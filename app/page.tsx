@@ -56,7 +56,7 @@ const StyledCarousel = styled(Box)(({ theme }) => ({
 
 const StyledSlide = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'imageUrl' && prop !== 'align',
-})(({ theme, imageUrl, align }) => ({
+})<any>(({ theme, imageUrl, align }) => ({
   position: 'absolute',
   top: 0,
   left: 0,
