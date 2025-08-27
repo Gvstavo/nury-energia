@@ -29,7 +29,7 @@ export default function Navbar() {
 const [anchorEl, setAnchorEl] = useState(null);
 const open = Boolean(anchorEl);
 
-const handleOpen = (event:  React.ChangeEvent<HTMLInputElement >) => {
+const handleOpen = (event) => {
  setAnchorEl(event.currentTarget);
 };
 
