@@ -1,103 +1,361 @@
-import Image from "next/image";
+'use client';
+
+import { useState } from 'react';
+import { Box, Typography, IconButton, Card, CardMedia, Button } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+
+const banners = [
+  {
+    title: 'CONECTANDO VOCÊ AO',
+    subtitle: 'FUTURO DA MOBILIDADE ELÉTRICA',
+    imageUrl: '/andreas-gucklhorn-Ilpf2eUPpUE-unsplash.jpg', // Imagem de exemplo
+    align: 'left',
+  },
+  {
+    title: 'SOLUÇÕES COMPLETAS PARA',
+    subtitle: 'ENERGIA SOLAR RESIDENCIAL',
+    imageUrl: '/chelsea-WvusC5M-TM8-unsplash.jpg', // Imagem de exemplo
+    align: 'right',
+  },
+  {
+    title: 'EFICIÊNCIA ENERGÉTICA',
+    subtitle: 'PARA O SEU NEGÓCIO',
+    imageUrl: '/anders-j-hxUcl0nUsIY-unsplash.jpg', // Imagem de exemplo
+    align: 'left',
+  },
+];
+const highlightItems = [
+  {
+    title: 'Residencial',
+    description: 'Transforme a sua casa em um exemplo de sustentabilidade e economia com a energia solar.',
+    imageUrl: '/benjamin-child-GWe0dlVD9e0-unsplash.jpg', // Imagem de exemplo
+  },
+  {
+    title: 'Comercial',
+    description: 'Posicione sua empresa como líder em sustentabilidade e inovação com soluções de energia solar.',
+    imageUrl: '/chelsea-WvusC5M-TM8-unsplash.jpg', // Imagem de exemplo
+  },
+  {
+    title: 'Industrial',
+    description: 'Maximize a competitividade da sua indústria com sistemas de energia solar robustos e personalizados.',
+    imageUrl: '/andreas-gucklhorn-Ilpf2eUPpUE-unsplash.jpg', // Imagem de exemplo
+  },
+];
+
+const StyledCarousel = styled(Box)(({ theme }) => ({
+  position: 'relative',
+  width: '100%',
+  height: '600px', // Altura fixa de 600px
+  overflow: 'hidden',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
+
+const StyledSlide = styled(Box, {
+  shouldForwardProp: (prop) => prop !== 'imageUrl' && prop !== 'align',
+})(({ theme, imageUrl, align }) => ({
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
+  backgroundImage: `url(${imageUrl})`,
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  transition: 'opacity 0.5s ease-in-out',
+  opacity: 0,
+  visibility: 'hidden',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  padding: theme.spacing(4),
+  textAlign: align,
+  [theme.breakpoints.up('md')]: {
+    padding: theme.spacing(8),
+  },
+}));
+
+const StyledButton = styled(IconButton)(({ theme }) => ({
+  position: 'absolute',
+  top: '50%',
+  transform: 'translateY(-50%)',
+  color: 'white',
+  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  '&:hover': {
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+  },
+  zIndex: 10,
+}));
+
+// Seção de Informações
+const StyledCard = styled(Card)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  textAlign: 'center',
+  backgroundColor: '#0091BD',
+  color: 'white',
+  padding: theme.spacing(3),
+  borderRadius: '16px',
+  boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
+}));
+
+const StyledInfoButton = styled(Button)(({ theme }) => ({
+  backgroundColor: '#0091BD',
+  color: 'white',
+  borderRadius: '8px',
+  padding: theme.spacing(1.5, 3),
+  fontWeight: 'bold',
+  marginTop: theme.spacing(3),
+  '&:hover': {
+    backgroundColor: '#323758',
+  },
+}));
+
+
+const StyledHighlightCard = styled(Card)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  backgroundColor: '#ffffff',
+  color: 'white',
+  borderRadius: '16px',
+  boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
+  height: '100%',
+}));
+
+const StyledHighlightsButton = styled(Button)(({ theme }) => ({
+  backgroundColor: '#00579D',
+  color: 'white',
+  borderRadius: '8px',
+  padding: theme.spacing(1.5, 3),
+  fontWeight: 'bold',
+  marginTop: 'auto',
+  '&:hover': {
+    backgroundColor: '#007A9A',
+  },
+}));
+
+const StyledHighlightsCardContent = styled(Box)(({ theme }) => ({
+  padding: theme.spacing(3),
+  display: 'flex',
+  flexDirection: 'column',
+  flexGrow: 1,
+  color: "black"
+}));
+
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [activeIndex, setActiveIndex] = useState(0);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  const handleNext = () => {
+    setActiveIndex((prevIndex) => (prevIndex + 1) % banners.length);
+  };
+
+  const handlePrev = () => {
+    setActiveIndex((prevIndex) => (prevIndex - 1 + banners.length) % banners.length);
+  };
+
+  return (<>
+    <Box>
+      {/* Carrossel de Banners */}
+      <StyledCarousel>
+        {banners.map((banner, index) => (
+          <StyledSlide
+            key={index}
+            imageUrl={banner.imageUrl}
+            align={banner.align}
+            sx={{
+              opacity: activeIndex === index ? 1 : 0,
+              visibility: activeIndex === index ? 'visible' : 'hidden',
+            }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+            <Box sx={{
+              width: { xs: '100%', md: '50%' },
+              textAlign: banner.align,
+            }}>
+              <Typography variant="h4" component="h1" sx={{ color: 'white', fontWeight: 'bold', textShadow: '2px 2px 4px rgba(0,0,0,0.7)', mb: 1, textTransform: 'uppercase' }}>
+                {banner.title}
+              </Typography>
+              <Typography variant="h5" sx={{ color: 'white', textShadow: '2px 2px 4px rgba(0,0,0,0.7)', textTransform: 'uppercase' }}>
+                {banner.subtitle}
+              </Typography>
+            </Box>
+          </StyledSlide>
+        ))}
+
+        <StyledButton onClick={handlePrev} sx={{ left: { xs: 8, md: 20 } }}>
+          <ArrowBackIosIcon />
+        </StyledButton>
+        <StyledButton onClick={handleNext} sx={{ right: { xs: 8, md: 20 } }}>
+          <ArrowForwardIosIcon />
+        </StyledButton>
+      </StyledCarousel>
+      
+      {/* Seção de Informações Adicionada */}
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: { xs: 'column', md: 'row' },
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: { xs: 4, md: 8 },
+          padding: { xs: 4, md: 10 },
+          backgroundColor: '#F7F7F7',
+        }}
+      >
+        {/* Container das estatísticas */}
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 3,
+            width: { xs: '100%', md: '30%' },
+          }}
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          <StyledCard>
+            <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
+              96 MW
+            </Typography>
+            <Typography variant="body1">
+              de Potência Instalada
+            </Typography>
+          </StyledCard>
+          <StyledCard>
+            <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
+              R$ 100 Milhões
+            </Typography>
+            <Typography variant="body1">
+              em Economia Anual
+            </Typography>
+          </StyledCard>
+          <StyledCard>
+            <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
+              13 Mil Toneladas
+            </Typography>
+            <Typography variant="body1">
+              de CO² Reduzidas
+            </Typography>
+          </StyledCard>
+        </Box>
+
+        {/* Container de texto e botão */}
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: { xs: 'center', md: 'flex-start' },
+            textAlign: { xs: 'center', md: 'left' },
+            width: { xs: '100%', md: '30%' },
+          }}
         >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 2 }}>
+            Nury é energia limpa e economia para você
+          </Typography>
+          <Typography variant="body1" sx={{ mb: 3 }}>
+            Somos uma empresa pioneira no Brasil em geração de energia, 100% brasileira que
+            projeta e instala sistemas fotovoltaicos de pequeno, médio e grande porte com elevada
+            qualidade e comprovada eficiência. Trabalhamos com os fabricantes líderes mundiais.
+          </Typography>
+          <StyledInfoButton>
+            Saiba mais
+          </StyledInfoButton>
+        </Box>
+
+        {/* Container da imagem */}
+        <Box
+          sx={{
+            width: { xs: '100%', md: '40%' },
+            borderRadius: '16px',
+            overflow: 'hidden',
+            boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
+          }}
         >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
+          <CardMedia
+            component="img"
+            image="/benjamin-child-GWe0dlVD9e0-unsplash.jpg"
+            alt="Reunião de negócios"
+            sx={{
+              width: '100%',
+              height: 'auto',
+            }}
           />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        </Box>
+      </Box>
+    </Box>
+
+
+      <Box
+        sx={{
+          backgroundColor: '#00579D ',
+          padding: { xs: 4, md: 8 },
+          textAlign: 'center',
+        }}
+      >
+        <Typography
+          variant="body1"
+          sx={{ color: '#000000', fontWeight: 'bold' }}
+        >
+          Independente da sua necessidade
+        </Typography>
+        <Typography
+          variant="h3"
+          sx={{ color: '#000000', fontWeight: 'bold', mb: 6 }}
+        >
+          Temos a solução energética
+          <br />
+          perfeita pra você!
+        </Typography>
+
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: { xs: 'column', md: 'row' },
+            justifyContent: 'center',
+            gap: { xs: 4, md: 3 },
+          }}
+        >
+          {highlightItems.map((item, index) => (
+            <StyledHighlightCard key={index}>
+              <CardMedia
+                component="img"
+                image={item.imageUrl}
+                alt={item.title}
+                sx={{
+                  height: 200,
+                  width: '100%',
+                  objectFit: 'cover',
+                  borderTopLeftRadius: '16px',
+                  borderTopRightRadius: '16px',
+                }}
+              />
+              <StyledHighlightsCardContent>
+                <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 1 }}>
+                  {item.title}
+                </Typography>
+                <Typography variant="body2" sx={{ mb: 2 }}>
+                  {item.description}
+                </Typography>
+                <Box sx={{ mt: 'auto' }}>
+                  <StyledHighlightsButton>
+                    Saiba mais
+                  </StyledHighlightsButton>
+                </Box>
+              </StyledHighlightsCardContent>
+            </StyledHighlightCard>
+          ))}
+        </Box>
+      </Box>
+
+
+
+
+
+
+</>
   );
 }
