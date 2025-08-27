@@ -3,7 +3,7 @@ import "./globals.css";
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import { Roboto } from 'next/font/google';
 import { ThemeProvider } from '@mui/material/styles';
-import theme from '../src/theme.ts';
+import theme from '../src/theme';
 import Navbar from '../src/menu.tsx';
 import Box from '@mui/material/Box';
 import  TopBar from "../src/top_bar.tsx"
