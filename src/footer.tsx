@@ -19,7 +19,7 @@ const StyledFooter = styled(Box)(({ theme }) => ({
   padding: theme.spacing(8, 4),
   [theme.breakpoints.up('md')]: {
     padding: theme.spacing(10, 8),
-  },
+},
 }));
 
 const StyledCopyright = styled(Box)(({ theme }) => ({
@@ -29,7 +29,7 @@ const StyledCopyright = styled(Box)(({ theme }) => ({
   textAlign: 'right',
   [theme.breakpoints.up('md')]: {
     padding: theme.spacing(3, 8),
-  },
+},
 }));
 
 export default function Footer() {
@@ -42,97 +42,96 @@ export default function Footer() {
             flexDirection: { xs: 'column', md: 'row' },
             justifyContent: 'space-between',
             gap: { xs: 6, md: 8 },
-          }}
-        >
+        }}
+    >
           {/* Coluna da Logo e Descrição */}
-          <Box sx={{ maxWidth: { xs: '100%', md: '30%' } }}>
-            <Image
+      <Box sx={{ maxWidth: { xs: '100%', md: '30%' } }}>
+        <Image
               src="/Logo-Nury-white.png" // Use o caminho real da sua logo
               alt="Logo Nury Energia"
               width={150}
               height={40}
               priority={true}
-            />
-            <Typography variant="body2" sx={{ mt: 2, lineHeight: 1.6 }}>
+          />
+          <Typography variant="body2" sx={{ mt: 2, lineHeight: 1.6 }}>
               Uma empresa voltada 100% para a atividade de energias renováveis, com experiência
               comprovada, equipe técnica especializada e atuando dentro das normas NR10 e NR35.
               Possuímos de engenharia própria e um atendimento de venda e pós-venda
               especializado.
-            </Typography>
-          </Box>
+          </Typography>
+      </Box>
 
           {/* Coluna de Contatos */}
-          <Box>
-            <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 2 }}>
-              Contatos
-            </Typography>
-            <Box sx={{ display: 'flex', alignItems: 'center', mb: 1, gap: 1 }}>
-              <PhoneIcon sx={{ fontSize: 18 }} />
-              <Typography variant="body2">(51) 3909-7279</Typography>
-            </Box>
-            <Box sx={{ display: 'flex', alignItems: 'center', mb: 1, gap: 1 }}>
-              <PhoneIcon sx={{ fontSize: 18 }} />
-              <Typography variant="body2">(51) 9 9787-1660</Typography>
-            </Box>
-            <Box sx={{ display: 'flex', alignItems: 'center', mb: 1, gap: 1 }}>
-              <PhoneIcon sx={{ fontSize: 18 }} />
-              <Typography variant="body2">(51) 9 9839-2260</Typography>
-            </Box>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <EmailIcon sx={{ fontSize: 18 }} />
-              <Typography variant="body2">comercial@atendimentoenergia.com.br</Typography>
-            </Box>
-          </Box>
+      <Box>
+        <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 2 }}>
+          Contatos
+      </Typography>
+      <Box sx={{ display: 'flex', alignItems: 'center', mb: 1, gap: 1 }}>
+          <PhoneIcon sx={{ fontSize: 18 }} />
+          <Typography variant="body2">(51) 3909-7279</Typography>
+      </Box>
+      <Box sx={{ display: 'flex', alignItems: 'center', mb: 1, gap: 1 }}>
+          <PhoneIcon sx={{ fontSize: 18 }} />
+          <Typography variant="body2">(51) 9 9787-1660</Typography>
+      </Box>
+      <Box sx={{ display: 'flex', alignItems: 'center', mb: 1, gap: 1 }}>
+          <PhoneIcon sx={{ fontSize: 18 }} />
+          <Typography variant="body2">(51) 9 9839-2260</Typography>
+      </Box>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <EmailIcon sx={{ fontSize: 18 }} />
+          <Typography variant="body2">comercial@atendimentoenergia.com.br</Typography>
+      </Box>
+  </Box>
 
           {/* Coluna de Redes Sociais e Endereço */}
-          <Box>
-            <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 2 }}>
-              Siga-nos nas Redes Sociais
-            </Typography>
-            <Box sx={{ mb: 4 }}>
-              <Link href="#" target="_blank" rel="noopener">
-                <IconButton sx={{ color: 'white' }}>
-                  <FacebookIcon />
-                </IconButton>
-              </Link>
-              <Link href="#" target="_blank" rel="noopener">
-                <IconButton sx={{ color: 'white' }}>
-                  <InstagramIcon />
-                </IconButton>
-              </Link>
-              <Link href="#" target="_blank" rel="noopener">
-                <IconButton sx={{ color: 'white' }}>
-                  <YouTubeIcon />
-                </IconButton>
-              </Link>
-              <Link href="#" target="_blank" rel="noopener">
-                <IconButton sx={{ color: 'white' }}>
-                  <LinkedInIcon />
-                </IconButton>
-              </Link>
-            </Box>
-            
-            <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1 }}>
-              Endereço
-            </Typography>
-            <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1 }}>
-              <LocationOnIcon sx={{ fontSize: 18, mt: 0.5 }} />
-              <Typography variant="body2">
-                Edifício Manhattan, R. Bento Gonçalves, 1259, Osório, RS.
-                <br />
-                Osório/RS
-              </Typography>
-            </Box>
-          </Box>
-        </Box>
-      </StyledFooter>
+  <Box>
+    <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 2 }}>
+      Siga-nos nas Redes Sociais
+  </Typography>
+  <Box sx={{ mb: 4 }}>
+      <Link href="#" target="_blank" rel="noopener">
+      <IconButton sx={{ color: 'white' }}>
+          <FacebookIcon />
+      </IconButton>
+  </Link>
+  <Link href="#" target="_blank" rel="noopener">
+  <IconButton sx={{ color: 'white' }}>
+      <InstagramIcon />
+  </IconButton>
+</Link>
+<Link href="#" target="_blank" rel="noopener">
+<IconButton sx={{ color: 'white' }}>
+  <YouTubeIcon />
+</IconButton>
+</Link>
+<Link href="#" target="_blank" rel="noopener">
+<IconButton sx={{ color: 'white' }}>
+  <LinkedInIcon />
+</IconButton>
+</Link>
+</Box>
+
+<Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1 }}>
+  Endereço
+</Typography>
+<Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1 }}>
+  <LocationOnIcon sx={{ fontSize: 18, mt: 0.5 }} />
+  <Typography variant="body2">
+    Edifício Manhattan, R. Bento Gonçalves, 1259, Osório, RS.
+    <br />
+</Typography>
+</Box>
+</Box>
+</Box>
+</StyledFooter>
 
       {/* Seção de Copyright */}
-      <StyledCopyright>
-        <Typography variant="caption"  sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-          Copyright © 2025 Nury - A melhor opção de Energia Solar no Rio Grande do Sul - RS
-        </Typography>
-      </StyledCopyright>
-    </Box>
-  );
+<StyledCopyright>
+    <Typography variant="caption"  sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+      Copyright © 2025 Nury - A melhor opção de Energia Solar no Rio Grande do Sul - RS
+  </Typography>
+</StyledCopyright>
+</Box>
+);
 }
