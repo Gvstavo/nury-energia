@@ -11,7 +11,7 @@ const useScrollEffect = (threshold = 0.5) => {
   const [inView, setInView] = useState(false);
   const ref = useRef(null);
 
-  const handleIntersect = useCallback(([entry]) => {
+  const handleIntersect = useCallback(([entry]: IntersectionObserverEntry[]) => {
     if (entry.isIntersecting) {
       setInView(true);
     }
@@ -31,6 +31,7 @@ const useScrollEffect = (threshold = 0.5) => {
 
   return [ref, inView];
 };
+
 
 const originalBanners = [
   {
