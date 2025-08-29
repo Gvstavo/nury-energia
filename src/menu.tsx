@@ -120,6 +120,23 @@ export default function Navbar() {
 </MenuItem>
 ))}
  </Menu>
+ <Button
+   variant="contained"
+   href="#"
+   sx={{
+     ml: 2, // Margem à esquerda para separar do menu de soluções
+     backgroundColor: '#00579D', // Cor de fundo do botão
+     color: 'white',
+     fontWeight: 'bold',
+     textTransform: 'none', // Remove o uppercase padrão
+     '&:hover': {
+       backgroundColor: '#007A9A', // Cor de hover mais clara
+     },
+   }}
+>
+  Pedir orçamento
+</Button>
+
 </Box>
 </Toolbar>
 </AppBar>
