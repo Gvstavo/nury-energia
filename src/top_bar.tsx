@@ -14,14 +14,14 @@ export default function TopBar() {
   useEffect(() => {
     const handleScroll = () => {
       setIsAtTop(window.scrollY < 100);
-    };
+  };
 
-    window.addEventListener('scroll', handleScroll);
+  window.addEventListener('scroll', handleScroll);
 
-    return () => {
+  return () => {
       window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+  };
+}, []);
 
   return (
     <Box
@@ -40,46 +40,46 @@ export default function TopBar() {
         zIndex: 1100,
         transition: 'transform 0.3s ease-in-out',
         transform: isAtTop ? 'translateY(0)' : 'translateY(-100%)',
-      }}
-    >
+    }}
+>
       {/* Lado esquerdo com informações de contato */}
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <PhoneIphoneIcon sx={{ fontSize: 18 }} />
-          <Typography variant="body2" sx={{ fontSize: 15 }}>
-            (54) 3452-3200
-          </Typography>
-        </Box>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <EmailIcon sx={{ fontSize: 18 }} />
-          <Typography variant="body2" sx={{ fontSize: 15 }}>
-            contato@nuryenergia.com.br
-          </Typography>
-        </Box>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <LocationOnIcon sx={{ fontSize: 18 }} />
-          <Typography variant="body2" sx={{ fontSize: 15 }}>
-            Edifício Manhattan, R. Bento Gonçalves, 1259, Osório, RS.
-          </Typography>
-        </Box>
-      </Box>
-      
+  <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
+    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+      <PhoneIphoneIcon sx={{ fontSize: 18 }} />
+      <Typography variant="body2" sx={{ fontSize: 15 }}>
+        (54) 3452-3200
+    </Typography>
+</Box>
+<Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+  <EmailIcon sx={{ fontSize: 18 }} />
+  <Typography variant="body2" sx={{ fontSize: 15 }}>
+    contato@nuryenergia.com.br
+</Typography>
+</Box>
+<Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+  <LocationOnIcon sx={{ fontSize: 18 }} />
+  <Typography variant="body2" sx={{ fontSize: 15 }}>
+    Edifício Manhattan, R. Bento Gonçalves, 1259, Osório, RS.
+</Typography>
+</Box>
+</Box>
+
       {/* Lado direito com "Contate-nos" e ícones sociais */}
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 0 }}>
-        <Typography variant="body2" sx={{ fontSize: 15, fontWeight: 'bold' }}>
-          Contate-nos
-        </Typography>
-        <Link href="https://wa.me/555434523200" target="_blank" rel="noopener noreferrer">
-          <IconButton sx={{ color: 'white' }}>
-            <WhatsAppIcon />
-          </IconButton>
-        </Link>
-        <Link href="https://www.instagram.com/nuryenergia/" target="_blank" rel="noopener noreferrer">
-          <IconButton sx={{ color: 'white' }}>
-            <InstagramIcon />
-          </IconButton>
-        </Link>
-      </Box>
-    </Box>
-  );
+<Box sx={{ display: 'flex', alignItems: 'center', gap: 0 }}>
+    <Typography variant="body2" sx={{ fontSize: 15, fontWeight: 'bold' }}>
+      Contate-nos
+  </Typography>
+  <Link href="https://wa.me/555434523200" target="_blank" rel="noopener noreferrer">
+  <IconButton sx={{ color: 'white' }}>
+    <WhatsAppIcon />
+</IconButton>
+</Link>
+<Link href="https://www.instagram.com/nuryenergia/" target="_blank" rel="noopener noreferrer">
+<IconButton sx={{ color: 'white' }}>
+    <InstagramIcon />
+</IconButton>
+</Link>
+</Box>
+</Box>
+);
 }
