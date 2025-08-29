@@ -7,6 +7,7 @@ import theme from '../src/theme';
 import Navbar from '../src/menu.tsx';
 import Box from '@mui/material/Box';
 import  TopBar from "../src/top_bar.tsx"
+import Footer from '../src/footer.tsx';
 
 const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
@@ -37,10 +38,11 @@ export default function RootLayout({
           <ThemeProvider theme={theme}>
             <AppRouterCacheProvider>
               <TopBar />
-              <Box sx={{ mt: '69px' }}>
+              <Box sx={{ mt: '69px',mb: '40px' }}>
                 <Navbar />
                 {children}
               </Box>
+              <Footer sx={{ mt: 8 }}/>
             </AppRouterCacheProvider>
           </ThemeProvider>
       </body>
