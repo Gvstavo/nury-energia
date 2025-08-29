@@ -32,7 +32,6 @@ const useScrollEffect = (threshold = 0.5) => {
   return [ref, inView];
 };
 
-
 const originalBanners = [
   {
     title: 'CONECTANDO VOCÊ AO',
