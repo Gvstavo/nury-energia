@@ -52,7 +52,7 @@ const StyledCarousel = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-}));
+}));  
 
 const StyledSlide = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'imageUrl' && prop !== 'align',
@@ -147,7 +147,28 @@ const StyledHighlightsCardContent = styled(Box)(({ theme }) => ({
   color: "black"
 }));
 
+const StyledHowItWorksCard = styled(Card)(({ theme }) => ({
+ display: 'flex',
+ flexDirection: 'column',
+ borderRadius: '12px',
+ boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.1)',
+ backgroundColor: 'white',
+ flexGrow: 1,
+ margin: theme.spacing(1), // Espaçamento entre os cards
+ maxWidth: '300px', // Largura máxima para os cards, ajuste conforme necessário
+}));
 
+const StyledHowItWorksButton = styled(Button)(({ theme }) => ({
+ backgroundColor: '#00579D', // Cor do botão do "Saiba mais"
+ color: 'white',
+ borderRadius: '8px',
+ padding: theme.spacing(1.5, 3),
+ fontWeight: 'bold',
+ '&:hover': {
+  backgroundColor: '#00579D',
+ },
+ textTransform: 'none', // Remove o uppercase padrão
+}));
 export default function Home() {
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -291,20 +312,20 @@ export default function Home() {
 
       <Box
         sx={{
-          backgroundColor: '#00579D ',
+          backgroundColor: '#F7F7F7 ',
           padding: { xs: 4, md: 8 },
           textAlign: 'center',
         }}
       >
         <Typography
           variant="body1"
-          sx={{ color: '#000000', fontWeight: 'bold' }}
+         sx={{ color: '#1A1A1A', }}
         >
           Independente da sua necessidade
         </Typography>
         <Typography
           variant="h3"
-          sx={{ color: '#000000', fontWeight: 'bold', mb: 6 }}
+          sx={{  color: '#1A1A1A',mb: 6 }}
         >
           Temos a solução energética
           <br />
@@ -352,7 +373,101 @@ export default function Home() {
       </Box>
 
 
+   <Box
+    sx={{
+     backgroundColor: '#F7F7F7', // Cor de fundo da seção na imagem
+     padding: { xs: 4, md: 8 },
+     display: 'flex',
+     flexDirection: { xs: 'column', md: 'row' },
+     justifyContent: 'center',
+     alignItems: 'flex-start', // Alinha os itens ao topo
+     gap: { xs: 4, md: 8 },
+    }}
+   >
+    {/* Coluna da esquerda: Título, Subtítulo, Texto e Botão */}
+    <Box sx={{ flex: 1, maxWidth: { xs: '100%', md: '30%' }, textAlign: { xs: 'center', md: 'left' } }}>
+     <Typography variant="h4" component="h2" sx={{ fontWeight: 'bold', mb: 2, color: '#1A1A1A' }}>
+      Como funciona
+     </Typography>
+     <Typography variant="subtitle1" sx={{ fontWeight: 'bold', mb: 3, color: '#1A1A1A' }}>
+      Etapas do processo de instalação
+     </Typography>
+     <Typography variant="body1" sx={{ mb: 4, color: '#555' }}>
+      A empresa Nury em parceria com seus colaboradores, desenvolveu um processo
+      claro e detalhado do processo de instalação de seus produtos.
+     </Typography>
+     <StyledHowItWorksButton>
+      Saiba mais
+     </StyledHowItWorksButton>
+    </Box>
 
+    {/* Coluna da direita: 3 Cards com Imagem, Título e Descrição */}
+    <Box
+     sx={{
+      flex: 2,
+      display: 'flex',
+      flexDirection: { xs: 'column', sm: 'row' },
+      justifyContent: 'space-around',
+      alignItems: 'flex-start', // Alinha os cards ao topo
+      gap: { xs: 3, sm: 2 },
+      maxWidth: { xs: '100%', md: '70%' },
+     }}
+    >
+     {/* Card 1 */}
+     <StyledHowItWorksCard>
+      <CardMedia
+       component="img"
+       image="/firmbee-com-gcsNOsPEXfs-unsplash.jpg" // Imagem 1: Análise das últimas contas
+       alt="Análise das últimas contas"
+       sx={{ height: 200, objectFit: 'cover', borderRadius: '12px 12px 0 0' }}
+      />
+      <Box sx={{ p: 2, textAlign: 'left' }}>
+       <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1, color: '#1A1A1A' }}>
+        Análise das últimas contas
+       </Typography>
+       <Typography variant="body2" sx={{ color: '#555' }}>
+        Será realizado uma análise das doze últimas contas.
+       </Typography>
+      </Box>
+     </StyledHowItWorksCard>
+
+     {/* Card 2 */}
+     <StyledHowItWorksCard>
+      <CardMedia
+       component="img"
+       image="/scott-graham-OQMZwNd3ThU-unsplash.jpg" // Imagem 2: Proposta e contrato
+       alt="Proposta e contrato"
+       sx={{ height: 200, objectFit: 'cover', borderRadius: '12px 12px 0 0' }}
+      />
+      <Box sx={{ p: 2, textAlign: 'left' }}>
+       <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1, color: '#1A1A1A' }}>
+        Proposta e contrato
+       </Typography>
+       <Typography variant="body2" sx={{ color: '#555' }}>
+        O cliente receberá uma proposta e o contrato dos nossos serviços.
+       </Typography>
+      </Box>
+     </StyledHowItWorksCard>
+
+     {/* Card 3 */}
+     <StyledHowItWorksCard>
+      <CardMedia
+       component="img"
+       image="/radission-us-_XeQ8XEWb4Q-unsplash.jpg" // Imagem 3: Projeto de legalização
+       alt="Projeto de legalização"
+       sx={{ height: 200, objectFit: 'cover', borderRadius: '12px 12px 0 0' }}
+      />
+      <Box sx={{ p: 2, textAlign: 'left' }}>
+       <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1, color: '#1A1A1A' }}>
+        Projeto de legalização
+       </Typography>
+       <Typography variant="body2" sx={{ color: '#555' }}>
+        Os profissionais da Nury darão início no projeto e legalização.
+       </Typography>
+      </Box>
+     </StyledHowItWorksCard>
+    </Box>
+   </Box>
 
 
 
