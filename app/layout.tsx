@@ -38,11 +38,11 @@ export default function RootLayout({
           <ThemeProvider theme={theme}>
             <AppRouterCacheProvider>
               <TopBar />
-              <Box sx={{ mt: '69px',mb: '40px' }}>
+              <Box sx={{ mt: '69px'}}>
                 <Navbar />
                 {children}
               </Box>
-              <Footer sx={{ mt: 8 }}/>
+              <Footer />
             </AppRouterCacheProvider>
           </ThemeProvider>
       </body>
