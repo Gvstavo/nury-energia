@@ -34,18 +34,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt"  className={barlow.variable}>
-      <body>
-          <ThemeProvider theme={theme}>
-            <AppRouterCacheProvider>
-              <TopBar />
-              <Box sx={{ mt: '69px'}}>
-                <Navbar />
-                {children}
-              </Box>
-              <Footer />
-            </AppRouterCacheProvider>
-          </ThemeProvider>
-      </body>
-    </html>
-  );
+    <body>
+      <ThemeProvider theme={theme}>
+        <AppRouterCacheProvider>
+          <TopBar />
+          <Box sx={{ mt: '69px'}}>
+            <Navbar />
+            {children}
+        </Box>
+        <Footer />
+    </AppRouterCacheProvider>
+</ThemeProvider>
+</body>
+</html>
+);
 }
