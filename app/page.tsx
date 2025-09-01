@@ -18,23 +18,22 @@ const originalBanners = [
         title: 'CONECTANDO VOCÊ AO',
         subtitle: 'FUTURO DA MOBILIDADE ELÉTRICA',
         imageUrl: '/andreas-gucklhorn-Ilpf2eUPpUE-unsplash.jpg',
-        align: 'center', // Alterado para 'center'
+        align: 'center',
     },
     {
         title: 'SOLUÇÕES COMPLETAS PARA',
         subtitle: 'ENERGIA SOLAR RESIDENCIAL',
         imageUrl: '/chelsea-WvusC5M-TM8-unsplash.jpg',
-        align: 'center', // Alterado para 'center'
+        align: 'center',
     },
     {
         title: 'EFICIÊNCIA ENERGÉTICA',
         subtitle: 'PARA O SEU NEGÓCIO',
         imageUrl: '/anders-j-hxUcl0nUsIY-unsplash.jpg',
-        align: 'center', // Alterado para 'center'
+        align: 'center',
     },
 ];
 
-// Crie a lista de banners circular duplicando o primeiro e o último item
 const banners = [
     originalBanners[originalBanners.length - 1],
     ...originalBanners,
@@ -163,10 +162,10 @@ const StyledSlide = styled(Box, {
     backgroundPosition: 'center',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center', // Adicionado para centralizar o texto horizontalmente
+    alignItems: 'center',
     justifyContent: 'center',
     padding: theme.spacing(4),
-    textAlign: 'center', // Alterado para 'center' para centralizar o texto
+    textAlign: 'center',
     [theme.breakpoints.up('md')]: {
         padding: theme.spacing(8),
     },
@@ -184,7 +183,6 @@ const StyledButton = styled(IconButton)(({ theme }) => ({
     zIndex: 10,
 }));
 
-// Seção de Informações
 const StyledCard = styled(Card)(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
@@ -262,6 +260,7 @@ const StyledHowItWorksButton = styled(Button)(({ theme }) => ({
     },
     textTransform: 'none',
 }));
+
 const StyledSuccessCard = styled(Card)(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
@@ -273,37 +272,42 @@ const StyledSuccessCard = styled(Card)(({ theme }) => ({
     backgroundColor: '#ffffff',
     height: '100%',
 }));
+
 const StyledAvatar = styled(Avatar)(({ theme }) => ({
     width: 90,
     height: 90,
     marginBottom: theme.spacing(2),
     border: '3px solid #00579D',
 }));
+
+const sectionStyles = {
+    padding: { xs: 4, md: 8 },
+    textAlign: 'center',
+};
+
 export default function Home() {
-    const [activeIndex, setActiveIndex] = useState(1); // Começa no primeiro slide real (índice 1)
+    const [activeIndex, setActiveIndex] = useState(1);
     const [isTransitioning, setIsTransitioning] = useState(true);
 
-    // Refs e estados para as seções com scroll effect
     const [infoStatsRef, infoStatsInView] = useScrollEffect(0.3);
     const [infoTextRef, infoTextInView] = useScrollEffect(0.3);
     const [infoImageRef, infoImageInView] = useScrollEffect(0.3);
 
     const [highlightsTitleRef, highlightsTitleInView] = useScrollEffect(0.3);
     const [highlightCardInView, setHighlightCardInView] = useState(highlightItems.map(() => false));
-    const cardRefs = useRef < (HTMLDivElement | null)[] > ([]);
+    const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
     const [howItWorksTextRef, howItWorksTextInView] = useScrollEffect(0.3);
     const [howItWorksCardInView, setHowItWorksCardInView] = useState([false, false, false]);
-    const howItWorksRefs = useRef < (HTMLDivElement | null)[] > ([]);
+    const howItWorksRefs = useRef<(HTMLDivElement | null)[]>([]);
 
     const [advantagesRef, advantagesInView] = useScrollEffect(0.3);
     const [advantageCardInView, setAdvantageCardInView] = useState(advantagesItems.map(() => false));
-    const advantageCardRefs = useRef < (HTMLDivElement | null)[] > ([]);
-
+    const advantageCardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
     const [casesTitleRef, casesTitleInView] = useScrollEffect(0.3);
     const [caseCardInView, setCaseCardInView] = useState(cases.map(() => false));
-    const caseCardRefs = useRef < (HTMLDivElement | null)[] > ([]);
+    const caseCardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
 
     const handleNext = () => {
@@ -314,27 +318,23 @@ export default function Home() {
         setActiveIndex((prevIndex) => prevIndex - 1);
     };
 
-    // Use useEffect para gerenciar o "teletransporte"
     useEffect(() => {
         if (activeIndex === banners.length - 1 && isTransitioning) {
-            // Se chegou no último slide duplicado, prepara o teletransporte
             const timer = setTimeout(() => {
-                setIsTransitioning(false); // Desativa a transição
-                setActiveIndex(1); // Volta para o primeiro slide real
-            }, 500); // O tempo de espera deve ser igual à duração da transição
+                setIsTransitioning(false);
+                setActiveIndex(1);
+            }, 500);
             return () => clearTimeout(timer);
         }
         if (activeIndex === 0 && isTransitioning) {
-            // Se chegou no primeiro slide duplicado, prepara o teletransporte
             const timer = setTimeout(() => {
                 setIsTransitioning(false);
-                setActiveIndex(banners.length - 2); // Volta para o último slide real
+                setActiveIndex(banners.length - 2);
             }, 500);
             return () => clearTimeout(timer);
         }
     }, [activeIndex, isTransitioning]);
 
-    // Reativa a transição após o teletransporte
     useEffect(() => {
         if (!isTransitioning) {
             requestAnimationFrame(() => setIsTransitioning(true));
@@ -342,7 +342,6 @@ export default function Home() {
     }, [isTransitioning]);
 
 
-    // Efeito de scroll para os cards de destaque
     useEffect(() => {
         const observers = highlightItems.map((_, index) => {
             const observer = new IntersectionObserver(([entry]) => {
@@ -352,7 +351,7 @@ export default function Home() {
                         newState[index] = true;
                         return newState;
                     });
-                    observer.unobserve(entry.target); // Observa apenas uma vez
+                    observer.unobserve(entry.target);
                 }
             }, { threshold: 0.3 });
             if (cardRefs.current[index]) {
@@ -370,7 +369,6 @@ export default function Home() {
         };
     }, []);
 
-    // Efeito de scroll para os cards "Como Funciona"
     useEffect(() => {
         const observers = [0, 1, 2].map((_, index) => {
             const observer = new IntersectionObserver(([entry]) => {
@@ -380,7 +378,7 @@ export default function Home() {
                         newState[index] = true;
                         return newState;
                     });
-                    observer.unobserve(entry.target); // Observa apenas uma vez
+                    observer.unobserve(entry.target);
                 }
             }, { threshold: 0.3 });
             if (howItWorksRefs.current[index]) {
@@ -470,11 +468,9 @@ export default function Home() {
                             <StyledSlide
                                 key={index}
                                 imageUrl={banner.imageUrl}
-                                // Removido o prop `align` do componente StyledSlide
                             >
                                 <Box sx={{
-                                    // Removido width e textAlign do Box interno
-                                    maxWidth: { xs: '100%', md: '50%' }, // Opcional, para limitar a largura do texto em desktops
+                                    maxWidth: { xs: '100%', md: '50%' },
                                     textAlign: 'center'
                                 }}>
                                     <Typography variant="h4" component="h1" sx={{ color: 'white', fontWeight: 'bold', textShadow: '2px 2px 4px rgba(0,0,0,0.7)', mb: 1, textTransform: 'uppercase' }}>
@@ -496,19 +492,18 @@ export default function Home() {
                     </StyledButton>
                 </StyledCarousel>
 
-                {/* Seção de Informações Adicionada */}
+                {/* Seção de Informações */}
                 <Box
                     sx={{
+                        ...sectionStyles,
+                        backgroundColor: '#F7F7F7',
                         display: 'flex',
                         flexDirection: { xs: 'column', md: 'row' },
                         justifyContent: 'center',
                         alignItems: 'center',
                         gap: { xs: 4, md: 8 },
-                        padding: { xs: 4, md: 10 },
-                        backgroundColor: '#F7F7F7',
                     }}
                 >
-                    {/* Container das estatísticas */}
                     <Grow in={infoStatsInView} style={{ transformOrigin: '0 0 0' }} timeout={1000}>
                         <Box
                             ref={infoStatsRef}
@@ -545,8 +540,6 @@ export default function Home() {
                             </StyledCard>
                         </Box>
                     </Grow>
-
-                    {/* Container de texto e botão */}
                     <Grow in={infoTextInView} style={{ transformOrigin: '0 0 0' }} timeout={1500}>
                         <Box
                             ref={infoTextRef}
@@ -570,8 +563,6 @@ export default function Home() {
                             </StyledInfoButton>
                         </Box>
                     </Grow>
-
-                    {/* Container da imagem */}
                     <Grow in={infoImageInView} style={{ transformOrigin: '0 0 0' }} timeout={2000}>
                         <Box
                             ref={infoImageRef}
@@ -594,282 +585,229 @@ export default function Home() {
                         </Box>
                     </Grow>
                 </Box>
-            </Box>
 
-            {/* Seção de destaques adicionada */}
-            <Box
-                sx={{
-                    backgroundColor: '#F7F7F7 ',
-                    padding: { xs: 4, md: 8 },
-                    textAlign: 'center',
-                }}
-            >
-                <Grow in={highlightsTitleInView} style={{ transformOrigin: '0 0 0' }} timeout={1000}>
-                    <Box ref={highlightsTitleRef}>
-                        <Typography
-                            variant="body1"
-                            sx={{ color: '#1A1A1A', }}
-                        >
-                            Independente da sua necessidade
-                        </Typography>
-                        <Typography
-                            variant="h3"
-                            sx={{ color: '#1A1A1A', mb: 6 }}
-                        >
-                            Temos a solução energética
-                            <br />
-                            perfeita pra você!
-                        </Typography>
-                    </Box>
-                </Grow>
-
+                {/* Seção de Destaques */}
                 <Box
                     sx={{
+                        ...sectionStyles,
+                        backgroundColor: '#ffffff', // Alterado para branco
+                    }}
+                >
+                    <Grow in={highlightsTitleInView} style={{ transformOrigin: '0 0 0' }} timeout={1000}>
+                        <Box ref={highlightsTitleRef}>
+                            <Typography
+                                variant="body1"
+                                sx={{ color: '#1A1A1A', }}
+                            >
+                                Independente da sua necessidade
+                            </Typography>
+                            <Typography
+                                variant="h3"
+                                sx={{ color: '#1A1A1A', mb: 6 }}
+                            >
+                                Temos a solução energética
+                                <br />
+                                perfeita pra você!
+                            </Typography>
+                        </Box>
+                    </Grow>
+
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexDirection: { xs: 'column', md: 'row' },
+                            justifyContent: 'center',
+                            gap: { xs: 4, md: 3 },
+                        }}
+                    >
+                        {highlightItems.map((item, index) => (
+                            <Grow in={highlightCardInView[index]} style={{ transformOrigin: '0 0 0' }} timeout={1000 + (index * 500)} key={index}>
+                                <StyledHighlightCard ref={el => cardRefs.current[index] = el} sx={{ flex: 1 }}>
+                                    <CardMedia
+                                        component="img"
+                                        image={item.imageUrl}
+                                        alt={item.title}
+                                        sx={{
+                                            height: 200,
+                                            width: '100%',
+                                            objectFit: 'cover',
+                                            borderTopLeftRadius: '16px',
+                                            borderTopRightRadius: '16px',
+                                        }}
+                                    />
+                                    <StyledHighlightsCardContent>
+                                        <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 1 }}>
+                                            {item.title}
+                                        </Typography>
+                                        <Typography variant="body2" sx={{ mb: 2 }}>
+                                            {item.description}
+                                        </Typography>
+                                        <Box sx={{ mt: 'auto' }}>
+                                            <StyledHighlightsButton>
+                                                Saiba mais
+                                            </StyledHighlightsButton>
+                                        </Box>
+                                    </StyledHighlightsCardContent>
+                                </StyledHighlightCard>
+                            </Grow>
+                        ))}
+                    </Box>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexDirection: { xs: 'column', md: 'row' },
+                            justifyContent: 'center',
+                            gap: { xs: 4, md: 3 },
+                        }}
+                    >
+                        {highlightItemsBottom.map((item, index) => (
+                            <Grow in={highlightCardInView[index]} style={{ transformOrigin: '0 0 0' }} timeout={1000 + (index * 500)} key={index}>
+                                <StyledHighlightCard ref={el => cardRefs.current[index] = el} sx={{ flex: 1, marginTop: 3 }}>
+                                    <CardMedia
+                                        component="img"
+                                        image={item.imageUrl}
+                                        alt={item.title}
+                                        sx={{
+                                            height: 200,
+                                            width: '100%',
+                                            objectFit: 'cover',
+                                            borderTopLeftRadius: '16px',
+                                            borderTopRightRadius: '16px',
+                                        }}
+                                    />
+                                    <StyledHighlightsCardContent>
+                                        <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 1 }}>
+                                            {item.title}
+                                        </Typography>
+                                        <Typography variant="body2" sx={{ mb: 2 }}>
+                                            {item.description}
+                                        </Typography>
+                                        <Box sx={{ mt: 'auto' }}>
+                                            <StyledHighlightsButton>
+                                                Saiba mais
+                                            </StyledHighlightsButton>
+                                        </Box>
+                                    </StyledHighlightsCardContent>
+                                </StyledHighlightCard>
+                            </Grow>
+                        ))}
+                    </Box>
+                </Box>
+
+                {/* Seção "Como funciona" */}
+                <Box
+                    sx={{
+                        ...sectionStyles,
+                        backgroundColor: '#F7F7F7', // Manteve a cor de fundo cinza
                         display: 'flex',
                         flexDirection: { xs: 'column', md: 'row' },
                         justifyContent: 'center',
-                        gap: { xs: 4, md: 3 },
-                    }}
-                >
-                    {highlightItems.map((item, index) => (
-                        <Grow in={highlightCardInView[index]} style={{ transformOrigin: '0 0 0' }} timeout={1000 + (index * 500)} key={index}>
-                            <StyledHighlightCard ref={el => cardRefs.current[index] = el} sx={{ flex: 1 }}>
-                                <CardMedia
-                                    component="img"
-                                    image={item.imageUrl}
-                                    alt={item.title}
-                                    sx={{
-                                        height: 200,
-                                        width: '100%',
-                                        objectFit: 'cover',
-                                        borderTopLeftRadius: '16px',
-                                        borderTopRightRadius: '16px',
-                                    }}
-                                />
-                                <StyledHighlightsCardContent>
-                                    <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 1 }}>
-                                        {item.title}
-                                    </Typography>
-                                    <Typography variant="body2" sx={{ mb: 2 }}>
-                                        {item.description}
-                                    </Typography>
-                                    <Box sx={{ mt: 'auto' }}>
-                                        <StyledHighlightsButton>
-                                            Saiba mais
-                                        </StyledHighlightsButton>
-                                    </Box>
-                                </StyledHighlightsCardContent>
-                            </StyledHighlightCard>
-                        </Grow>
-                    ))}
-                </Box>
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexDirection: { xs: 'column', md: 'row' },
-                        justifyContent: 'center',
-                        gap: { xs: 4, md: 3 },
-                    }}
-                >
-                    {highlightItemsBottom.map((item, index) => (
-                        <Grow in={highlightCardInView[index]} style={{ transformOrigin: '0 0 0' }} timeout={1000 + (index * 500)} key={index}>
-                            <StyledHighlightCard ref={el => cardRefs.current[index] = el} sx={{ flex: 1, marginTop: 3 }}>
-                                <CardMedia
-                                    component="img"
-                                    image={item.imageUrl}
-                                    alt={item.title}
-                                    sx={{
-                                        height: 200,
-                                        width: '100%',
-                                        objectFit: 'cover',
-                                        borderTopLeftRadius: '16px',
-                                        borderTopRightRadius: '16px',
-                                    }}
-                                />
-                                <StyledHighlightsCardContent>
-                                    <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 1 }}>
-                                        {item.title}
-                                    </Typography>
-                                    <Typography variant="body2" sx={{ mb: 2 }}>
-                                        {item.description}
-                                    </Typography>
-                                    <Box sx={{ mt: 'auto' }}>
-                                        <StyledHighlightsButton>
-                                            Saiba mais
-                                        </StyledHighlightsButton>
-                                    </Box>
-                                </StyledHighlightsCardContent>
-                            </StyledHighlightCard>
-                        </Grow>
-                    ))}
-                </Box>
-            </Box>
-
-            {/* Seção "Como funciona" */}
-            <Box
-                sx={{
-                    backgroundColor: '#F7F7F7',
-                    padding: { xs: 4, md: 8 },
-                    display: 'flex',
-                    flexDirection: { xs: 'column', md: 'row' },
-                    justifyContent: 'center',
-                    alignItems: 'flex-start',
-                    gap: { xs: 4, md: 8 },
-                }}
-            >
-                {/* Coluna da esquerda: Título, Subtítulo, Texto e Botão */}
-                <Grow in={howItWorksTextInView} style={{ transformOrigin: '0 0 0' }} timeout={1000}>
-                    <Box ref={howItWorksTextRef} sx={{ flex: 1, maxWidth: { xs: '100%', md: '30%' }, textAlign: { xs: 'center', md: 'left' } }}>
-                        <Typography variant="h4" component="h2" sx={{ fontWeight: 'bold', mb: 2, color: '#1A1A1A' }}>
-                            Como funciona
-                        </Typography>
-                        <Typography variant="subtitle1" sx={{ fontWeight: 'bold', mb: 3, color: '#1A1A1A' }}>
-                            Etapas do processo de instalação
-                        </Typography>
-                        <Typography variant="body1" sx={{ mb: 4, color: '#555' }}>
-                            A empresa Nury em parceria com seus colaboradores, desenvolveu um processo
-                            claro e detalhado do processo de instalação de seus produtos.
-                        </Typography>
-                        <StyledHowItWorksButton>
-                            Saiba mais
-                        </StyledHowItWorksButton>
-                    </Box>
-                </Grow>
-
-                {/* Coluna da direita: 3 Cards com Imagem, Título e Descrição */}
-                <Box
-                    sx={{
-                        flex: 2,
-                        display: 'flex',
-                        flexDirection: { xs: 'column', sm: 'row' },
-                        justifyContent: 'space-around',
                         alignItems: 'flex-start',
-                        gap: { xs: 3, sm: 2 },
-                        maxWidth: { xs: '100%', md: '70%' },
+                        gap: { xs: 4, md: 8 },
                     }}
                 >
-                    {/* Card 1 */}
-                    <Grow in={howItWorksCardInView[0]} style={{ transformOrigin: '0 0 0' }} timeout={1000}>
-                        <StyledHowItWorksCard ref={el => howItWorksRefs.current[0] = el}>
-                            <CardMedia
-                                component="img"
-                                image="/firmbee-com-gcsNOsPEXfs-unsplash.jpg"
-                                alt="Análise das últimas contas"
-                                sx={{ height: 200, objectFit: 'cover', borderRadius: '12px 12px 0 0' }}
-                            />
-                            <Box sx={{ p: 2, textAlign: 'left' }}>
-                                <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1, color: '#1A1A1A' }}>
-                                    Análise das últimas contas
-                                </Typography>
-                                <Typography variant="body2" sx={{ color: '#555' }}>
-                                    Será realizado uma análise das doze últimas contas.
-                                </Typography>
-                            </Box>
-                        </StyledHowItWorksCard>
+                    <Grow in={howItWorksTextInView} style={{ transformOrigin: '0 0 0' }} timeout={1000}>
+                        <Box ref={howItWorksTextRef} sx={{ flex: 1, maxWidth: { xs: '100%', md: '30%' }, textAlign: { xs: 'center', md: 'left' } }}>
+                            <Typography variant="h4" component="h2" sx={{ fontWeight: 'bold', mb: 2, color: '#1A1A1A' }}>
+                                Como funciona
+                            </Typography>
+                            <Typography variant="subtitle1" sx={{ fontWeight: 'bold', mb: 3, color: '#1A1A1A' }}>
+                                Etapas do processo de instalação
+                            </Typography>
+                            <Typography variant="body1" sx={{ mb: 4, color: '#555' }}>
+                                A empresa Nury em parceria com seus colaboradores, desenvolveu um processo
+                                claro e detalhado do processo de instalação de seus produtos.
+                            </Typography>
+                            <StyledHowItWorksButton>
+                                Saiba mais
+                            </StyledHowItWorksButton>
+                        </Box>
                     </Grow>
-
-                    {/* Card 2 */}
-                    <Grow in={howItWorksCardInView[1]} style={{ transformOrigin: '0 0 0' }} timeout={1500}>
-                        <StyledHowItWorksCard ref={el => howItWorksRefs.current[1] = el}>
-                            <CardMedia
-                                component="img"
-                                image="/scott-graham-OQMZwNd3ThU-unsplash.jpg"
-                                alt="Proposta e contrato"
-                                sx={{ height: 200, objectFit: 'cover', borderRadius: '12px 12px 0 0' }}
-                            />
-                            <Box sx={{ p: 2, textAlign: 'left' }}>
-                                <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1, color: '#1A1A1A' }}>
-                                    Proposta e contrato
-                                </Typography>
-                                <Typography variant="body2" sx={{ color: '#555' }}>
-                                    O cliente receberá uma proposta e o contrato dos nossos serviços.
-                                </Typography>
-                            </Box>
-                        </StyledHowItWorksCard>
-                    </Grow>
-
-                    {/* Card 3 */}
-                    <Grow in={howItWorksCardInView[2]} style={{ transformOrigin: '0 0 0' }} timeout={2000}>
-                        <StyledHowItWorksCard ref={el => howItWorksRefs.current[2] = el}>
-                            <CardMedia
-                                component="img"
-                                image="/radission-us-_XeQ8XEWb4Q-unsplash.jpg"
-                                alt="Projeto de legalização"
-                                sx={{ height: 200, objectFit: 'cover', borderRadius: '12px 12px 0 0' }}
-                            />
-                            <Box sx={{ p: 2, textAlign: 'left' }}>
-                                <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1, color: '#1A1A1A' }}>
-                                    Projeto de legalização
-                                </Typography>
-                                <Typography variant="body2" sx={{ color: '#555' }}>
-                                    Os profissionais da Nury darão início no projeto e legalização.
-                                </Typography>
-                            </Box>
-                        </StyledHowItWorksCard>
-                    </Grow>
-                </Box>
-            </Box>
-
-            {/* Seção de Vantagens */}
-            <Box
-                sx={{
-                    backgroundColor: '#F7F7F7',
-                    padding: { xs: 4, md: 8 },
-                    textAlign: 'center',
-                }}
-            >
-                <Grow in={advantagesInView} style={{ transformOrigin: '0 0 0' }} timeout={1000}>
-                    <Box ref={advantagesRef}>
-                        <Typography
-                            variant="h4"
-                            sx={{ fontWeight: 'bold', mb: 2, color: '#1A1A1A' }}
-                        >
-                            Vantagens de Escolher Nury
-                        </Typography>
-                        <Typography variant="body1" sx={{ color: '#555', mb: 6 }}>
-                            Oferecemos mais do que produtos, entregamos benefícios que transformam a sua vida e o planeta.
-                        </Typography>
+                    <Box
+                        sx={{
+                            flex: 2,
+                            display: 'flex',
+                            flexDirection: { xs: 'column', sm: 'row' },
+                            justifyContent: 'space-around',
+                            alignItems: 'flex-start',
+                            gap: { xs: 3, sm: 2 },
+                            maxWidth: { xs: '100%', md: '70%' },
+                        }}
+                    >
+                        <Grow in={howItWorksCardInView[0]} style={{ transformOrigin: '0 0 0' }} timeout={1000}>
+                            <StyledHowItWorksCard ref={el => howItWorksRefs.current[0] = el}>
+                                <CardMedia
+                                    component="img"
+                                    image="/firmbee-com-gcsNOsPEXfs-unsplash.jpg"
+                                    alt="Análise das últimas contas"
+                                    sx={{ height: 200, objectFit: 'cover', borderRadius: '12px 12px 0 0' }}
+                                />
+                                <Box sx={{ p: 2, textAlign: 'left' }}>
+                                    <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1, color: '#1A1A1A' }}>
+                                        Análise das últimas contas
+                                    </Typography>
+                                    <Typography variant="body2" sx={{ color: '#555' }}>
+                                        Será realizado uma análise das doze últimas contas.
+                                    </Typography>
+                                </Box>
+                            </StyledHowItWorksCard>
+                        </Grow>
+                        <Grow in={howItWorksCardInView[1]} style={{ transformOrigin: '0 0 0' }} timeout={1500}>
+                            <StyledHowItWorksCard ref={el => howItWorksRefs.current[1] = el}>
+                                <CardMedia
+                                    component="img"
+                                    image="/scott-graham-OQMZwNd3ThU-unsplash.jpg"
+                                    alt="Proposta e contrato"
+                                    sx={{ height: 200, objectFit: 'cover', borderRadius: '12px 12px 0 0' }}
+                                />
+                                <Box sx={{ p: 2, textAlign: 'left' }}>
+                                    <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1, color: '#1A1A1A' }}>
+                                        Proposta e contrato
+                                    </Typography>
+                                    <Typography variant="body2" sx={{ color: '#555' }}>
+                                        O cliente receberá uma proposta e o contrato dos nossos serviços.
+                                    </Typography>
+                                </Box>
+                            </StyledHowItWorksCard>
+                        </Grow>
+                        <Grow in={howItWorksCardInView[2]} style={{ transformOrigin: '0 0 0' }} timeout={2000}>
+                            <StyledHowItWorksCard ref={el => howItWorksRefs.current[2] = el}>
+                                <CardMedia
+                                    component="img"
+                                    image="/radission-us-_XeQ8XEWb4Q-unsplash.jpg"
+                                    alt="Projeto de legalização"
+                                    sx={{ height: 200, objectFit: 'cover', borderRadius: '12px 12px 0 0' }}
+                                />
+                                <Box sx={{ p: 2, textAlign: 'left' }}>
+                                    <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1, color: '#1A1A1A' }}>
+                                        Projeto de legalização
+                                    </Typography>
+                                    <Typography variant="body2" sx={{ color: '#555' }}>
+                                        Os profissionais da Nury darão início no projeto e legalização.
+                                    </Typography>
+                                </Box>
+                            </StyledHowItWorksCard>
+                        </Grow>
                     </Box>
-                </Grow>
+                </Box>
 
+                {/* Seção de Vantagens */}
                 <Box
                     sx={{
-                        display: 'flex',
-                        flexDirection: { xs: 'column', md: 'row' },
-                        justifyContent: 'center',
-                        gap: { xs: 4, md: 3 },
+                        ...sectionStyles,
+                        backgroundColor: '#ffffff', // Alterado para branco
                     }}
                 >
-                    {advantagesItems.map((item, index) => (
-                        <Grow in={advantageCardInView[index]} style={{ transformOrigin: '0 0 0' }} timeout={1000 + (index * 500)} key={index}>
-                            <StyledAdvantageCard ref={el => advantageCardRefs.current[index] = el} sx={{ flex: 1 }}>
-                                <Box sx={{ mb: 2 }}>
-                                    {item.icon}
-                                </Box>
-                                <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 1 }}>
-                                    {item.title}
-                                </Typography>
-                                <Typography variant="body2" sx={{ mb: 2 }}>
-                                    {item.description}
-                                </Typography>
-                            </StyledAdvantageCard>
-                        </Grow>
-                    ))}
-                </Box>
-            </Box>
-
-            <Box
-                sx={{
-                    backgroundColor: '#F7F7F7',
-                    padding: { xs: 4, md: 8 },
-                    textAlign: 'center',
-                }}
-            >
-                <Container maxWidth="lg">
-                    <Grow in={casesTitleInView} style={{ transformOrigin: '0 0 0' }} timeout={1000}>
-                        <Box ref={casesTitleRef}>
-                            <Typography variant="h3" sx={{ fontWeight: 'bold', mb: 6, color: '#1A1A1A' }}>
-                                Cases de Sucesso
+                    <Grow in={advantagesInView} style={{ transformOrigin: '0 0 0' }} timeout={1000}>
+                        <Box ref={advantagesRef}>
+                            <Typography
+                                variant="h4"
+                                sx={{ fontWeight: 'bold', mb: 2, color: '#1A1A1A' }}
+                            >
+                                Vantagens de Escolher Nury
+                            </Typography>
+                            <Typography variant="body1" sx={{ color: '#555', mb: 6 }}>
+                                Oferecemos mais do que produtos, entregamos benefícios que transformam a sua vida e o planeta.
                             </Typography>
                         </Box>
                     </Grow>
@@ -881,29 +819,71 @@ export default function Home() {
                             gap: { xs: 4, md: 3 },
                         }}
                     >
-                        {cases.map((caseItem, index) => (
-                            <Grow in={caseCardInView[index]} style={{ transformOrigin: '0 0 0' }} timeout={1000 + (index * 300)} key={index}>
-                                <StyledSuccessCard ref={el => caseCardRefs.current[index] = el} sx={{ flex: 1 }}>
-                                    <StyledAvatar alt={caseItem.name}>
-                                        <img src={caseItem.avatarUrl} alt={caseItem.name} style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />
-                                    </StyledAvatar>
-                                    <CardContent>
-                                        <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#00579D' }}>
-                                            {caseItem.name}
-                                        </Typography>
-                                        <Typography variant="body2" sx={{ color: '#555', mb: 1 }}>
-                                            {caseItem.type}
-                                        </Typography>
-                                        <Rating name={`rating-${index}`} value={caseItem.rating} readOnly sx={{ mb: 2 }} />
-                                        <Typography variant="body2" sx={{ fontStyle: 'italic', color: '#1A1A1A' }}>
-                                            "{caseItem.comment}"
-                                        </Typography>
-                                    </CardContent>
-                                </StyledSuccessCard>
+                        {advantagesItems.map((item, index) => (
+                            <Grow in={advantageCardInView[index]} style={{ transformOrigin: '0 0 0' }} timeout={1000 + (index * 500)} key={index}>
+                                <StyledAdvantageCard ref={el => advantageCardRefs.current[index] = el} sx={{ flex: 1 }}>
+                                    <Box sx={{ mb: 2 }}>
+                                        {item.icon}
+                                    </Box>
+                                    <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 1 }}>
+                                        {item.title}
+                                    </Typography>
+                                    <Typography variant="body2" sx={{ mb: 2 }}>
+                                        {item.description}
+                                    </Typography>
+                                </StyledAdvantageCard>
                             </Grow>
                         ))}
                     </Box>
-                </Container>
+                </Box>
+
+                {/* Seção de Cases de Sucesso */}
+                <Box
+                    sx={{
+                        ...sectionStyles,
+                        backgroundColor: '#F7F7F7', // Manteve a cor de fundo cinza
+                    }}
+                >
+                    <Container maxWidth="lg">
+                        <Grow in={casesTitleInView} style={{ transformOrigin: '0 0 0' }} timeout={1000}>
+                            <Box ref={casesTitleRef}>
+                                <Typography variant="h3" sx={{ fontWeight: 'bold', mb: 6, color: '#1A1A1A' }}>
+                                    Cases de Sucesso
+                                </Typography>
+                            </Box>
+                        </Grow>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                flexDirection: { xs: 'column', md: 'row' },
+                                justifyContent: 'center',
+                                gap: { xs: 4, md: 3 },
+                            }}
+                        >
+                            {cases.map((caseItem, index) => (
+                                <Grow in={caseCardInView[index]} style={{ transformOrigin: '0 0 0' }} timeout={1000 + (index * 300)} key={index}>
+                                    <StyledSuccessCard ref={el => caseCardRefs.current[index] = el} sx={{ flex: 1 }}>
+                                        <StyledAvatar alt={caseItem.name}>
+                                            <img src={caseItem.avatarUrl} alt={caseItem.name} style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />
+                                        </StyledAvatar>
+                                        <CardContent>
+                                            <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#00579D' }}>
+                                                {caseItem.name}
+                                            </Typography>
+                                            <Typography variant="body2" sx={{ color: '#555', mb: 1 }}>
+                                                {caseItem.type}
+                                            </Typography>
+                                            <Rating name={`rating-${index}`} value={caseItem.rating} readOnly sx={{ mb: 2 }} />
+                                            <Typography variant="body2" sx={{ fontStyle: 'italic', color: '#1A1A1A' }}>
+                                                "{caseItem.comment}"
+                                            </Typography>
+                                        </CardContent>
+                                    </StyledSuccessCard>
+                                </Grow>
+                            ))}
+                        </Box>
+                    </Container>
+                </Box>
             </Box>
         </>
     );
