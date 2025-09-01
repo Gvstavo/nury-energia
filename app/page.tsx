@@ -68,15 +68,41 @@ const highlightItems = [
   },
   {
     title: 'Comercial',
-    description: 'Posicione sua empresa como líder em sustentabilidade e inovação com soluções de energia solar.',
+    description: 'Utilize energia solar, reduza os custos operacionais e melhore sua imagem corporativa com energia solar. Torne seu negócio mais sustentável e lucrativo.',
     imageUrl: '/chelsea-WvusC5M-TM8-unsplash.jpg', // Imagem de exemplo
   },
   {
     title: 'Industrial',
-    description: 'Maximize a competitividade da sua indústria com sistemas de energia solar robustos e personalizados.',
+    description: 'Transforme sua produção industrial com energia solar. Otimize seus processos e reduza drasticamente seus custos com energia e também emissões de carbono.',
     imageUrl: '/andreas-gucklhorn-Ilpf2eUPpUE-unsplash.jpg', // Imagem de exemplo
   },
+
+
+
 ];
+
+const highlightItemsBottom = [
+  {
+    title: 'Agro',
+    description: 'Energize suas operações agrícolas com soluções solares sustentáveis e eficientes. Reduza custos e aumente a produtividade de maneira limpa e eficiente.',
+    imageUrl: '/benjamin-child-GWe0dlVD9e0-unsplash.jpg', // Imagem de exemplo
+  },
+  {
+    title: 'Imobiliário',
+    description: 'Adicione valor aos seus empreendimentos imobiliários com energia solar. Atraia compradores e inquilinos ao oferecer soluções sustentáveis e econômicas.',
+    imageUrl: '/chelsea-WvusC5M-TM8-unsplash.jpg', // Imagem de exemplo
+  },
+  {
+    title: 'Usinas',
+    description: 'Construa e opere usinas solares de grande porte. Beneficie-se de uma energia limpa, renovável e de baixo custo para abastecer comunidades inteiras. Gerando renda e economia.',
+    imageUrl: '/andreas-gucklhorn-Ilpf2eUPpUE-unsplash.jpg', // Imagem de exemplo
+  },
+
+
+
+];
+
+
 
 const StyledCarousel = styled(Box)(({ theme }) => ({
   position: 'relative',
@@ -492,7 +518,47 @@ export default function Home() {
         >
           {highlightItems.map((item, index) => (
             <Grow in={highlightCardInView[index]} style={{ transformOrigin: '0 0 0' }} timeout={1000 + (index * 500)} key={index}>
-              <StyledHighlightCard ref={el => cardRefs.current[index] = el}>
+              <StyledHighlightCard ref={el => cardRefs.current[index] = el} sx = {{flex: 1}}>
+                <CardMedia
+                  component="img"
+                  image={item.imageUrl}
+                  alt={item.title}
+                  sx={{
+                    height: 200,
+                    width: '100%',
+                    objectFit: 'cover',
+                    borderTopLeftRadius: '16px',
+                    borderTopRightRadius: '16px',
+                  }}
+                />
+                <StyledHighlightsCardContent>
+                  <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 1 }}>
+                    {item.title}
+                  </Typography>
+                  <Typography variant="body2" sx={{ mb: 2 }}>
+                    {item.description}
+                  </Typography>
+                  <Box sx={{ mt: 'auto' }}>
+                    <StyledHighlightsButton>
+                      Saiba mais
+                    </StyledHighlightsButton>
+                  </Box>
+                </StyledHighlightsCardContent>
+              </StyledHighlightCard>
+            </Grow>
+          ))}
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: { xs: 'column', md: 'row' },
+            justifyContent: 'center',
+            gap: { xs: 4, md: 3 },
+          }}
+        >
+          {highlightItemsBottom.map((item, index) => (
+            <Grow in={highlightCardInView[index]} style={{ transformOrigin: '0 0 0' }} timeout={1000 + (index * 500)} key={index}>
+              <StyledHighlightCard ref={el => cardRefs.current[index] = el} sx = {{flex: 1, marginTop:  3}}>
                 <CardMedia
                   component="img"
                   image={item.imageUrl}
