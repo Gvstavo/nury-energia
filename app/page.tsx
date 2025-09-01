@@ -2,10 +2,14 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Box, Typography, IconButton, Card, CardMedia, Button, Grow } from '@mui/material';
+import { CardContent, Avatar, Rating, Container } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-
+import AcUnitIcon from '@mui/icons-material/AcUnit'; // Ícone de "Não polui o meio ambiente"
+import AutorenewIcon from '@mui/icons-material/Autorenew'; // Ícone de "Fonte de energia renovável"
+import BoltIcon from '@mui/icons-material/Bolt'; // Ícone de "Estoque Próprio"
+import ConstructionIcon from '@mui/icons-material/Construction'; 
 // Hook personalizado para detectar visibilidade no scroll
 const useScrollEffect = (threshold = 0.5) => {
   const [inView, setInView] = useState(false);
@@ -101,7 +105,46 @@ const highlightItemsBottom = [
 
 
 ];
+const advantagesItems = [
+  {
+    title: 'Facilidade na Instalação',
+    description: 'Nossa equipe de especialistas garante um processo de instalação rápido e sem complicações.',
+    icon: <ConstructionIcon sx={{ fontSize: 60, color: '#00579D' }} />,
+    image: '/davis-v-8F9B6eYy-sI-unsplash.jpg',
+  },
+  {
+    title: 'Não Polui o Meio Ambiente',
+    description: 'A energia solar é uma fonte limpa que não emite poluentes, contribuindo para um futuro mais verde.',
+    icon: <AcUnitIcon sx={{ fontSize: 60, color: '#00579D' }} />,
+    image: '/thomas-shellberg-3L_x39v80T8-unsplash.jpg',
+  },
+  {
+    title: 'Fonte de Energia Renovável',
+    description: 'O sol é uma fonte inesgotável de energia, garantindo sustentabilidade e independência energética a longo prazo.',
+    icon: <AutorenewIcon sx={{ fontSize: 60, color: '#00579D' }} />,
+    image: '/jonathan-borba-xP5_t-G4mH0-unsplash.jpg',
+  },
+  {
+    title: 'Estoque Próprio',
+    description: 'Com a parceria da WEG, nosso estoque é um diferencial que garante acesso imediato a uma grande variedade de produtos de alta qualidade.',
+    icon: <BoltIcon sx={{ fontSize: 60, color: '#00579D' }} />,
+    image: '/thisisengineering-ra-hYj2o0M8-unsplash.jpg',
+  },
+];
 
+const StyledAdvantageCard = styled(Card)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'flex-start',
+  alignItems: 'center',
+  textAlign: 'center',
+  backgroundColor: '#ffffff',
+  color: 'black',
+  padding: theme.spacing(3),
+  borderRadius: '16px',
+  boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
+  height: '100%',
+}));
 
 
 const StyledCarousel = styled(Box)(({ theme }) => ({
@@ -242,6 +285,9 @@ export default function Home() {
   const [howItWorksCardInView, setHowItWorksCardInView] = useState([false, false, false]);
   const howItWorksRefs = useRef<(HTMLDivElement | null)[]>([]);
 
+  const [advantagesRef, advantagesInView] = useScrollEffect(0.3);
+  const [advantageCardInView, setAdvantageCardInView] = useState(advantagesItems.map(() => false));
+  const advantageCardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const handleNext = () => {
     setActiveIndex((prevIndex) => prevIndex + 1);
@@ -335,7 +381,32 @@ export default function Home() {
       };
     }, []);
 
+useEffect(() => {
+  const observers = advantagesItems.map((_, index) => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setAdvantageCardInView(prev => {
+          const newState = [...prev];
+          newState[index] = true;
+          return newState;
+        });
+        observer.unobserve(entry.target);
+      }
+    }, { threshold: 0.3 });
+    if (advantageCardRefs.current[index]) {
+      observer.observe(advantageCardRefs.current[index]!);
+    }
+    return observer;
+  });
 
+  return () => {
+    observers.forEach((observer, index) => {
+      if (advantageCardRefs.current[index]) {
+        observer.unobserve(advantageCardRefs.current[index]!);
+      }
+    });
+  };
+}, []);
   return (
     <>
       <Box>
@@ -694,6 +765,53 @@ export default function Home() {
           </Grow>
         </Box>
       </Box>
+      {/* Seção de Vantagens */}
+<Box
+  sx={{
+    backgroundColor: '#F7F7F7',
+    padding: { xs: 4, md: 8 },
+    textAlign: 'center',
+  }}
+>
+  <Grow in={advantagesInView} style={{ transformOrigin: '0 0 0' }} timeout={1000}>
+    <Box ref={advantagesRef}>
+      <Typography
+        variant="h4"
+        sx={{ fontWeight: 'bold', mb: 2, color: '#1A1A1A' }}
+      >
+        Vantagens de Escolher Nury
+      </Typography>
+      <Typography variant="body1" sx={{ color: '#555', mb: 6 }}>
+        Oferecemos mais do que produtos, entregamos benefícios que transformam a sua vida e o planeta.
+      </Typography>
+    </Box>
+  </Grow>
+
+  <Box
+    sx={{
+      display: 'flex',
+      flexDirection: { xs: 'column', md: 'row' },
+      justifyContent: 'center',
+      gap: { xs: 4, md: 3 },
+    }}
+  >
+    {advantagesItems.map((item, index) => (
+      <Grow in={advantageCardInView[index]} style={{ transformOrigin: '0 0 0' }} timeout={1000 + (index * 500)} key={index}>
+        <StyledAdvantageCard ref={el => advantageCardRefs.current[index] = el} sx={{ flex: 1 }}>
+          <Box sx={{ mb: 2 }}>
+            {item.icon}
+          </Box>
+          <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 1 }}>
+            {item.title}
+          </Typography>
+          <Typography variant="body2" sx={{ mb: 2 }}>
+            {item.description}
+          </Typography>
+        </StyledAdvantageCard>
+      </Grow>
+    ))}
+  </Box>
+</Box>
     </>
   );
 }
