@@ -132,6 +132,31 @@ const advantagesItems = [
   },
 ];
 
+const cases = [
+    {
+      name: 'João Pedro Ernest',
+      type: 'Cliente residencial',
+      rating: 5,
+      comment: 'Ótima experiência desde o primeiro contato com a empresa, pessoal muito bem qualificado, esclareceram todas as dúvidas, cumpriram com o prazo de entrega e hoje já nem me preocupo mais com a conta de luz. Super recomendo!!!',
+      avatarUrl: '/lampada-nury.webp', // Adicione a URL da imagem de avatar aqui
+    },
+    {
+      name: 'João Fraga',
+      type: 'Cliente residencial',
+      rating: 5,
+      comment: 'Preço justo, negociação célere, atendimento de qualidade, tudo isso em prol da sustentabilidade, energia solar com uma empresa séria que respeita seu cliente.',
+      avatarUrl: '/lampada-nury.webp', // Adicione a URL da imagem de avatar aqui
+    },
+    {
+      name: 'Silvio Senw',
+      type: 'Cliente residencial',
+      rating: 5,
+      comment: 'Tendo uma fonte de energia natural que ajuda o meio ambiente sem degradação sem dúvida é a energia solar e para que isso seja possível nada mais que ter um serviço de qualidade junto à empresa Nury Energia Solar de Osório-RS.',
+      avatarUrl: 'lampada-nury.webp', // Adicione a URL da imagem de avatar aqui
+    },
+  ];
+
+
 const StyledAdvantageCard = styled(Card)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
@@ -267,7 +292,23 @@ const StyledHowItWorksButton = styled(Button)(({ theme }) => ({
   },
   textTransform: 'none',
 }));
-
+const StyledSuccessCard = styled(Card)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  textAlign: 'center',
+  padding: theme.spacing(4),
+  borderRadius: '16px',
+  boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
+  backgroundColor: '#ffffff',
+  height: '100%',
+}));
+const StyledAvatar = styled(Avatar)(({ theme }) => ({
+  width: 90,
+  height: 90,
+  marginBottom: theme.spacing(2),
+  border: '3px solid #00579D',
+}));
 export default function Home() {
   const [activeIndex, setActiveIndex] = useState(1); // Começa no primeiro slide real (índice 1)
   const [isTransitioning, setIsTransitioning] = useState(true);
@@ -288,6 +329,12 @@ export default function Home() {
   const [advantagesRef, advantagesInView] = useScrollEffect(0.3);
   const [advantageCardInView, setAdvantageCardInView] = useState(advantagesItems.map(() => false));
   const advantageCardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+
+  const [casesTitleRef, casesTitleInView] = useScrollEffect(0.3);
+  const [caseCardInView, setCaseCardInView] = useState(cases.map(() => false));
+  const caseCardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
 
   const handleNext = () => {
     setActiveIndex((prevIndex) => prevIndex + 1);
@@ -407,6 +454,33 @@ useEffect(() => {
     });
   };
 }, []);
+ useEffect(() => {
+    const observers = cases.map((_, index) => {
+      const observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          setCaseCardInView(prev => {
+            const newState = [...prev];
+            newState[index] = true;
+            return newState;
+          });
+          observer.unobserve(entry.target);
+        }
+      }, { threshold: 0.3 });
+      if (caseCardRefs.current[index]) {
+        observer.observe(caseCardRefs.current[index]!);
+      }
+      return observer;
+    });
+
+    return () => {
+      observers.forEach((observer, index) => {
+        if (caseCardRefs.current[index]) {
+          observer.unobserve(caseCardRefs.current[index]!);
+        }
+      });
+    };
+  }, []);
+
   return (
     <>
       <Box>
@@ -812,6 +886,60 @@ useEffect(() => {
     ))}
   </Box>
 </Box>
+
+     <Box
+      sx={{
+        backgroundColor: '#F7F7F7',
+        padding: { xs: 4, md: 8 },
+        textAlign: 'center',
+      }}
+    >
+      <Container maxWidth="lg">
+        <Grow in={casesTitleInView} style={{ transformOrigin: '0 0 0' }} timeout={1000}>
+          <Box ref={casesTitleRef}>
+            <Typography variant="h3" sx={{ fontWeight: 'bold', mb: 6, color: '#1A1A1A' }}>
+              Cases de Sucesso
+            </Typography>
+          </Box>
+        </Grow>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: { xs: 'column', md: 'row' },
+            justifyContent: 'center',
+            gap: { xs: 4, md: 3 },
+          }}
+        >
+          {cases.map((caseItem, index) => (
+            <Grow in={caseCardInView[index]} style={{ transformOrigin: '0 0 0' }} timeout={1000 + (index * 300)} key={index}>
+              <StyledSuccessCard ref={el => caseCardRefs.current[index] = el} sx={{ flex: 1 }}>
+                {/* Aqui está o avatar com o fundo de lâmpada */}
+                <StyledAvatar alt={caseItem.name}>
+                  {/* Se você tiver uma imagem da lâmpada, pode usar como backgroundImage no StyledAvatar
+                      e colocar a imagem da pessoa aqui, ou apenas o gradiente no StyledAvatar
+                      e não ter uma imagem de pessoa. Para a imagem, estou usando exemplos de Unsplash. */}
+                  <img src={caseItem.avatarUrl} alt={caseItem.name} style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />
+                </StyledAvatar>
+                <CardContent>
+                  <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#00579D' }}>
+                    {caseItem.name}
+                  </Typography>
+                  <Typography variant="body2" sx={{ color: '#555', mb: 1 }}>
+                    {caseItem.type}
+                  </Typography>
+                  <Rating name={`rating-${index}`} value={caseItem.rating} readOnly sx={{ mb: 2 }} />
+                  <Typography variant="body2" sx={{ fontStyle: 'italic', color: '#1A1A1A' }}>
+                    "{caseItem.comment}"
+                  </Typography>
+                </CardContent>
+              </StyledSuccessCard>
+            </Grow>
+          ))}
+        </Box>
+      </Container>
+    </Box>
+
+
     </>
   );
 }
