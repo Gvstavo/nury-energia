@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-const useScrollEffect = (threshold = 0.5) => {
+export  const useScrollEffect = (threshold = 0.5) => {
     const [inView, setInView] = useState(false);
     const ref = useRef(null);
 

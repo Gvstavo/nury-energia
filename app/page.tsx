@@ -9,7 +9,8 @@ import AcUnitIcon from '@mui/icons-material/AcUnit'; // Ícone de "Não polui o 
 import AutorenewIcon from '@mui/icons-material/Autorenew'; // Ícone de "Fonte de energia renovável"
 import BoltIcon from '@mui/icons-material/Bolt'; // Ícone de "Estoque Próprio"
 import ConstructionIcon from '@mui/icons-material/Construction'; 
-import useScrollEffect from "../src/utils.tsx";
+import {useScrollEffect} from "../src/utils.tsx";
+import { useState, useRef, useEffect} from 'react';
 
 
 const originalBanners = [

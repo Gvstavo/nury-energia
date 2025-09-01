@@ -4,7 +4,8 @@ import { Box, Typography } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { styled } from '@mui/material/styles';
 import { Container, Grow } from '@mui/material';
-import useScrollEffect from "../src/utils.tsx";
+import {useScrollEffect} from "../../src/utils.tsx";
+import { useState, useRef, useEffect} from 'react';
 
 const SectionWrapper = styled(Box)(({ theme }) => ({
     display: 'flex',

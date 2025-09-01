@@ -3,7 +3,7 @@
 import { Box, Typography, Container, Grow } from '@mui/material';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { styled } from '@mui/material/styles';
-import useScrollEffect from "../src/utils.tsx";
+import {useScrollEffect} from "../../src/utils.tsx";
 
 // Ícones para a nova seção de valores
 import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined';
