@@ -13,7 +13,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 const navItems = [
   { label: 'Página Inicial', href: '/' },
-  { label: 'Sobre nós', href: '/about' },
+  { label: 'Sobre nós', href: '/sobre-nos' },
   { label: 'Sucesso do Cliente', href: '/customer-success' },
   { label: 'Blog', href: '/blog' },
   { label: 'Contato', href: '/contact' },

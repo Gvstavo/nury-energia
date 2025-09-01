@@ -70,17 +70,9 @@ export default function Footer() {
           <PhoneIcon sx={{ fontSize: 18 }} />
           <Typography variant="body2">(51) 3909-7279</Typography>
       </Box>
-      <Box sx={{ display: 'flex', alignItems: 'center', mb: 1, gap: 1 }}>
-          <PhoneIcon sx={{ fontSize: 18 }} />
-          <Typography variant="body2">(51) 9 9787-1660</Typography>
-      </Box>
-      <Box sx={{ display: 'flex', alignItems: 'center', mb: 1, gap: 1 }}>
-          <PhoneIcon sx={{ fontSize: 18 }} />
-          <Typography variant="body2">(51) 9 9839-2260</Typography>
-      </Box>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <EmailIcon sx={{ fontSize: 18 }} />
-          <Typography variant="body2">comercial@atendimentoenergia.com.br</Typography>
+          <Typography variant="body2">atendimento@nuryenergia.com.br</Typography>
       </Box>
   </Box>
 
@@ -90,25 +82,15 @@ export default function Footer() {
       Siga-nos nas Redes Sociais
   </Typography>
   <Box sx={{ mb: 4 }}>
-      <Link href="#" target="_blank" rel="noopener">
+      <Link href="https://www.facebook.com/nuryenergia" target="_blank" rel="noopener">
       <IconButton sx={{ color: 'white' }}>
           <FacebookIcon />
       </IconButton>
   </Link>
-  <Link href="#" target="_blank" rel="noopener">
+  <Link href="https://www.instagram.com/nuryenergia/" target="_blank" rel="noopener">
   <IconButton sx={{ color: 'white' }}>
       <InstagramIcon />
   </IconButton>
-</Link>
-<Link href="#" target="_blank" rel="noopener">
-<IconButton sx={{ color: 'white' }}>
-  <YouTubeIcon />
-</IconButton>
-</Link>
-<Link href="#" target="_blank" rel="noopener">
-<IconButton sx={{ color: 'white' }}>
-  <LinkedInIcon />
-</IconButton>
 </Link>
 </Box>
 
