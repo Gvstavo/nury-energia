@@ -1,6 +1,5 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
 import { Box, Typography, IconButton, Card, CardMedia, Button, Grow } from '@mui/material';
 import { CardContent, Avatar, Rating, Container } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -10,31 +9,8 @@ import AcUnitIcon from '@mui/icons-material/AcUnit'; // Ícone de "Não polui o 
 import AutorenewIcon from '@mui/icons-material/Autorenew'; // Ícone de "Fonte de energia renovável"
 import BoltIcon from '@mui/icons-material/Bolt'; // Ícone de "Estoque Próprio"
 import ConstructionIcon from '@mui/icons-material/Construction'; 
-// Hook personalizado para detectar visibilidade no scroll
-const useScrollEffect = (threshold = 0.5) => {
-  const [inView, setInView] = useState(false);
-  const ref = useRef(null);
+import useScrollEffect from "../src/utils.tsx";
 
-  const handleIntersect = useCallback(([entry]: IntersectionObserverEntry[]) => {
-    if (entry.isIntersecting) {
-      setInView(true);
-    }
-  }, []);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(handleIntersect, { threshold });
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-    return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
-    };
-  }, [handleIntersect, threshold]);
-
-  return [ref, inView];
-};
 
 const originalBanners = [
   {

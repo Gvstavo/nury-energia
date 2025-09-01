@@ -3,34 +3,8 @@
 import { Box, Typography } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { styled } from '@mui/material/styles';
-import { useState, useEffect, useRef, useCallback } from 'react';
 import { Container, Grow } from '@mui/material';
-
-
-const useScrollEffect = (threshold = 0.5) => {
-    const [inView, setInView] = useState(false);
-    const ref = useRef(null);
-
-    const handleIntersect = useCallback(([entry]) => {
-        if (entry.isIntersecting) {
-            setInView(true);
-        }
-    }, []);
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(handleIntersect, { threshold });
-        if (ref.current) {
-            observer.observe(ref.current);
-        }
-        return () => {
-            if (ref.current) {
-                observer.unobserve(ref.current);
-            }
-        };
-    }, [handleIntersect, threshold]);
-
-    return [ref, inView];
-};
+import useScrollEffect from "../src/utils.tsx";
 
 const SectionWrapper = styled(Box)(({ theme }) => ({
     display: 'flex',

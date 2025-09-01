@@ -3,38 +3,12 @@
 import { Box, Typography, Container, Grow } from '@mui/material';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { styled } from '@mui/material/styles';
-import { useState, useEffect, useRef, useCallback } from 'react';
+import useScrollEffect from "../src/utils.tsx";
 
 // Ícones para a nova seção de valores
 import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined';
 import RocketLaunchOutlinedIcon from '@mui/icons-material/RocketLaunchOutlined';
 import StarOutlineOutlinedIcon from '@mui/icons-material/StarOutlineOutlined';
-
-// Hook personalizado para detectar visibilidade no scroll
-const useScrollEffect = (threshold = 0.5) => {
-    const [inView, setInView] = useState(false);
-    const ref = useRef(null);
-
-    const handleIntersect = useCallback(([entry]) => {
-        if (entry.isIntersecting) {
-            setInView(true);
-        }
-    }, []);
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(handleIntersect, { threshold });
-        if (ref.current) {
-            observer.observe(ref.current);
-        }
-        return () => {
-            if (ref.current) {
-                observer.unobserve(ref.current);
-            }
-        };
-    }, [handleIntersect, threshold]);
-
-    return [ref, inView];
-};
 
 const proposals = [
     'Agilidade',
