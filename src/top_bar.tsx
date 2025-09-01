@@ -53,7 +53,7 @@ export default function TopBar() {
 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
   <EmailIcon sx={{ fontSize: 18 }} />
   <Typography variant="body2" sx={{ fontSize: 15 }}>
-    contato@nuryenergia.com.br
+    atendimento@nuryenergia.com.br
 </Typography>
 </Box>
 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
