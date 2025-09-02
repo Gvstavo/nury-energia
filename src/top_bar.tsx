@@ -47,7 +47,7 @@ export default function TopBar() {
     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
       <PhoneIphoneIcon sx={{ fontSize: 18 }} />
       <Typography variant="body2" sx={{ fontSize: 15 }}>
-        (54) 3452-3200
+        (51) 9767-4482
     </Typography>
 </Box>
 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
@@ -69,7 +69,7 @@ export default function TopBar() {
     <Typography variant="body2" sx={{ fontSize: 15, fontWeight: 'bold' }}>
       Contate-nos
   </Typography>
-  <Link href="https://wa.me/555434523200" target="_blank" rel="noopener noreferrer">
+  <Link href="https://wa.me/555197674482" target="_blank" rel="noopener noreferrer">
   <IconButton sx={{ color: 'white' }}>
     <WhatsAppIcon />
 </IconButton>

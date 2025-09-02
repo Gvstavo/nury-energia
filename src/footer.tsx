@@ -68,7 +68,7 @@ export default function Footer() {
       </Typography>
       <Box sx={{ display: 'flex', alignItems: 'center', mb: 1, gap: 1 }}>
           <PhoneIcon sx={{ fontSize: 18 }} />
-          <Typography variant="body2">(51) 3909-7279</Typography>
+          <Typography variant="body2">(51) 9767-4482</Typography>
       </Box>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <EmailIcon sx={{ fontSize: 18 }} />
