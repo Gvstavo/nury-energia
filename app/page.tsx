@@ -80,25 +80,25 @@ const advantagesItems = [
     {
         title: 'Facilidade na Instalação',
         description: 'Nossa equipe de especialistas garante um processo de instalação rápido e sem complicações.',
-        icon: <ConstructionIcon sx={{ fontSize: 60, color: '#00579D' }} />,
+        icon: <ConstructionIcon sx={{ fontSize: 60, color: '#072463' }} />,
         image: '/davis-v-8F9B6eYy-sI-unsplash.jpg',
     },
     {
         title: 'Não Polui o Meio Ambiente',
         description: 'A energia solar é uma fonte limpa que não emite poluentes, contribuindo para um futuro mais verde.',
-        icon: <AcUnitIcon sx={{ fontSize: 60, color: '#00579D' }} />,
+        icon: <AcUnitIcon sx={{ fontSize: 60, color: '#072463' }} />,
         image: '/thomas-shellberg-3L_x39v80T8-unsplash.jpg',
     },
     {
         title: 'Fonte de Energia Renovável',
         description: 'O sol é uma fonte inesgotável de energia, garantindo sustentabilidade e independência energética a longo prazo.',
-        icon: <AutorenewIcon sx={{ fontSize: 60, color: '#00579D' }} />,
+        icon: <AutorenewIcon sx={{ fontSize: 60, color: '#072463' }} />,
         image: '/jonathan-borba-xP5_t-G4mH0-unsplash.jpg',
     },
     {
         title: 'Estoque Próprio',
         description: 'Com a parceria da WEG, nosso estoque é um diferencial que garante acesso imediato a uma grande variedade de produtos de alta qualidade.',
-        icon: <BoltIcon sx={{ fontSize: 60, color: '#00579D' }} />,
+        icon: <BoltIcon sx={{ fontSize: 60, color: '#072463' }} />,
         image: '/thisisengineering-ra-hYj2o0M8-unsplash.jpg',
     },
 ];
