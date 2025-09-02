@@ -125,7 +125,7 @@ export default function Navbar() {
    href="#"
    sx={{
      ml: 2, // Margem à esquerda para separar do menu de soluções
-     backgroundColor: '#00579D', // Cor de fundo do botão
+     backgroundColor: '#072463', // Cor de fundo do botão
      color: 'white',
      fontWeight: 'bold',
      textTransform: 'none', // Remove o uppercase padrão

@@ -14,7 +14,7 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 const StyledFooter = styled(Box)(({ theme }) => ({
-  backgroundColor: '#00579D', // Cor de fundo que se aproxima da imagem
+  backgroundColor: '#072463', // Cor de fundo que se aproxima da imagem
   color: 'white',
   padding: theme.spacing(8, 4),
   [theme.breakpoints.up('md')]: {
@@ -24,7 +24,7 @@ const StyledFooter = styled(Box)(({ theme }) => ({
 
 const StyledCopyright = styled(Box)(({ theme }) => ({
   borderTop: '1px solid rgba(255, 255, 255, 0.2)',
-  backgroundColor: '#00579D', 
+  backgroundColor: '#072463', 
   padding: theme.spacing(3, 4),
   textAlign: 'right',
   [theme.breakpoints.up('md')]: {

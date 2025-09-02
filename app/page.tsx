@@ -189,7 +189,7 @@ const StyledCard = styled(Card)(({ theme }) => ({
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
-    backgroundColor: '#00579D',
+    backgroundColor: '#072463',
     color: 'white',
     padding: theme.spacing(3),
     borderRadius: '16px',
@@ -197,7 +197,7 @@ const StyledCard = styled(Card)(({ theme }) => ({
 }));
 
 const StyledInfoButton = styled(Button)(({ theme }) => ({
-    backgroundColor: '#00579D',
+    backgroundColor: '#072463',
     color: 'white',
     borderRadius: '8px',
     padding: theme.spacing(1.5, 3),
@@ -219,7 +219,7 @@ const StyledHighlightCard = styled(Card)(({ theme }) => ({
 }));
 
 const StyledHighlightsButton = styled(Button)(({ theme }) => ({
-    backgroundColor: '#00579D',
+    backgroundColor: '#072463',
     color: 'white',
     borderRadius: '8px',
     padding: theme.spacing(1.5, 3),
@@ -250,7 +250,7 @@ const StyledHowItWorksCard = styled(Card)(({ theme }) => ({
 }));
 
 const StyledHowItWorksButton = styled(Button)(({ theme }) => ({
-    backgroundColor: '#00579D',
+    backgroundColor: '#072463',
     color: 'white',
     borderRadius: '8px',
     padding: theme.spacing(1.5, 3),
@@ -277,7 +277,7 @@ const StyledAvatar = styled(Avatar)(({ theme }) => ({
     width: 90,
     height: 90,
     marginBottom: theme.spacing(2),
-    border: '3px solid #00579D',
+    border: '3px solid #072463',
 }));
 
 const sectionStyles = {
@@ -867,7 +867,7 @@ export default function Home() {
                                             <img src={caseItem.avatarUrl} alt={caseItem.name} style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />
                                         </StyledAvatar>
                                         <CardContent>
-                                            <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#00579D' }}>
+                                            <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#072463' }}>
                                                 {caseItem.name}
                                             </Typography>
                                             <Typography variant="body2" sx={{ color: '#555', mb: 1 }}>

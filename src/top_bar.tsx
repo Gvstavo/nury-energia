@@ -31,7 +31,7 @@ export default function TopBar() {
         left: 0,
         width: '100%',
         height: 69,
-        bgcolor: '#00579D',
+        bgcolor: '#072463',
         color: 'white',
         display: 'flex',
         justifyContent: 'space-between',
