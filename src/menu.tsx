@@ -10,7 +10,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Box from '@mui/material/Box';
 import Image from 'next/image';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-
+import Link from 'next/link';
 const navItems = [
   { label: 'Página Inicial', href: '/' },
   { label: 'Sobre nós', href: '/sobre-nos' },
@@ -20,10 +20,10 @@ const navItems = [
 ];
 
 const solutions = [
-  "Agro",
-  "Residencial",
-  "Usinas Solares"
-]
+    { label: "Residencial", href: "/residencial" },
+    { label: "Agro", href: "/agro" },
+    { label: "Usinas Solares", href: "/usinas-solares" }
+];
 
 export default function Navbar() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -75,51 +75,54 @@ export default function Navbar() {
            {item.label}
        </Button>
        ))}
-      <Button
-         id="solutions-button"
-         aria-controls={open ? 'solutions-menu' : undefined}
-         aria-haspopup="true"
-         aria-expanded={open ? 'true' : undefined}
-         onMouseEnter={handleOpen}
-         color="inherit"
-         sx={{ mx: 1, textTransform: 'none', '&:hover': { backgroundColor: 'transparent' } }}
-         className="nav-item-hover"
-         endIcon={<ArrowDropDownIcon />}
-     >
-         Soluções
-     </Button>
-     <Menu
-         id="solutions-menu"
-         anchorEl={anchorEl}
-         open={open}
-         onClose={handleClose}
-         onMouseLeave={handleClose}
-         MenuListProps={{
-           disablePadding: true,
-           onMouseLeave: handleClose
-       }}
-   >
-     {solutions.map((solution) => (
-       <MenuItem
-          key={solution}
-          onClick={handleClose}
-          sx={{
-            textTransform: 'none',
-            color: 'black',
-            '&:hover': {
-               backgroundColor: 'transparent',
-               color: '#0091BD',
-           },
-           '&:focus-visible': {
-               backgroundColor: 'transparent',
-               outline: 'none',
-           },
-       }}
-   >
-    {solution}
-</MenuItem>
-))}
- </Menu>
+                    <Button
+                        id="solutions-button"
+                        aria-controls={open ? 'solutions-menu' : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={open ? 'true' : undefined}
+                        onMouseEnter={handleOpen}
+                        color="inherit"
+                        sx={{ mx: 1, textTransform: 'none', '&:hover': { backgroundColor: 'transparent' } }}
+                        className="nav-item-hover"
+                        endIcon={<ArrowDropDownIcon />}
+                    >
+                        Soluções
+                    </Button>
+                    <Menu
+                        id="solutions-menu"
+                        anchorEl={anchorEl}
+                        open={open}
+                        onClose={handleClose}
+                        onMouseLeave={handleClose}
+                        MenuListProps={{
+                            disablePadding: true,
+                            onMouseLeave: handleClose
+                        }}
+                    >
+                        {/* 3. Mapeie o novo array e integre o Link */}
+                        {solutions.map((solution) => (
+                            <MenuItem
+                                key={solution.label}
+                                component={Link}         // Renderiza o MenuItem como um Link
+                                href={solution.href}     // Passa o caminho para o Link
+                                onClick={handleClose}    // Fecha o menu ao clicar
+                                sx={{
+                                    textTransform: 'none',
+                                    color: 'black',
+                                    '&:hover': {
+                                        backgroundColor: 'transparent',
+                                        color: '#0091BD',
+                                    },
+                                    '&:focus-visible': {
+                                        backgroundColor: 'transparent',
+                                        outline: 'none',
+                                    },
+                                }}
+                            >
+                                {solution.label}
+                            </MenuItem>
+                        ))}
+                    </Menu>
  <Button
    variant="contained"
    href="/orcamento"
