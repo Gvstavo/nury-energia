@@ -21,17 +21,17 @@ const proposals = [
 
 const values = [
     {
-        icon: <LightbulbOutlinedIcon sx={{ fontSize: 60, color: '#00579D' }} />,
+        icon: <LightbulbOutlinedIcon sx={{ fontSize: 60, color: '#072463' }} />,
         title: 'Propósito',
         description: 'Pensar e agir de forma inovadora, buscando, através da energia que nos move, realizar sonhos e solarizar o Sul do Brasill.',
     },
     {
-        icon: <RocketLaunchOutlinedIcon sx={{ fontSize: 60, color: '#00579D' }} />,
+        icon: <RocketLaunchOutlinedIcon sx={{ fontSize: 60, color: '#072463' }} />,
         title: 'Missão',
         description: 'Colaboramos com a sustentabilidade do planeta, proporcionando liberdade de escolha aos nossos clientes por meio da experiência única de gerar sua própria energia com soluções customizadas e inovadoras.',
     },
     {
-        icon: <StarOutlineOutlinedIcon sx={{ fontSize: 60, color: '#00579D' }} />,
+        icon: <StarOutlineOutlinedIcon sx={{ fontSize: 60, color: '#072463' }} />,
         title: 'Visão',
         description: 'Ser referência em excelência na eficiência energética e energia renovável na nossa região de atuação.',
     },
@@ -118,13 +118,13 @@ export default function About() {
                         {/* Coluna da Esquerda: Proposta de Valor */}
                         <Grow in={sectionInView} style={{ transformOrigin: '0 0 0' }} timeout={1000}>
                             <Box sx={{ flex: 1, maxWidth: { xs: '100%', md: '50%' } }}>
-                                <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 3, color: '#00579D' }}>
+                                <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 3, color: '#072463' }}>
                                     Proposta de Valor:
                                 </Typography>
                                 <Box>
                                     {proposals.map((item, index) => (
                                         <StyledChecklistItem key={index}>
-                                            <CheckCircleOutlineIcon sx={{ color: '#00579D', mr: 1, fontSize: 20 }} />
+                                            <CheckCircleOutlineIcon sx={{ color: '#072463', mr: 1, fontSize: 20 }} />
                                             <Typography variant="body1">
                                                 {item}
                                             </Typography>
@@ -155,7 +155,7 @@ export default function About() {
                 }}
             >
                 <Container maxWidth="lg" ref={valuesRef}>
-                    <Typography variant="h4" align="center" sx={{ fontWeight: 'bold', mb: 6, color: '#00579D' }}>
+                    <Typography variant="h4" align="center" sx={{ fontWeight: 'bold', mb: 6, color: '#072463' }}>
                         Valores que nos movem
                     </Typography>
                     <Box

@@ -128,7 +128,7 @@ export default function Features() {
                 <Grow in={supportInView} style={{ transformOrigin: '0 0 0' }} timeout={1000}>
                     <ContentRow ref={supportRef}>
                         <TextContent>
-                            <Typography variant="body1" sx={{ color: '#00579D', fontWeight: 'bold', mb: 1 }}>
+                            <Typography variant="body1" sx={{ color: '#072463', fontWeight: 'bold', mb: 1 }}>
                                 Manutenção
                             </Typography>
                             <Typography variant="h4" component="h2" sx={{ color: '#1A1A1A', fontWeight: 'bold', mb: 2 }}>
@@ -161,7 +161,7 @@ export default function Features() {
                 <Grow in={managementInView} style={{ transformOrigin: '0 0 0' }} timeout={1000}>
                     <ContentRow ref={managementRef} sx={{ flexDirection: { xs: 'column', md: 'row-reverse' } }}>
                         <TextContent>
-                            <Typography variant="body1" sx={{ color: '#00579D', fontWeight: 'bold', mb: 1 }}>
+                            <Typography variant="body1" sx={{ color: '#072463', fontWeight: 'bold', mb: 1 }}>
                                 Gestão
                             </Typography>
                             <Typography variant="h4" component="h2" sx={{ color: '#1A1A1A', fontWeight: 'bold', mb: 2 }}>
