@@ -47,9 +47,9 @@ const StyledChecklistItem = styled(Box)(({ theme }) => ({
 const StyledBanner = styled(Box)(({ theme }) => ({
     width: '100%',
     minHeight: '400px',
-    backgroundImage: 'url(/chelsea-WvusC5M-TM8-unsplash.jpg)',
+    backgroundImage: 'url(/rahul-bhogal-Ub9LkIWxyec-unsplash.webp)',
     backgroundSize: 'cover',
-    backgroundPosition: 'center',
+    backgroundPosition: '50% 35%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

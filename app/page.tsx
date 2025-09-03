@@ -17,19 +17,19 @@ const originalBanners = [
     {
         title: 'CONECTANDO VOCÊ AO',
         subtitle: 'FUTURO DA MOBILIDADE ELÉTRICA',
-        imageUrl: '/andreas-gucklhorn-Ilpf2eUPpUE-unsplash.jpg',
+        imageUrl: '/markus-spiske-pwFr_1SUXRo-unsplash.webp',
         align: 'center',
     },
     {
         title: 'SOLUÇÕES COMPLETAS PARA',
         subtitle: 'ENERGIA SOLAR RESIDENCIAL',
-        imageUrl: '/chelsea-WvusC5M-TM8-unsplash.jpg',
+        imageUrl: '/benjamin-jopen-Df7hu8UO19M-unsplash.webp',
         align: 'center',
     },
     {
         title: 'EFICIÊNCIA ENERGÉTICA',
         subtitle: 'PARA O SEU NEGÓCIO',
-        imageUrl: '/anders-j-hxUcl0nUsIY-unsplash.jpg',
+        imageUrl: '/ryan-searle-oeSxn9z_15I-unsplash.webp',
         align: 'center',
     },
 ];
@@ -43,36 +43,42 @@ const banners = [
 const highlightItems = [
     {
         title: 'Residencial',
-        description: 'Transforme a sua casa em um exemplo de sustentabilidade e economia com a energia solar.',
-        imageUrl: '/benjamin-child-GWe0dlVD9e0-unsplash.jpg',
+        description: 'Leve a energia solar para sua casa. Economize na conta de luz e contribua para um futuro mais verde com soluções solares acessíveis e eficientes.',
+        imageUrl: '/watt-a-lot-4Wl2YkDqHjU-unsplash.webp',
+        url: '/residencial'
     },
     {
         title: 'Comercial',
         description: 'Utilize energia solar, reduza os custos operacionais e melhore sua imagem corporativa com energia solar. Torne seu negócio mais sustentável e lucrativo.',
-        imageUrl: '/chelsea-WvusC5M-TM8-unsplash.jpg',
+        imageUrl: '/tem-rysh-F6-U5fGAOik-unsplash.jpg',
+        url: '/comercial'
     },
     {
         title: 'Industrial',
         description: 'Transforme sua produção industrial com energia solar. Otimize seus processos e reduza drasticamente seus custos com energia e também emissões de carbono.',
-        imageUrl: '/andreas-gucklhorn-Ilpf2eUPpUE-unsplash.jpg',
+        imageUrl: '/homa-appliances-pWUyHVJgLhg-unsplash.jpg',
+        url: '/industrial'
     },
 ];
 
 const highlightItemsBottom = [
     {
-        title: 'Agro',
+        title: 'Rural',
         description: 'Energize suas operações agrícolas com soluções solares sustentáveis e eficientes. Reduza custos e aumente a produtividade de maneira limpa e eficiente.',
-        imageUrl: '/benjamin-child-GWe0dlVD9e0-unsplash.jpg',
+        imageUrl: '/james-smith-qg7xspO1Ozk-unsplash.jpg',
+        url:'/rural'
     },
     {
-        title: 'Imobiliário',
-        description: 'Adicione valor aos seus empreendimentos imobiliários com energia solar. Atraia compradores e inquilinos ao oferecer soluções sustentáveis e econômicas.',
-        imageUrl: '/chelsea-WvusC5M-TM8-unsplash.jpg',
+        title: 'Mobilidade elétrica',
+        description: 'Com o crescimento acelerado da mobilidade elétrica no Brasil, a Nury está na vanguarda dessa transformação. ',
+        imageUrl: '/chuttersnap-xJLsHl0hIik-unsplash.jpg',
+        url:'mobilidade-eletrica'
     },
     {
-        title: 'Usinas',
-        description: 'Construa e opere usinas solares de grande porte. Beneficie-se de uma energia limpa, renovável e de baixo custo para abastecer comunidades inteiras. Gerando renda e economia.',
-        imageUrl: '/andreas-gucklhorn-Ilpf2eUPpUE-unsplash.jpg',
+        title: 'Baterias e Armazenamento',
+        description: 'Maximize o uso da energia solar, armazenando o excesso para uso durante a noite ou em momentos de alta demanda.',
+        imageUrl: '/jon-moore-g4PJkWiAmVo-unsplash.jpg',
+        url: 'baterias-e-armazenamento'
     },
 ];
 
@@ -575,7 +581,7 @@ export default function Home() {
                         >
                             <CardMedia
                                 component="img"
-                                image="/benjamin-child-GWe0dlVD9e0-unsplash.jpg"
+                                image="/benjamin-child-GWe0dlVD9e0-unsplash_.jpg"
                                 alt="Reunião de negócios"
                                 sx={{
                                     width: '100%',
@@ -643,7 +649,7 @@ export default function Home() {
                                             {item.description}
                                         </Typography>
                                         <Box sx={{ mt: 'auto' }}>
-                                            <StyledHighlightsButton>
+                                            <StyledHighlightsButton href={item.url}>
                                                 Saiba mais
                                             </StyledHighlightsButton>
                                         </Box>
@@ -683,7 +689,7 @@ export default function Home() {
                                             {item.description}
                                         </Typography>
                                         <Box sx={{ mt: 'auto' }}>
-                                            <StyledHighlightsButton>
+                                            <StyledHighlightsButton href={item.url}>
                                                 Saiba mais
                                             </StyledHighlightsButton>
                                         </Box>
@@ -738,7 +744,7 @@ export default function Home() {
                             <StyledHowItWorksCard ref={el => howItWorksRefs.current[0] = el}>
                                 <CardMedia
                                     component="img"
-                                    image="/firmbee-com-gcsNOsPEXfs-unsplash.jpg"
+                                    image="/scott-graham-5fNmWej4tAA-unsplash.jpg"
                                     alt="Análise das últimas contas"
                                     sx={{ height: 200, objectFit: 'cover', borderRadius: '12px 12px 0 0' }}
                                 />
@@ -756,7 +762,7 @@ export default function Home() {
                             <StyledHowItWorksCard ref={el => howItWorksRefs.current[1] = el}>
                                 <CardMedia
                                     component="img"
-                                    image="/scott-graham-OQMZwNd3ThU-unsplash.jpg"
+                                    image="/scott-graham-OQMZwNd3ThU-unsplash_.jpg"
                                     alt="Proposta e contrato"
                                     sx={{ height: 200, objectFit: 'cover', borderRadius: '12px 12px 0 0' }}
                                 />
@@ -774,7 +780,7 @@ export default function Home() {
                             <StyledHowItWorksCard ref={el => howItWorksRefs.current[2] = el}>
                                 <CardMedia
                                     component="img"
-                                    image="/radission-us-_XeQ8XEWb4Q-unsplash.jpg"
+                                    image="/radission-us-_XeQ8XEWb4Q-unsplash_.jpg"
                                     alt="Projeto de legalização"
                                     sx={{ height: 200, objectFit: 'cover', borderRadius: '12px 12px 0 0' }}
                                 />
