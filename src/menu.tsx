@@ -15,7 +15,7 @@ const navItems = [
   { label: 'Página Inicial', href: '/' },
   { label: 'Sobre nós', href: '/sobre-nos' },
   { label: 'Sucesso do Cliente', href: '/sucesso-do-cliente' },
-  { label: 'Blog', href: '/blog' },
+  //{ label: 'Blog', href: '/blog' },
   //{ label: 'Contato', href: '/contact' },
 ];
 
