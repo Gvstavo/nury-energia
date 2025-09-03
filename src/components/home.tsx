@@ -724,7 +724,7 @@ export default function Home() {
                                 A empresa Nury em parceria com seus colaboradores, desenvolveu um processo
                                 claro e detalhado do processo de instalação de seus produtos.
                             </Typography>
-                            <StyledHowItWorksButton>
+                            <StyledHowItWorksButton href="/orcamento">
                                 Saiba mais
                             </StyledHowItWorksButton>
                         </Box>
