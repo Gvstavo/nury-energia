@@ -45,19 +45,19 @@ const highlightItems = [
         title: 'Residencial',
         description: 'Leve a energia solar para sua casa. Economize na conta de luz e contribua para um futuro mais verde com soluções solares acessíveis e eficientes.',
         imageUrl: '/watt-a-lot-4Wl2YkDqHjU-unsplash.webp',
-        url: '/residencial'
+        url: '/solucoes/residencial'
     },
     {
         title: 'Comercial',
         description: 'Utilize energia solar, reduza os custos operacionais e melhore sua imagem corporativa com energia solar. Torne seu negócio mais sustentável e lucrativo.',
         imageUrl: '/tem-rysh-F6-U5fGAOik-unsplash.jpg',
-        url: '/comercial'
+        url: '/solucoes/comercial'
     },
     {
         title: 'Industrial',
         description: 'Transforme sua produção industrial com energia solar. Otimize seus processos e reduza drasticamente seus custos com energia e também emissões de carbono.',
         imageUrl: '/homa-appliances-pWUyHVJgLhg-unsplash.jpg',
-        url: '/industrial'
+        url: '/solucoes//industrial'
     },
 ];
 
@@ -66,19 +66,19 @@ const highlightItemsBottom = [
         title: 'Rural',
         description: 'Energize suas operações agrícolas com soluções solares sustentáveis e eficientes. Reduza custos e aumente a produtividade de maneira limpa e eficiente.',
         imageUrl: '/james-smith-qg7xspO1Ozk-unsplash.jpg',
-        url:'/rural'
+        url:'/solucoes//rural'
     },
     {
         title: 'Mobilidade elétrica',
         description: 'Com o crescimento acelerado da mobilidade elétrica no Brasil, a Nury está na vanguarda dessa transformação. ',
         imageUrl: '/chuttersnap-xJLsHl0hIik-unsplash.jpg',
-        url:'mobilidade-eletrica'
+        url:'/solucoes/mobilidade-eletrica'
     },
     {
         title: 'Baterias e Armazenamento',
         description: 'Maximize o uso da energia solar, armazenando o excesso para uso durante a noite ou em momentos de alta demanda.',
         imageUrl: '/jon-moore-g4PJkWiAmVo-unsplash.jpg',
-        url: 'baterias-e-armazenamento'
+        url: '/solucoes/baterias-e-armazenamento'
     },
 ];
 
@@ -564,7 +564,7 @@ export default function Home() {
                             <Typography variant="body1" sx={{ mb: 3 }}>
                                 Somos uma empresa pioneira no Brasil em geração de energia, 100% brasileira que projeta e instala sistemas fotovoltaicos de pequeno, médio e grande porte com elevada qualidade e comprovada eficiência. Trabalhamos com os fabricantes líderes mundiais.
                             </Typography>
-                            <StyledInfoButton>
+                            <StyledInfoButton href="/orcamento">
                                 Saiba mais
                             </StyledInfoButton>
                         </Box>
