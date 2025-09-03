@@ -21,8 +21,13 @@ const navItems = [
 
 const solutions = [
     { label: "Residencial", href: "/residencial" },
-    { label: "Agro", href: "/agro" },
-    { label: "Usinas Solares", href: "/usinas-solares" }
+    { label: "Comercial", href: "/comercial" },
+    { label: "Industrial", href: "/industrial" },
+    { label: "Rural", href: "/rural" },
+    { label: "Mobilidade Elétrica", href: "/mobilidade-eletrica" },
+    { label: "Mercado Livre de Energia", href: "/mercado-livre-de-energia" },
+    { label: "Baterias e Armazenamento", href: "/baterias-e-armazenamento" },
+
 ];
 
 export default function Navbar() {

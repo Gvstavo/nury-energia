@@ -4,17 +4,19 @@ import { Box, Typography, Container, Grow } from '@mui/material';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { styled } from '@mui/material/styles';
 import { useScrollEffect } from "../../src/utils.tsx";
-
+import SolarPowerIcon from '@mui/icons-material/SolarPower';
 // Ícones para a nova seção de Detalhes Técnicos
 import TuneIcon from '@mui/icons-material/Tune';
 import ShieldOutlinedIcon from '@mui/icons-material/ShieldOutlined';
+import MonitorIcon from '@mui/icons-material/Monitor';
+import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 
 const StyledBanner = styled(Box)(({ theme }) => ({
     width: '100%',
     minHeight: '400px',
-    backgroundImage: 'url(/daniele-la-rosa-messina-OiPtLN9_04w-unsplash.webp)',
+    backgroundImage: 'url(/jon-moore-0MKzwPmehRE-unsplash.webp)',
     backgroundSize: 'cover',
-    backgroundPosition: '25% 15%',
+    backgroundPosition: '50% 50%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -28,7 +30,7 @@ const StyledBannerContent = styled(Box)(({ theme }) => ({
 }));
 
 
-export default function Residencial() {
+export default function Mercado() {
     // Hooks para o efeito de scroll
     const [bannerRef, bannerInView] = useScrollEffect(0.3);
     const [sectionRef, sectionInView] = useScrollEffect(0.3);
@@ -43,7 +45,7 @@ export default function Residencial() {
                 <StyledBanner ref={bannerRef}>
                     <StyledBannerContent>
                         <Typography variant="h3" component="h1" sx={{ fontWeight: 'bold', textTransform: 'uppercase' }}>
-                            Energia solar residencial
+                            Baterias e Armazenamento
                         </Typography>
                         <Typography variant="h5" sx={{ mt: 1, maxWidth: '600px', mx: 'auto' }}>
                         </Typography>
@@ -65,19 +67,14 @@ export default function Residencial() {
                             {/* Coluna da Esquerda: Conteúdo */}
                             <Box sx={{ flex: 1 }}>
                                 <Typography variant="h4" component="h2" fontWeight="bold" color="text.primary" sx={{ mb: 2 }}>
-                                    Energia Solar Personalizada para Sua Casa
+                                   Armazenamento Inteligente para um Futuro Sustentável
                                 </Typography>
                                 <Typography variant="h6" component="h3" color={primaryBlue} sx={{ mb: 3, fontWeight: 'medium' }}>
                                     Soluções sob medida
                                 </Typography>
                                 <Typography variant="body1" color="text.secondary" lineHeight={1.6}>
-                                    Transforme a sua casa em um exemplo de sustentabilidade e
-                                    economia com a energia solar. Nossas soluções são desenhadas
-                                    sob medida para atender às necessidades energéticas do seu
-                                    lar, garantindo uma integração perfeita com a arquitetura
-                                    existente. Desde o primeiro dia, você começará a notar a
-                                    redução nas suas contas de energia, enquanto contribui para um
-                                    futuro mais verde para as próximas gerações.
+                                    Com nossas soluções de armazenamento , você pode maximizar o uso da energia solar, armazenando o excesso para uso durante a noite ou em momentos de alta demanda. 
+                                    Isso não apenas aumenta a sua autonomia energética, mas também reduz os custos durante horários de pico, oferecendo uma solução completa para a gestão de energia em sua residência ou empresa.
                                 </Typography>
                             </Box>
                             {/* Coluna da Direita: Benefícios */}
@@ -89,22 +86,22 @@ export default function Residencial() {
                                 <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 3 }}>
                                     <CheckCircleOutlineIcon sx={{ color: primaryBlue, fontSize: 24, mr: 1, mt: 0.5 }} />
                                     <Box>
-                                        <Typography variant="h6" component="h3" fontWeight="bold" color="text.primary">Economia Imediata</Typography>
-                                        <Typography variant="body1" color="text.secondary">Reduza significativamente sua conta de luz com energia gerada diretamente no seu telhado.</Typography>
+                                        <Typography variant="h6" component="h3" fontWeight="bold" color="text.primary">    Redução de Custos Durante Horários de Pico   </Typography>
+                                        <Typography variant="body1" color="text.secondary">  Utilize energia armazenada em momentos de alta demanda e evite tarifas elevadas.</Typography>
                                     </Box>
                                 </Box>
                                 <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 3 }}>
                                     <CheckCircleOutlineIcon sx={{ color: primaryBlue, fontSize: 24, mr: 1, mt: 0.5 }} />
                                     <Box>
-                                        <Typography variant="h6" component="h3" fontWeight="bold" color="text.primary">Valorização do Imóvel</Typography>
-                                        <Typography variant="body1" color="text.secondary">Propriedades com sistemas de energia solar tendem a ter maior valor de mercado.</Typography>
+                                        <Typography variant="h6" component="h3" fontWeight="bold" color="text.primary">  Autonomia Energética </Typography>
+                                        <Typography variant="body1" color="text.secondary">   Garanta o fornecimento contínuo de energia, mesmo em caso de falhas na rede.</Typography>
                                     </Box>
                                 </Box>
                                 <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
                                     <CheckCircleOutlineIcon sx={{ color: primaryBlue, fontSize: 24, mr: 1, mt: 0.5 }} />
                                     <Box>
-                                        <Typography variant="h6" component="h3" fontWeight="bold" color="text.primary">Sustentabilidade</Typography>
-                                        <Typography variant="body1" color="text.secondary">Cada kilowatt-hora produzido evita a emissão de CO², ajudando a proteger o meio ambiente.</Typography>
+                                        <Typography variant="h6" component="h3" fontWeight="bold" color="text.primary">  Confiabilidade e Segurança </Typography>
+                                        <Typography variant="body1" color="text.secondary">  Sistemas de armazenamento seguros, com monitoramento constante e suporte técnico especializado.</Typography>
                                     </Box>
                                 </Box>
                             </Box>
@@ -128,22 +125,22 @@ export default function Residencial() {
                         }}>
                             {/* Item 1: Sistemas Personalizados */}
                             <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <TuneIcon sx={{ fontSize: '3rem', color: primaryBlue, mb: 2 }} />
+                                <SolarPowerIcon sx={{ fontSize: '3rem', color: primaryBlue, mb: 2 }} />
                                 <Typography variant="h6" component="h3" fontWeight="bold" color="text.primary" sx={{ mb: 1 }}>
-                                    Sistemas Personalizados
+                                   Soluções Modulares
                                 </Typography>
                                 <Typography variant="body1" color="text.secondary">
-                                    Analisamos seu consumo e projetamos um sistema fotovoltaico ideal para suas necessidades, otimizando a geração e o retorno do investimento.
+                                     Sistemas que podem ser dimensionados para atender às suas necessidades energéticas específicas.
                                 </Typography>
                             </Box>
                             {/* Item 2: Instalação Rápida e Segura */}
                             <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <ShieldOutlinedIcon sx={{ fontSize: '3rem', color: primaryBlue, mb: 2 }} />
+                                <MonitorIcon sx={{ fontSize: '3rem', color: primaryBlue, mb: 2 }} />
                                 <Typography variant="h6" component="h3" fontWeight="bold" color="text.primary" sx={{ mb: 1 }}>
-                                    Instalação Rápida e Segura
+                                 Tecnologia de Ponta
                                 </Typography>
                                 <Typography variant="body1" color="text.secondary">
-                                    Nossa equipe de especialistas certificados garante uma instalação ágil e em conformidade com todas as normas de segurança.
+                                     Equipamentos de armazenamento com alta eficiência e durabilidade, suportados pelas melhores marcas do mercado.
                                 </Typography>
                             </Box>
                         </Box>
