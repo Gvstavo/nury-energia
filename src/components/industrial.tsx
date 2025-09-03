@@ -3,21 +3,19 @@
 import { Box, Typography, Container, Grow } from '@mui/material';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { styled } from '@mui/material/styles';
-import { useScrollEffect } from "../../src/utils.tsx";
+import { useScrollEffect } from "../utils.tsx";
 import SolarPowerIcon from '@mui/icons-material/SolarPower';
 // Ícones para a nova seção de Detalhes Técnicos
 import TuneIcon from '@mui/icons-material/Tune';
 import ShieldOutlinedIcon from '@mui/icons-material/ShieldOutlined';
 import MonitorIcon from '@mui/icons-material/Monitor';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
-import SystemUpdateAltIcon from '@mui/icons-material/SystemUpdateAlt';
-import EvStationIcon from '@mui/icons-material/EvStation';
 const StyledBanner = styled(Box)(({ theme }) => ({
     width: '100%',
     minHeight: '400px',
-    backgroundImage: 'url(/chuttersnap-xfaYAsMV1p8-unsplash.webp)',
+    backgroundImage: 'url(/chuttersnap-9cCeS9Sg6nU-unsplash.webp)',
     backgroundSize: 'cover',
-    backgroundPosition: '50% 50%',
+    backgroundPosition: '25% 15%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -31,7 +29,7 @@ const StyledBannerContent = styled(Box)(({ theme }) => ({
 }));
 
 
-export default function Mobilidade() {
+export default function Industrial() {
     // Hooks para o efeito de scroll
     const [bannerRef, bannerInView] = useScrollEffect(0.3);
     const [sectionRef, sectionInView] = useScrollEffect(0.3);
@@ -46,7 +44,7 @@ export default function Mobilidade() {
                 <StyledBanner ref={bannerRef}>
                     <StyledBannerContent>
                         <Typography variant="h3" component="h1" sx={{ fontWeight: 'bold', textTransform: 'uppercase' }}>
-                            Mobilidade Elétrica
+                            Energia solar industrial
                         </Typography>
                         <Typography variant="h5" sx={{ mt: 1, maxWidth: '600px', mx: 'auto' }}>
                         </Typography>
@@ -68,15 +66,15 @@ export default function Mobilidade() {
                             {/* Coluna da Esquerda: Conteúdo */}
                             <Box sx={{ flex: 1 }}>
                                 <Typography variant="h4" component="h2" fontWeight="bold" color="text.primary" sx={{ mb: 2 }}>
-                                    O futuro da mobilidade começa aqui
+                                    Eficiência Energética em Grande Escala
                                 </Typography>
                                 <Typography variant="h6" component="h3" color={primaryBlue} sx={{ mb: 3, fontWeight: 'medium' }}>
                                     Soluções sob medida
                                 </Typography>
                                 <Typography variant="body1" color="text.secondary" lineHeight={1.6}>
-                                    Com o crescimento acelerado da mobilidade elétrica no Brasil, a Nury está na vanguarda dessa transformação. 
-                                    Nossas soluções incluem carregadores para veículos elétricos que podem ser integrados com sistemas solares, proporcionando uma recarga sustentável e econômica. 
-                                    Com opções de carregadores para diferentes necessidades, desde residenciais até comerciais, estamos prontos para ajudar você a fazer parte do futuro da mobilidade.
+                                    Maximize a competitividade da sua indústria com sistemas de energia solar robustos e personalizados. 
+                                    A Nury entende as demandas energéticas das grandes indústrias e oferece soluções que garantem eficiência, confiabilidade e redução significativa dos custos operacionais. 
+                                    Nossos projetos são desenvolvidos para se integrar perfeitamente às operações industriais, minimizando interrupções e garantindo uma transição suave para a energia renovável.
                                 </Typography>
                             </Box>
                             {/* Coluna da Direita: Benefícios */}
@@ -88,22 +86,22 @@ export default function Mobilidade() {
                                 <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 3 }}>
                                     <CheckCircleOutlineIcon sx={{ color: primaryBlue, fontSize: 24, mr: 1, mt: 0.5 }} />
                                     <Box>
-                                        <Typography variant="h6" component="h3" fontWeight="bold" color="text.primary">   Redução de Custos de Recarga  </Typography>
-                                        <Typography variant="body1" color="text.secondary">  Use a energia solar para recarregar veículos elétricos, reduzindo ainda mais os custos operacionais.</Typography>
+                                        <Typography variant="h6" component="h3" fontWeight="bold" color="text.primary">  Redução Significativa de Custos  </Typography>
+                                        <Typography variant="body1" color="text.secondary"> Economize milhões em despesas energéticas com um sistema solar projetado para grandes consumidores.</Typography>
                                     </Box>
                                 </Box>
                                 <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 3 }}>
                                     <CheckCircleOutlineIcon sx={{ color: primaryBlue, fontSize: 24, mr: 1, mt: 0.5 }} />
                                     <Box>
-                                        <Typography variant="h6" component="h3" fontWeight="bold" color="text.primary"> Sustentabilidade </Typography>
-                                        <Typography variant="body1" color="text.secondary">  Contribua para a redução das emissões de CO² e faça parte da transição para um futuro mais limpo.</Typography>
+                                        <Typography variant="h6" component="h3" fontWeight="bold" color="text.primary">  Conformidade Ambiental </Typography>
+                                        <Typography variant="body1" color="text.secondary"> Atenda a exigências regulatórias ambientais e melhore sua posição competitiva no mercado.</Typography>
                                     </Box>
                                 </Box>
                                 <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
                                     <CheckCircleOutlineIcon sx={{ color: primaryBlue, fontSize: 24, mr: 1, mt: 0.5 }} />
                                     <Box>
-                                        <Typography variant="h6" component="h3" fontWeight="bold" color="text.primary">  Versatilidade e Conectividade  </Typography>
-                                        <Typography variant="body1" color="text.secondary"> Carregadores compatíveis com diversas tensões e conectividade avançada via Wi-Fi e 4G.</Typography>
+                                        <Typography variant="h6" component="h3" fontWeight="bold" color="text.primary"> Autonomia Energética </Typography>
+                                        <Typography variant="body1" color="text.secondary"> Reduza a dependência das concessionárias e proteja sua operação contra flutuações de preços de energia.</Typography>
                                     </Box>
                                 </Box>
                             </Box>
@@ -127,22 +125,22 @@ export default function Mobilidade() {
                         }}>
                             {/* Item 1: Sistemas Personalizados */}
                             <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <EvStationIcon sx={{ fontSize: '3rem', color: primaryBlue, mb: 2 }} />
+                                <SolarPowerIcon sx={{ fontSize: '3rem', color: primaryBlue, mb: 2 }} />
                                 <Typography variant="h6" component="h3" fontWeight="bold" color="text.primary" sx={{ mb: 1 }}>
-                                   Carregadores Personalizados
+                                   Soluções Personalizadas
                                 </Typography>
                                 <Typography variant="body1" color="text.secondary">
-                                     Soluções que vão desde carregadores domésticos até infraestruturas de carregamento para frotas empresariais.
+                                    Projetos desenvolvidos sob medida, levando em conta a estrutura e a demanda energética da sua indústria.
                                 </Typography>
                             </Box>
                             {/* Item 2: Instalação Rápida e Segura */}
                             <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <SystemUpdateAltIcon sx={{ fontSize: '3rem', color: primaryBlue, mb: 2 }} />
+                                <SupportAgentIcon sx={{ fontSize: '3rem', color: primaryBlue, mb: 2 }} />
                                 <Typography variant="h6" component="h3" fontWeight="bold" color="text.primary" sx={{ mb: 1 }}>
-                                  Atualizações e Suporte
+                                   Suporte Completo
                                 </Typography>
                                 <Typography variant="body1" color="text.secondary">
-                                      Carregadores com atualizações remotas e suporte contínuo para garantir a máxima eficiência.
+                                     Desde a instalação até a manutenção, nossa equipe oferece suporte contínuo para garantir o melhor desempenho do sistema.
                                 </Typography>
                             </Box>
                         </Box>

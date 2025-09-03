@@ -3,19 +3,20 @@
 import { Box, Typography, Container, Grow } from '@mui/material';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { styled } from '@mui/material/styles';
-import { useScrollEffect } from "../../src/utils.tsx";
+import { useScrollEffect } from "../utils.tsx";
 import SolarPowerIcon from '@mui/icons-material/SolarPower';
 // Ícones para a nova seção de Detalhes Técnicos
 import TuneIcon from '@mui/icons-material/Tune';
 import ShieldOutlinedIcon from '@mui/icons-material/ShieldOutlined';
 import MonitorIcon from '@mui/icons-material/Monitor';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
+
 const StyledBanner = styled(Box)(({ theme }) => ({
     width: '100%',
     minHeight: '400px',
-    backgroundImage: 'url(/chuttersnap-9cCeS9Sg6nU-unsplash.webp)',
+    backgroundImage: 'url(/jon-moore-0MKzwPmehRE-unsplash.webp)',
     backgroundSize: 'cover',
-    backgroundPosition: '25% 15%',
+    backgroundPosition: '50% 50%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -29,7 +30,7 @@ const StyledBannerContent = styled(Box)(({ theme }) => ({
 }));
 
 
-export default function Industrial() {
+export default function Mercado() {
     // Hooks para o efeito de scroll
     const [bannerRef, bannerInView] = useScrollEffect(0.3);
     const [sectionRef, sectionInView] = useScrollEffect(0.3);
@@ -44,7 +45,7 @@ export default function Industrial() {
                 <StyledBanner ref={bannerRef}>
                     <StyledBannerContent>
                         <Typography variant="h3" component="h1" sx={{ fontWeight: 'bold', textTransform: 'uppercase' }}>
-                            Energia solar industrial
+                            Baterias e Armazenamento
                         </Typography>
                         <Typography variant="h5" sx={{ mt: 1, maxWidth: '600px', mx: 'auto' }}>
                         </Typography>
@@ -66,15 +67,14 @@ export default function Industrial() {
                             {/* Coluna da Esquerda: Conteúdo */}
                             <Box sx={{ flex: 1 }}>
                                 <Typography variant="h4" component="h2" fontWeight="bold" color="text.primary" sx={{ mb: 2 }}>
-                                    Eficiência Energética em Grande Escala
+                                   Armazenamento Inteligente para um Futuro Sustentável
                                 </Typography>
                                 <Typography variant="h6" component="h3" color={primaryBlue} sx={{ mb: 3, fontWeight: 'medium' }}>
                                     Soluções sob medida
                                 </Typography>
                                 <Typography variant="body1" color="text.secondary" lineHeight={1.6}>
-                                    Maximize a competitividade da sua indústria com sistemas de energia solar robustos e personalizados. 
-                                    A Nury entende as demandas energéticas das grandes indústrias e oferece soluções que garantem eficiência, confiabilidade e redução significativa dos custos operacionais. 
-                                    Nossos projetos são desenvolvidos para se integrar perfeitamente às operações industriais, minimizando interrupções e garantindo uma transição suave para a energia renovável.
+                                    Com nossas soluções de armazenamento , você pode maximizar o uso da energia solar, armazenando o excesso para uso durante a noite ou em momentos de alta demanda. 
+                                    Isso não apenas aumenta a sua autonomia energética, mas também reduz os custos durante horários de pico, oferecendo uma solução completa para a gestão de energia em sua residência ou empresa.
                                 </Typography>
                             </Box>
                             {/* Coluna da Direita: Benefícios */}
@@ -86,22 +86,22 @@ export default function Industrial() {
                                 <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 3 }}>
                                     <CheckCircleOutlineIcon sx={{ color: primaryBlue, fontSize: 24, mr: 1, mt: 0.5 }} />
                                     <Box>
-                                        <Typography variant="h6" component="h3" fontWeight="bold" color="text.primary">  Redução Significativa de Custos  </Typography>
-                                        <Typography variant="body1" color="text.secondary"> Economize milhões em despesas energéticas com um sistema solar projetado para grandes consumidores.</Typography>
+                                        <Typography variant="h6" component="h3" fontWeight="bold" color="text.primary">    Redução de Custos Durante Horários de Pico   </Typography>
+                                        <Typography variant="body1" color="text.secondary">  Utilize energia armazenada em momentos de alta demanda e evite tarifas elevadas.</Typography>
                                     </Box>
                                 </Box>
                                 <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 3 }}>
                                     <CheckCircleOutlineIcon sx={{ color: primaryBlue, fontSize: 24, mr: 1, mt: 0.5 }} />
                                     <Box>
-                                        <Typography variant="h6" component="h3" fontWeight="bold" color="text.primary">  Conformidade Ambiental </Typography>
-                                        <Typography variant="body1" color="text.secondary"> Atenda a exigências regulatórias ambientais e melhore sua posição competitiva no mercado.</Typography>
+                                        <Typography variant="h6" component="h3" fontWeight="bold" color="text.primary">  Autonomia Energética </Typography>
+                                        <Typography variant="body1" color="text.secondary">   Garanta o fornecimento contínuo de energia, mesmo em caso de falhas na rede.</Typography>
                                     </Box>
                                 </Box>
                                 <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
                                     <CheckCircleOutlineIcon sx={{ color: primaryBlue, fontSize: 24, mr: 1, mt: 0.5 }} />
                                     <Box>
-                                        <Typography variant="h6" component="h3" fontWeight="bold" color="text.primary"> Autonomia Energética </Typography>
-                                        <Typography variant="body1" color="text.secondary"> Reduza a dependência das concessionárias e proteja sua operação contra flutuações de preços de energia.</Typography>
+                                        <Typography variant="h6" component="h3" fontWeight="bold" color="text.primary">  Confiabilidade e Segurança </Typography>
+                                        <Typography variant="body1" color="text.secondary">  Sistemas de armazenamento seguros, com monitoramento constante e suporte técnico especializado.</Typography>
                                     </Box>
                                 </Box>
                             </Box>
@@ -127,20 +127,20 @@ export default function Industrial() {
                             <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                 <SolarPowerIcon sx={{ fontSize: '3rem', color: primaryBlue, mb: 2 }} />
                                 <Typography variant="h6" component="h3" fontWeight="bold" color="text.primary" sx={{ mb: 1 }}>
-                                   Soluções Personalizadas
+                                   Soluções Modulares
                                 </Typography>
                                 <Typography variant="body1" color="text.secondary">
-                                    Projetos desenvolvidos sob medida, levando em conta a estrutura e a demanda energética da sua indústria.
+                                     Sistemas que podem ser dimensionados para atender às suas necessidades energéticas específicas.
                                 </Typography>
                             </Box>
                             {/* Item 2: Instalação Rápida e Segura */}
                             <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <SupportAgentIcon sx={{ fontSize: '3rem', color: primaryBlue, mb: 2 }} />
+                                <MonitorIcon sx={{ fontSize: '3rem', color: primaryBlue, mb: 2 }} />
                                 <Typography variant="h6" component="h3" fontWeight="bold" color="text.primary" sx={{ mb: 1 }}>
-                                   Suporte Completo
+                                 Tecnologia de Ponta
                                 </Typography>
                                 <Typography variant="body1" color="text.secondary">
-                                     Desde a instalação até a manutenção, nossa equipe oferece suporte contínuo para garantir o melhor desempenho do sistema.
+                                     Equipamentos de armazenamento com alta eficiência e durabilidade, suportados pelas melhores marcas do mercado.
                                 </Typography>
                             </Box>
                         </Box>
