@@ -1,7 +1,7 @@
 'use client';
 
 import { Box, Typography, IconButton, Card, CardMedia, Button, Grow } from '@mui/material';
-import { CardContent, Avatar, Rating, Container } from '@mui/material';
+import { CardContent, Avatar, Rating, Container,    List,ListItem,ListItemIcon,ListItemText } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -11,25 +11,32 @@ import BoltIcon from '@mui/icons-material/Bolt';
 import ConstructionIcon from '@mui/icons-material/Construction';
 import { useScrollEffect } from "../utils.tsx";
 import { useState, useRef, useEffect } from 'react';
-
+import Link from 'next/link'; // Importe o Link para o botão
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+const mainBanner = {
+    title: 'Energia Solar é o nosso forte',
+    subtitle: 'Soluções completas para residências, agronegócio e indústrias em todo o Sul do Brasil.',
+    imageUrl: '/mpv-shot0108.jpg',
+    align: 'flex-start', // Alinha o texto à esquerda
+};
 
 const originalBanners = [
     {
-        title: 'CONECTANDO VOCÊ AO',
-        subtitle: 'FUTURO DA MOBILIDADE ELÉTRICA',
-        imageUrl: '/markus-spiske-pwFr_1SUXRo-unsplash.webp',
+        title: 'Teste de fonte',
+        subtitle: '',
+        imageUrl: '/mpv-shot0108.jpg',
         align: 'center',
     },
     {
-        title: 'SOLUÇÕES COMPLETAS PARA',
-        subtitle: 'ENERGIA SOLAR RESIDENCIAL',
-        imageUrl: '/benjamin-jopen-Df7hu8UO19M-unsplash.webp',
+        title: '',
+        subtitle: '',
+        imageUrl: '/dji_fly_20240408_185116_65_1712583670563_photo_optimized.jpg',
         align: 'center',
     },
     {
-        title: 'EFICIÊNCIA ENERGÉTICA',
-        subtitle: 'PARA O SEU NEGÓCIO',
-        imageUrl: '/ryan-searle-oeSxn9z_15I-unsplash.webp',
+        title: '',
+        subtitle: '',
+        imageUrl: '/mpv-shot0109.jpg',
         align: 'center',
     },
 ];
@@ -152,31 +159,54 @@ const StyledCarousel = styled(Box)(({ theme }) => ({
     width: '100%',
     height: '600px',
     overflow: 'hidden',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
 }));
 
 const StyledSlide = styled(Box, {
     shouldForwardProp: (prop) => prop !== 'imageUrl' && prop !== 'align',
 }) <any>(({ theme, imageUrl, align }) => ({
-    flexShrink: 0,
     width: '100%',
     height: '100%',
-    backgroundImage: `url(${imageUrl})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
+    position: 'relative', // Necessário para o pseudo-elemento do overlay
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
+    alignItems: align || 'center', // Usa o alinhamento do objeto do banner
     justifyContent: 'center',
-    padding: theme.spacing(4),
-    textAlign: 'center',
-    [theme.breakpoints.up('md')]: {
-        padding: theme.spacing(8),
+    padding: theme.spacing(4, 10),
+    textAlign: align === 'flex-start' ? 'left' : 'center', // Alinha o texto
+    
+    // A imagem de fundo agora fica no pseudo-elemento ::before
+    '&::before': {
+        content: '""',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        backgroundImage: `url(${imageUrl})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        zIndex: 1,
+    },
+
+    // O gradiente azul fica no pseudo-elemento ::after
+    '&::after': {
+        content: '""',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        // O gradiente vai da esquerda (azul) para a direita (transparente)
+        background: 'linear-gradient(to right, rgba(7, 36, 99, 0.7), rgba(7, 36, 99, 0.1), transparent)',
+        zIndex: 2,
     },
 }));
-
+const SlideContent = styled(Box)({
+    position: 'relative',
+    zIndex: 3, // Garante que o conteúdo fique sobre a imagem e o gradiente
+    color: 'white',
+    textShadow: '1px 1px 3px rgba(0,0,0,0.5)',
+});
 const StyledButton = styled(IconButton)(({ theme }) => ({
     position: 'absolute',
     top: '50%',
@@ -461,41 +491,37 @@ export default function Home() {
             <Box>
                 {/* Carrossel de Banners */}
                 <StyledCarousel>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            width: '100%',
-                            height: '100%',
-                            transition: isTransitioning ? 'transform 0.5s ease-in-out' : 'none',
-                            transform: `translateX(-${activeIndex * 100}%)`,
-                        }}
+                    <StyledSlide
+                        imageUrl={mainBanner.imageUrl}
+                        align={mainBanner.align}
                     >
-                        {banners.map((banner, index) => (
-                            <StyledSlide
-                                key={index}
-                                imageUrl={banner.imageUrl}
+                        <SlideContent sx={{ maxWidth: '50%' }}>
+                            <Typography variant="h2" component="h1" sx={{ fontWeight: 'bold', mb: 2 }}>
+                                {mainBanner.title}
+                            </Typography>
+                            <Typography variant="h5" component="p" sx={{ mb: 4 }}>
+                                {mainBanner.subtitle}
+                            </Typography>
+                            <Button
+                                component={Link}
+                                href="/orcamento"
+                                variant="contained"
+                                size="large"
+                                sx={{
+                                    backgroundColor: 'white',
+                                    color: '#072463',
+                                    fontWeight: 'bold',
+                                    padding: '12px 32px',
+                                    fontSize: '1rem',
+                                    '&:hover': {
+                                        backgroundColor: '#f0f0f0',
+                                    }
+                                }}
                             >
-                                <Box sx={{
-                                    maxWidth: { xs: '100%', md: '50%' },
-                                    textAlign: 'center'
-                                }}>
-                                    <Typography variant="h4" component="h1" sx={{ color: 'white', fontWeight: 'bold', textShadow: '2px 2px 4px rgba(0,0,0,0.7)', mb: 1, textTransform: 'uppercase' }}>
-                                        {banner.title}
-                                    </Typography>
-                                    <Typography variant="h5" sx={{ color: 'white', textShadow: '2px 2px 4px rgba(0,0,0,0.7)', textTransform: 'uppercase' }}>
-                                        {banner.subtitle}
-                                    </Typography>
-                                </Box>
-                            </StyledSlide>
-                        ))}
-                    </Box>
-
-                    <StyledButton onClick={handlePrev} sx={{ left: { xs: 8, md: 20 } }}>
-                        <ArrowBackIosIcon />
-                    </StyledButton>
-                    <StyledButton onClick={handleNext} sx={{ right: { xs: 8, md: 20 } }}>
-                        <ArrowForwardIosIcon />
-                    </StyledButton>
+                                Peça um Orçamento
+                            </Button>
+                        </SlideContent>
+                    </StyledSlide>
                 </StyledCarousel>
 
                 {/* Seção de Informações */}
@@ -522,18 +548,18 @@ export default function Home() {
                         >
                             <StyledCard>
                                 <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
-                                    96 MW
+                                    + de 200
                                 </Typography>
                                 <Typography variant="body1">
-                                    de Potência Instalada
+                                    Projetos executados
                                 </Typography>
                             </StyledCard>
                             <StyledCard>
                                 <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
-                                    R$ 100 Milhões
+                                    + de 10.000
                                 </Typography>
                                 <Typography variant="body1">
-                                    em Economia Anual
+                                    Módulos em operação
                                 </Typography>
                             </StyledCard>
                             <StyledCard>
@@ -581,7 +607,7 @@ export default function Home() {
                         >
                             <CardMedia
                                 component="img"
-                                image="/benjamin-child-GWe0dlVD9e0-unsplash_.jpg"
+                                image="/img_.webp"
                                 alt="Reunião de negócios"
                                 sx={{
                                     width: '100%',
@@ -701,147 +727,99 @@ export default function Home() {
                 </Box>
 
                 {/* Seção "Como funciona" */}
+ {/* Secção "Como funciona" - REESTRUTURADA */}
+<Box
+    sx={{
+        ...sectionStyles,
+        backgroundColor: '#F7F7F7',
+    }}
+>
+    <Container maxWidth="lg">
+        <Box
+            sx={{
+                display: 'flex',
+                flexDirection: { xs: 'column', md: 'row' },
+                justifyContent: 'center',
+                alignItems: 'center', // Alinha a imagem e o texto verticalmente
+                gap: { xs: 4, md: 8 },
+            }}
+        >
+            {/* Coluna da Esquerda: Imagem Única */}
+            <Grow in={howItWorksTextInView} style={{ transformOrigin: '0 0 0' }} timeout={1000}>
                 <Box
+                    ref={howItWorksTextRef} // Reutilizando a ref para a animação da secção
                     sx={{
-                        ...sectionStyles,
-                        backgroundColor: '#F7F7F7', // Manteve a cor de fundo cinza
-                        display: 'flex',
-                        flexDirection: { xs: 'column', md: 'row' },
-                        justifyContent: 'center',
-                        alignItems: 'flex-start',
-                        gap: { xs: 4, md: 8 },
+                        flex: 1,
+                        maxWidth: { xs: '100%', md: '40%' },
+                        borderRadius: '16px',
+                        overflow: 'hidden',
+                        boxShadow: '0px 8px 24px rgba(0, 0, 0, 0.1)',
                     }}
                 >
-                    <Grow in={howItWorksTextInView} style={{ transformOrigin: '0 0 0' }} timeout={1000}>
-                        <Box ref={howItWorksTextRef} sx={{ flex: 1, maxWidth: { xs: '100%', md: '30%' }, textAlign: { xs: 'center', md: 'left' } }}>
-                            <Typography variant="h4" component="h2" sx={{ fontWeight: 'bold', mb: 2, color: '#1A1A1A' }}>
-                                Como funciona
-                            </Typography>
-                            <Typography variant="subtitle1" sx={{ fontWeight: 'bold', mb: 3, color: '#1A1A1A' }}>
-                                Etapas do processo de instalação
-                            </Typography>
-                            <Typography variant="body1" sx={{ mb: 4, color: '#555' }}>
-                                A empresa Nury em parceria com seus colaboradores, desenvolveu um processo
-                                claro e detalhado do processo de instalação de seus produtos.
-                            </Typography>
-                            <StyledHowItWorksButton href="/orcamento">
-                                Saiba mais
-                            </StyledHowItWorksButton>
-                        </Box>
-                    </Grow>
-                    <Box
+                    <CardMedia
+                        component="img"
+                        image="/IMG_5938.jpg" // Imagem de destaque
+                        alt="Análise e planeamento de projeto de energia solar"
                         sx={{
-                            flex: 2,
-                            display: 'flex',
-                            flexDirection: { xs: 'column', sm: 'row' },
-                            justifyContent: 'space-around',
-                            alignItems: 'flex-start',
-                            gap: { xs: 3, sm: 2 },
-                            maxWidth: { xs: '100%', md: '70%' },
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
                         }}
-                    >
-                        <Grow in={howItWorksCardInView[0]} style={{ transformOrigin: '0 0 0' }} timeout={1000}>
-                            <StyledHowItWorksCard ref={el => howItWorksRefs.current[0] = el}>
-                                <CardMedia
-                                    component="img"
-                                    image="/scott-graham-5fNmWej4tAA-unsplash.jpg"
-                                    alt="Análise das últimas contas"
-                                    sx={{ height: 200, objectFit: 'cover', borderRadius: '12px 12px 0 0' }}
-                                />
-                                <Box sx={{ p: 2, textAlign: 'left' }}>
-                                    <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1, color: '#1A1A1A' }}>
-                                        Análise das últimas contas
-                                    </Typography>
-                                    <Typography variant="body2" sx={{ color: '#555' }}>
-                                        Será realizado uma análise das doze últimas contas.
-                                    </Typography>
-                                </Box>
-                            </StyledHowItWorksCard>
-                        </Grow>
-                        <Grow in={howItWorksCardInView[1]} style={{ transformOrigin: '0 0 0' }} timeout={1500}>
-                            <StyledHowItWorksCard ref={el => howItWorksRefs.current[1] = el}>
-                                <CardMedia
-                                    component="img"
-                                    image="/scott-graham-OQMZwNd3ThU-unsplash_.jpg"
-                                    alt="Proposta e contrato"
-                                    sx={{ height: 200, objectFit: 'cover', borderRadius: '12px 12px 0 0' }}
-                                />
-                                <Box sx={{ p: 2, textAlign: 'left' }}>
-                                    <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1, color: '#1A1A1A' }}>
-                                        Proposta e contrato
-                                    </Typography>
-                                    <Typography variant="body2" sx={{ color: '#555' }}>
-                                        O cliente receberá uma proposta e o contrato dos nossos serviços.
-                                    </Typography>
-                                </Box>
-                            </StyledHowItWorksCard>
-                        </Grow>
-                        <Grow in={howItWorksCardInView[2]} style={{ transformOrigin: '0 0 0' }} timeout={2000}>
-                            <StyledHowItWorksCard ref={el => howItWorksRefs.current[2] = el}>
-                                <CardMedia
-                                    component="img"
-                                    image="/radission-us-_XeQ8XEWb4Q-unsplash_.jpg"
-                                    alt="Projeto de legalização"
-                                    sx={{ height: 200, objectFit: 'cover', borderRadius: '12px 12px 0 0' }}
-                                />
-                                <Box sx={{ p: 2, textAlign: 'left' }}>
-                                    <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 1, color: '#1A1A1A' }}>
-                                        Projeto de legalização
-                                    </Typography>
-                                    <Typography variant="body2" sx={{ color: '#555' }}>
-                                        Os profissionais da Nury darão início no projeto e legalização.
-                                    </Typography>
-                                </Box>
-                            </StyledHowItWorksCard>
-                        </Grow>
-                    </Box>
+                    />
                 </Box>
+            </Grow>
 
-                {/* Seção de Vantagens */}
-                <Box
-                    sx={{
-                        ...sectionStyles,
-                        backgroundColor: '#ffffff', // Alterado para branco
-                    }}
-                >
-                    <Grow in={advantagesInView} style={{ transformOrigin: '0 0 0' }} timeout={1000}>
-                        <Box ref={advantagesRef}>
-                            <Typography
-                                variant="h4"
-                                sx={{ fontWeight: 'bold', mb: 2, color: '#1A1A1A' }}
-                            >
-                                Vantagens de Escolher Nury
-                            </Typography>
-                            <Typography variant="body1" sx={{ color: '#555', mb: 6 }}>
-                                Oferecemos mais do que produtos, entregamos benefícios que transformam a sua vida e o planeta.
-                            </Typography>
-                        </Box>
-                    </Grow>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            flexDirection: { xs: 'column', md: 'row' },
-                            justifyContent: 'center',
-                            gap: { xs: 4, md: 3 },
-                        }}
-                    >
-                        {advantagesItems.map((item, index) => (
-                            <Grow in={advantageCardInView[index]} style={{ transformOrigin: '0 0 0' }} timeout={1000 + (index * 500)} key={index}>
-                                <StyledAdvantageCard ref={el => advantageCardRefs.current[index] = el} sx={{ flex: 1 }}>
-                                    <Box sx={{ mb: 2 }}>
-                                        {item.icon}
-                                    </Box>
-                                    <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 1 }}>
-                                        {item.title}
-                                    </Typography>
-                                    <Typography variant="body2" sx={{ mb: 2 }}>
-                                        {item.description}
-                                    </Typography>
-                                </StyledAdvantageCard>
-                            </Grow>
-                        ))}
-                    </Box>
+            {/* Coluna da Direita: Texto e Lista de Passos */}
+            <Grow in={howItWorksTextInView} style={{ transformOrigin: '0 0 0' }} timeout={1500}>
+                <Box sx={{ flex: 1, maxWidth: { xs: '100%', md: '60%' }, textAlign: { xs: 'center', md: 'left' } }}>
+                    <Typography variant="h4" component="h2" sx={{ fontWeight: 'bold', mb: 2, color: '#1A1A1A' }}>
+                        Como Funciona
+                    </Typography>
+                    
+                    {/* Texto introdutório adicionado */}
+                    <Typography variant="body1" sx={{ mb: 4, color: '#555' }}>
+                        Na Nury Energia, acreditamos que cada projeto é único. Por isso, desenvolvemos um processo claro e detalhado para garantir a solução perfeita para você.
+                    </Typography>
+                    
+                    {/* Lista com os passos do processo */}
+                    <List sx={{ mb: 4 }}>
+                        <ListItem sx={{ alignItems: 'flex-start' }}>
+                            <ListItemIcon sx={{ mt: '6px', minWidth: '40px' }}>
+                                <CheckCircleOutlineIcon sx={{ color: '#072463' }} />
+                            </ListItemIcon>
+                            <ListItemText
+                                primary="Análise das Contas"
+                                secondary="O primeiro passo é uma análise detalhada do seu histórico de consumo para entendermos perfeitamente a sua necessidade energética."
+                            />
+                        </ListItem>
+                        <ListItem sx={{ alignItems: 'flex-start' }}>
+                            <ListItemIcon sx={{ mt: '6px', minWidth: '40px' }}>
+                                <CheckCircleOutlineIcon sx={{ color: '#072463' }} />
+                            </ListItemIcon>
+                            <ListItemText
+                                primary="Proposta e Contrato"
+                                secondary="Com base na análise, apresentamos uma proposta comercial clara e o contrato de serviço, sem surpresas."
+                            />
+                        </ListItem>
+                        <ListItem sx={{ alignItems: 'flex-start' }}>
+                            <ListItemIcon sx={{ mt: '6px', minWidth: '40px' }}>
+                                <CheckCircleOutlineIcon sx={{ color: '#072463' }} />
+                            </ListItemIcon>
+                            <ListItemText
+                                primary="Projeto e Legalização"
+                                secondary="A nossa equipa de engenharia cuida de todo o projeto técnico e do processo de legalização junto da concessionária de energia."
+                            />
+                        </ListItem>
+                    </List>
+
+                    <StyledHowItWorksButton href="/orcamento">
+                        Peça um Orçamento
+                    </StyledHowItWorksButton>
                 </Box>
+            </Grow>
+        </Box>
+    </Container>
+</Box>
 
                 {/* Seção de Cases de Sucesso */}
                 <Box
