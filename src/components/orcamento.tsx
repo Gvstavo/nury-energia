@@ -12,6 +12,67 @@ import { styled } from '@mui/material/styles';
 import {useState} from "react";
 import { Divider } from '@mui/material';
 import {  CircularProgress, Alert } from '@mui/material';
+const mainBanner = {
+    title: 'Vamos Começar o Seu Projeto Solar?',
+    subtitle: 'Dê o primeiro passo para a sua independência energética. Preencha o formulário para receber uma proposta técnica e comercial sem compromisso.',
+    imageUrl: '/northfolk-Ok76F6yW2iA-unsplash.webp',
+    align: 'flex-start', // Alinha o texto à esquerda
+};
+const StyledCarousel = styled(Box)(({ theme }) => ({
+    position: 'relative',
+    width: '100%',
+    height: '600px',
+    overflow: 'hidden',
+}));
+
+const StyledSlide = styled(Box, {
+    shouldForwardProp: (prop) => prop !== 'imageUrl' && prop !== 'align',
+}) <any>(({ theme, imageUrl, align }) => ({
+    width: '100%',
+    height: '100%',
+    position: 'relative', // Necessário para o pseudo-elemento do overlay
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: align || 'center', // Usa o alinhamento do objeto do banner
+    justifyContent: 'center',
+    padding: theme.spacing(4, 10),
+    textAlign: align === 'flex-start' ? 'left' : 'center', // Alinha o texto
+    
+    // A imagem de fundo agora fica no pseudo-elemento ::before
+    '&::before': {
+        content: '""',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        backgroundImage: `url(${imageUrl})`,
+        backgroundSize: 'cover',
+        backgroundPosition: '50% 50%',
+        zIndex: 1,
+    },
+
+    // O gradiente azul fica no pseudo-elemento ::after
+    '&::after': {
+        content: '""',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        // O gradiente vai da esquerda (azul) para a direita (transparente)
+        background: 'linear-gradient(to right, rgba(7, 36, 99, 0.7), rgba(7, 36, 99, 0.1), transparent)',
+        zIndex: 2,
+    },
+}));
+const SlideContent = styled(Box)({
+    position: 'relative',
+    zIndex: 3, // Garante que o conteúdo fique sobre a imagem e o gradiente
+    color: 'white',
+    textShadow: '1px 1px 3px rgba(0,0,0,0.5)',
+});
+
+
 const advantages = [
   'Gerar energia limpa.',
   'Valorizar seu imóvel.',
@@ -60,6 +121,7 @@ export default function Orcamento() {
     whatsapp: '',
     city: '',
     necessity: 'agricola',
+    solution: 'eletrica'
     });
 
 
@@ -111,16 +173,22 @@ export default function Orcamento() {
     <Box>
 
             <Grow in={bannerInView} style={{ transformOrigin: 'top' }} timeout={1000}>
-                <StyledBanner ref={bannerRef}>
-                    <StyledBannerContent>
-                        <Typography variant="h3" component="h1" sx={{ fontWeight: 'bold', textTransform: 'uppercase' }}>
-                            Orçamento
-                        </Typography>
-                        <Typography variant="h5" sx={{ mt: 1, maxWidth: '600px', mx: 'auto' }}>
-                            Envie-nos sua necessidade.
-                        </Typography>
-                    </StyledBannerContent>
-                </StyledBanner>
+                <StyledCarousel ref={bannerRef}>
+                    <StyledSlide
+                        imageUrl={mainBanner.imageUrl}
+                        align={mainBanner.align}
+                    >
+                        <SlideContent sx={{ maxWidth: '50%' }}>
+                            <Typography variant="h2" component="h1" sx={{ fontWeight: 'bold', mb: 2 }}>
+                                {mainBanner.title}
+                            </Typography>
+                            <Typography variant="h5" component="p" sx={{ mb: 4 }}>
+                                {mainBanner.subtitle}
+                            </Typography>
+
+                        </SlideContent>
+                    </StyledSlide>
+                </StyledCarousel>
             </Grow>
 
             <Grow in={bannerInView} style={{ transformOrigin: 'top' }} timeout={1000}>
@@ -250,7 +318,7 @@ export default function Orcamento() {
         fullWidth
       />
       <FormControl variant="outlined" sx={{ gridColumn: { xs: '1', sm: 'span 2' } }}>
-        <InputLabel>Necessidade</InputLabel>
+        <InputLabel>Segmento</InputLabel>
         <Select
           name="necessity"
           label="Necessidade"
@@ -265,6 +333,32 @@ export default function Orcamento() {
           <MenuItem value="comercial">Comercial</MenuItem>
         </Select>
       </FormControl>
+
+      <FormControl variant="outlined" sx={{ gridColumn: { xs: '1', sm: 'span 2' } }}>
+        <InputLabel>Solução</InputLabel>
+        <Select
+          name="solution"
+          label="solucao"
+          value={formData.solution}
+          onChange={handleChange}
+        >
+          <MenuItem value="eletrica">Elétricas</MenuItem>
+          <MenuItem value="energia_solar">Energia Solar</MenuItem>
+          <MenuItem value="projetos">Projetos</MenuItem>
+          <MenuItem value="laudos">Laudos técnicos</MenuItem>
+          <MenuItem value="redes_eletricas_condominios">Redes elétricas para condomínios</MenuItem>
+          <MenuItem value="spda">SPDA</MenuItem>
+          <MenuItem value="extensoes">Extensões de rede e entrada de energia</MenuItem>
+          <MenuItem value="automacoes_residenciais">Automações residenciais</MenuItem>
+          <MenuItem value="automacoes_industriais">Automações industriais</MenuItem>
+          <MenuItem value="correcao">Correção fator de potência</MenuItem>
+ <MenuItem value="mercado">Mercado livre de energia</MenuItem>
+ <MenuItem value="mobilidade">Mobilidade Elétrica</MenuItem>
+
+        </Select>
+      </FormControl>
+
+
 
       <Box sx={{ gridColumn: 'span 2', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, mt: 2 }}>
         <Button

@@ -11,7 +11,65 @@ import TuneIcon from '@mui/icons-material/Tune';
 import ShieldOutlinedIcon from '@mui/icons-material/ShieldOutlined';
 import MonitorIcon from '@mui/icons-material/Monitor';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
+const mainBanner = {
+    title: 'A Liberdade de Escolher a Sua Energia',
+    subtitle: 'Dê o próximo passo na gestão energética da sua empresa. No Mercado Livre, você negocia diretamente com os fornecedores para garantir melhores preços e contratos.',
+    imageUrl: '/nasa-Q1p7bh3SHj8-unsplash.webp',
+    align: 'flex-start', // Alinha o texto à esquerda
+};
+const StyledCarousel = styled(Box)(({ theme }) => ({
+    position: 'relative',
+    width: '100%',
+    height: '600px',
+    overflow: 'hidden',
+}));
 
+const StyledSlide = styled(Box, {
+    shouldForwardProp: (prop) => prop !== 'imageUrl' && prop !== 'align',
+}) <any>(({ theme, imageUrl, align }) => ({
+    width: '100%',
+    height: '100%',
+    position: 'relative', // Necessário para o pseudo-elemento do overlay
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: align || 'center', // Usa o alinhamento do objeto do banner
+    justifyContent: 'center',
+    padding: theme.spacing(4, 10),
+    textAlign: align === 'flex-start' ? 'left' : 'center', // Alinha o texto
+    
+    // A imagem de fundo agora fica no pseudo-elemento ::before
+    '&::before': {
+        content: '""',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        backgroundImage: `url(${imageUrl})`,
+        backgroundSize: 'cover',
+        backgroundPosition: '50% 50%',
+        zIndex: 1,
+    },
+
+    // O gradiente azul fica no pseudo-elemento ::after
+    '&::after': {
+        content: '""',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        // O gradiente vai da esquerda (azul) para a direita (transparente)
+        background: 'linear-gradient(to right, rgba(7, 36, 99, 0.7), rgba(7, 36, 99, 0.1), transparent)',
+        zIndex: 2,
+    },
+}));
+const SlideContent = styled(Box)({
+    position: 'relative',
+    zIndex: 3, // Garante que o conteúdo fique sobre a imagem e o gradiente
+    color: 'white',
+    textShadow: '1px 1px 3px rgba(0,0,0,0.5)',
+});
 const StyledBanner = styled(Box)(({ theme }) => ({
     width: '100%',
     minHeight: '400px',
@@ -43,15 +101,22 @@ export default function Mercado() {
         <>
             {/* Banner Section com animação */}
             <Grow in={bannerInView} style={{ transformOrigin: 'top' }} timeout={1000}>
-                <StyledBanner ref={bannerRef}>
-                    <StyledBannerContent>
-                        <Typography variant="h3" component="h1" sx={{ fontWeight: 'bold', textTransform: 'uppercase' }}>
-                            Mercado Livre de Energia
-                        </Typography>
-                        <Typography variant="h5" sx={{ mt: 1, maxWidth: '600px', mx: 'auto' }}>
-                        </Typography>
-                    </StyledBannerContent>
-                </StyledBanner>
+                <StyledCarousel ref={bannerRef}>
+                    <StyledSlide
+                        imageUrl={mainBanner.imageUrl}
+                        align={mainBanner.align}
+                    >
+                        <SlideContent sx={{ maxWidth: '50%' }}>
+                            <Typography variant="h2" component="h1" sx={{ fontWeight: 'bold', mb: 2 }}>
+                                {mainBanner.title}
+                            </Typography>
+                            <Typography variant="h5" component="p" sx={{ mb: 4 }}>
+                                {mainBanner.subtitle}
+                            </Typography>
+
+                        </SlideContent>
+                    </StyledSlide>
+                </StyledCarousel>
             </Grow>
 
             {/* Seção Energia Solar Personalizada com animação */}

@@ -6,7 +6,65 @@ import { styled } from '@mui/material/styles';
 import { Container, Grow } from '@mui/material';
 import {useScrollEffect} from "../utils.tsx";
 import { useState, useRef, useEffect} from 'react';
+const mainBanner = {
+    title: 'A Nossa Parceria Continua Após a Instalação',
+    subtitle: 'O nosso compromisso é com o seu sucesso a longo prazo. Conheça as nossas soluções de suporte técnico e gestão energética que garantem a máxima performance do seu sistema solar.',
+    imageUrl: '/38CF4930-11E5-441A-82E3-FAF7A15666A1.jpg',
+    align: 'flex-start', // Alinha o texto à esquerda
+};
+const StyledCarousel = styled(Box)(({ theme }) => ({
+    position: 'relative',
+    width: '100%',
+    height: '600px',
+    overflow: 'hidden',
+}));
 
+const StyledSlide = styled(Box, {
+    shouldForwardProp: (prop) => prop !== 'imageUrl' && prop !== 'align',
+}) <any>(({ theme, imageUrl, align }) => ({
+    width: '100%',
+    height: '100%',
+    position: 'relative', // Necessário para o pseudo-elemento do overlay
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: align || 'center', // Usa o alinhamento do objeto do banner
+    justifyContent: 'center',
+    padding: theme.spacing(4, 10),
+    textAlign: align === 'flex-start' ? 'left' : 'center', // Alinha o texto
+    
+    // A imagem de fundo agora fica no pseudo-elemento ::before
+    '&::before': {
+        content: '""',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        backgroundImage: `url(${imageUrl})`,
+        backgroundSize: 'cover',
+        backgroundPosition: '50% 50%',
+        zIndex: 1,
+    },
+
+    // O gradiente azul fica no pseudo-elemento ::after
+    '&::after': {
+        content: '""',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        // O gradiente vai da esquerda (azul) para a direita (transparente)
+        background: 'linear-gradient(to right, rgba(7, 36, 99, 0.7), rgba(7, 36, 99, 0.1), transparent)',
+        zIndex: 2,
+    },
+}));
+const SlideContent = styled(Box)({
+    position: 'relative',
+    zIndex: 3, // Garante que o conteúdo fique sobre a imagem e o gradiente
+    color: 'white',
+    textShadow: '1px 1px 3px rgba(0,0,0,0.5)',
+});
 const SectionWrapper = styled(Box)(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
@@ -76,9 +134,9 @@ const FeatureItem = styled(Box)(({ theme }) => ({
 const StyledBanner = styled(Box)(({ theme }) => ({
     width: '100%',
     minHeight: '400px',
-    backgroundImage: 'url(/markus-spiske-rNn_TU8dvoY-unsplash.webp)',
+    backgroundImage: 'url(/IMG_4604.webp)',
     backgroundSize: 'cover',
-    backgroundPosition: '25% 20%',
+    backgroundPosition: '50% 58%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -112,15 +170,22 @@ export default function Features() {
     return (
         <>
             <Grow in={bannerInView} style={{ transformOrigin: 'top' }} timeout={1000}>
-                <StyledBanner ref={bannerRef}>
-                    <StyledBannerContent>
-                        <Typography variant="h3" component="h1" sx={{ fontWeight: 'bold', textTransform: 'uppercase' }}>
-                            Sucesso do Cliente
-                        </Typography>
-                        <Typography variant="h5" sx={{ mt: 1, maxWidth: '600px', mx: 'auto' }}>
-                        </Typography>
-                    </StyledBannerContent>
-                </StyledBanner>
+                <StyledCarousel ref={bannerRef}>
+                    <StyledSlide
+                        imageUrl={mainBanner.imageUrl}
+                        align={mainBanner.align}
+                    >
+                        <SlideContent sx={{ maxWidth: '50%' }}>
+                            <Typography variant="h2" component="h1" sx={{ fontWeight: 'bold', mb: 2 }}>
+                                {mainBanner.title}
+                            </Typography>
+                            <Typography variant="h5" component="p" sx={{ mb: 4 }}>
+                                {mainBanner.subtitle}
+                            </Typography>
+
+                        </SlideContent>
+                    </StyledSlide>
+                </StyledCarousel>
             </Grow>
 
             <SectionWrapper>

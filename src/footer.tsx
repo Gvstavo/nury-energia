@@ -54,9 +54,9 @@ export default function Footer() {
               priority={true}
           />
           <Typography variant="body2" sx={{ mt: 2, lineHeight: 1.6 }}>
-              Uma empresa voltada 100% para a atividade de energias renováveis, com experiência
+              Uma empresa do <a target="_blank" rel="noopener noreferrer" href="https://grupotrivium.com.br/">Grupo Trivium</a> voltada 100% para a atividade de energias renováveis, com experiência
               comprovada, equipe técnica especializada e atuando dentro das normas NR10 e NR35.
-              Possuímos de engenharia própria e um atendimento de venda e pós-venda
+              Possuímos engenharia própria e um atendimento de venda e pós-venda
               especializado.
           </Typography>
       </Box>

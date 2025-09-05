@@ -20,13 +20,14 @@ const navItems = [
 ];
 
 const solutions = [
-    { label: "Residencial", href: "/solucoes/residencial" },
-    { label: "Comercial", href: "/solucoes/comercial" },
-    { label: "Industrial", href: "/solucoes/industrial" },
-    { label: "Rural", href: "/solucoes/rural" },
+    //{ label: "Residencial", href: "/solucoes/residencial" },
+    //{ label: "Comercial", href: "/solucoes/comercial" },
+    //{ label: "Industrial", href: "/solucoes/industrial" },
+    //{ label: "Rural", href: "/solucoes/rural" },
+    {label: "Energia Solar", href: "/solucoes/energia-solar"},
     { label: "Mobilidade Elétrica", href: "/solucoes/mobilidade-eletrica" },
     { label: "Mercado Livre de Energia", href: "/solucoes/mercado-livre-de-energia" },
-    { label: "Baterias e Armazenamento", href: "/solucoes/baterias-e-armazenamento" },
+ //   { label: "Baterias e Armazenamento", href: "/solucoes/baterias-e-armazenamento" },
 
 ];
 

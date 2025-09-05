@@ -1,10 +1,10 @@
 'use client';
 
-import { Box, Typography, Container, Grow } from '@mui/material';
+import { Box, Typography, Container, Grow , Button} from '@mui/material';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { styled } from '@mui/material/styles';
 import {useScrollEffect} from "../utils.tsx";
-
+import Link from 'next/link';
 // Ícones para a nova seção de valores
 import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined';
 import RocketLaunchOutlinedIcon from '@mui/icons-material/RocketLaunchOutlined';
@@ -36,7 +36,65 @@ const values = [
         description: 'Ser referência em excelência na eficiência energética e energia renovável na nossa região de atuação.',
     },
 ];
+const mainBanner = {
+    title: 'Nossa História, Nossos Valores',
+    subtitle: 'Conheça a Nury Energia e descubra como estamos moldando um futuro mais limpo e sustentável.',
+    imageUrl: '/IMG_2929.webp',
+    align: 'flex-start', // Alinha o texto à esquerda
+};
+const StyledCarousel = styled(Box)(({ theme }) => ({
+    position: 'relative',
+    width: '100%',
+    height: '600px',
+    overflow: 'hidden',
+}));
 
+const StyledSlide = styled(Box, {
+    shouldForwardProp: (prop) => prop !== 'imageUrl' && prop !== 'align',
+}) <any>(({ theme, imageUrl, align }) => ({
+    width: '100%',
+    height: '100%',
+    position: 'relative', // Necessário para o pseudo-elemento do overlay
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: align || 'center', // Usa o alinhamento do objeto do banner
+    justifyContent: 'center',
+    padding: theme.spacing(4, 10),
+    textAlign: align === 'flex-start' ? 'left' : 'center', // Alinha o texto
+    
+    // A imagem de fundo agora fica no pseudo-elemento ::before
+    '&::before': {
+        content: '""',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        backgroundImage: `url(${imageUrl})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        zIndex: 1,
+    },
+
+    // O gradiente azul fica no pseudo-elemento ::after
+    '&::after': {
+        content: '""',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        // O gradiente vai da esquerda (azul) para a direita (transparente)
+        background: 'linear-gradient(to right, rgba(7, 36, 99, 0.7), rgba(7, 36, 99, 0.1), transparent)',
+        zIndex: 2,
+    },
+}));
+const SlideContent = styled(Box)({
+    position: 'relative',
+    zIndex: 3, // Garante que o conteúdo fique sobre a imagem e o gradiente
+    color: 'white',
+    textShadow: '1px 1px 3px rgba(0,0,0,0.5)',
+});
 const StyledChecklistItem = styled(Box)(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
@@ -84,16 +142,22 @@ export default function About() {
         <>
             {/* Novo Banner */}
             <Grow in={bannerInView} style={{ transformOrigin: 'top' }} timeout={1000}>
-                <StyledBanner ref={bannerRef}>
-                    <StyledBannerContent>
-                        <Typography variant="h3" component="h1" sx={{ fontWeight: 'bold', textTransform: 'uppercase' }}>
-                            Nossa História, Nossos Valores
-                        </Typography>
-                        <Typography variant="h5" sx={{ mt: 1, maxWidth: '600px', mx: 'auto' }}>
-                            Conheça a Nury Energia e descubra como estamos moldando um futuro mais limpo e sustentável.
-                        </Typography>
-                    </StyledBannerContent>
-                </StyledBanner>
+                <StyledCarousel ref={bannerRef}>
+                    <StyledSlide
+                        imageUrl={mainBanner.imageUrl}
+                        align={mainBanner.align}
+                    >
+                        <SlideContent sx={{ maxWidth: '50%' }}>
+                            <Typography variant="h2" component="h1" sx={{ fontWeight: 'bold', mb: 2 }}>
+                                {mainBanner.title}
+                            </Typography>
+                            <Typography variant="h5" component="p" sx={{ mb: 4 }}>
+                                {mainBanner.subtitle}
+                            </Typography>
+
+                        </SlideContent>
+                    </StyledSlide>
+                </StyledCarousel>
             </Grow>
 
             {/* Seção Sobre Nós */}

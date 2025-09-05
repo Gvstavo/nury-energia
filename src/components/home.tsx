@@ -19,7 +19,39 @@ const mainBanner = {
     imageUrl: '/mpv-shot0108.jpg',
     align: 'flex-start', // Alinha o texto à esquerda
 };
+const mainSolutions = [
+    {
+        title: 'Energia Solar',
+        description: 'Projetos personalizados para residências, comércios, indústrias e agronegócio, garantindo economia e sustentabilidade.',
+        imageUrl: '/IMG_4241.webp', // Imagem representativa de energia solar
+        url: '/solucoes/energia-solar' // Pode apontar para a solução principal ou uma página geral
+    },
+    {
+        title: 'Mobilidade Elétrica',
+        description: 'Instalação de carregadores para veículos elétricos, integrados com sistemas solares para uma recarga 100% limpa e econômica.',
+        imageUrl: '/charger.jpeg', // Imagem de mobilidade elétrica
+        url: '/solucoes/mobilidade-eletrica'
+    },
+    {
+        title: 'Mercado Livre de Energia',
+        description: 'Assessoria completa para a sua empresa migrar e operar no Mercado Livre, otimizando custos e contratos de energia.',
+        imageUrl: '/83A9B1BD-1D42-41D0-9675-E8CB89D8592C.jpg', // Imagem do Mercado Livre de Energia
+        url: '/solucoes/mercado-livre-energia'
+    },
+];
 
+// Crie este novo array para a lista de outras soluções
+const otherSolutions = [
+    'Elétricas',
+    'Projetos',
+    'Laudos técnicos',
+    'Redes elétricas para condomínios',
+    'SPDA',
+    'Extensões de rede e entrada de energia',
+    'Automações residenciais',
+    'Automações industriais',
+    'Correção fator de potência',
+];
 const originalBanners = [
     {
         title: 'Teste de fonte',
@@ -619,112 +651,117 @@ export default function Home() {
                 </Box>
 
                 {/* Seção de Destaques */}
-                <Box
-                    sx={{
-                        ...sectionStyles,
-                        backgroundColor: '#ffffff', // Alterado para branco
-                    }}
+{/* Secção de Destaques - REESTRUTURADA */}
+{/* Secção de Destaques - REESTRUTURADA */}
+<Box
+    sx={{
+        ...sectionStyles,
+        backgroundColor: '#ffffff',
+    }}
+>
+    <Container maxWidth="lg">
+        <Grow in={highlightsTitleInView} style={{ transformOrigin: '0 0 0' }} timeout={1000}>
+            <Box ref={highlightsTitleRef}>
+                <Typography
+                    variant="body1"
+                    sx={{ color: '#1A1A1A', }}
                 >
-                    <Grow in={highlightsTitleInView} style={{ transformOrigin: '0 0 0' }} timeout={1000}>
-                        <Box ref={highlightsTitleRef}>
-                            <Typography
-                                variant="body1"
-                                sx={{ color: '#1A1A1A', }}
-                            >
-                                Independente da sua necessidade
-                            </Typography>
-                            <Typography
-                                variant="h3"
-                                sx={{ color: '#1A1A1A', mb: 6 }}
-                            >
-                                Temos a solução energética
-                                <br />
-                                perfeita pra você!
-                            </Typography>
-                        </Box>
-                    </Grow>
+                    Independente da sua necessidade
+                </Typography>
+                <Typography
+                    variant="h3"
+                    sx={{ color: '#1A1A1A', mb: 6 }}
+                >
+                    Temos a solução energética
+                    <br />
+                    perfeita para si!
+                </Typography>
+            </Box>
+        </Grow>
 
+        {/* 3 Destaques Principais */}
+        <Box
+            sx={{
+                display: 'flex',
+                flexDirection: { xs: 'column', md: 'row' },
+                justifyContent: 'center',
+                gap: { xs: 4, md: 3 },
+                mb: 8,
+            }}
+        >
+            {mainSolutions.map((item, index) => (
+                <Grow in={highlightCardInView[index]} style={{ transformOrigin: '0 0 0' }} timeout={1000 + (index * 500)} key={item.title}>
+                    <StyledHighlightCard ref={el => cardRefs.current[index] = el} sx={{ flex: 1 }}>
+                        <CardMedia
+                            component="img"
+                            image={item.imageUrl}
+                            alt={item.title}
+                            sx={{ height: 200, width: '100%', objectFit: 'cover' }}
+                        />
+                        <StyledHighlightsCardContent>
+                            <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 1 }}>
+                                {item.title}
+                            </Typography>
+                            <Typography variant="body2" sx={{ mb: 2 }}>
+                                {item.description}
+                            </Typography>
+                            <Box sx={{ mt: 'auto' }}>
+                                <StyledHighlightsButton href={item.url}>
+                                    Saiba mais
+                                </StyledHighlightsButton>
+                            </Box>
+                        </StyledHighlightsCardContent>
+                    </StyledHighlightCard>
+                </Grow>
+            ))}
+        </Box>
+
+        {/* Secção "Outras Soluções" */}
+        <Box sx={{ mt: 8, pt: 6, borderTop: '1px solid #e0e0e0' }}>
+            <Typography variant="h5" sx={{ fontWeight: 'bold', color: '#1A1A1A', textAlign: 'center', mb: 1 }}>
+                E muito mais...
+            </Typography>
+            <Typography variant="body1" sx={{ color: '#555', textAlign: 'center', mb: 4 }}>
+                Contate-nos e conheça as nossas outras soluções em engenharia elétrica:
+            </Typography>
+
+            {/* AQUI ESTÁ A SUBSTITUIÇÃO DE GRID POR BOX */}
+            <Box
+                sx={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    justifyContent: 'flex-start',
+                    gap: 2, // Espaçamento entre os itens
+                }}
+            >
+                {otherSolutions.map((solution, index) => (
                     <Box
+                        key={index}
                         sx={{
                             display: 'flex',
-                            flexDirection: { xs: 'column', md: 'row' },
-                            justifyContent: 'center',
-                            gap: { xs: 4, md: 3 },
+                            alignItems: 'center',
+                            // Define a largura de cada item para criar as colunas
+                            width: {
+                                xs: '100%', // 1 coluna em ecrãs extra pequenos
+                                sm: 'calc(50% - 8px)', // 2 colunas em ecrãs pequenos (8px = metade do gap)
+                                md: 'calc(33.333% - 11px)', // 3 colunas em ecrãs médios
+                            },
                         }}
                     >
-                        {highlightItems.map((item, index) => (
-                            <Grow in={highlightCardInView[index]} style={{ transformOrigin: '0 0 0' }} timeout={1000 + (index * 500)} key={index}>
-                                <StyledHighlightCard ref={el => cardRefs.current[index] = el} sx={{ flex: 1 }}>
-                                    <CardMedia
-                                        component="img"
-                                        image={item.imageUrl}
-                                        alt={item.title}
-                                        sx={{
-                                            height: 200,
-                                            width: '100%',
-                                            objectFit: 'cover',
-                                            borderTopLeftRadius: '16px',
-                                            borderTopRightRadius: '16px',
-                                        }}
-                                    />
-                                    <StyledHighlightsCardContent>
-                                        <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 1 }}>
-                                            {item.title}
-                                        </Typography>
-                                        <Typography variant="body2" sx={{ mb: 2 }}>
-                                            {item.description}
-                                        </Typography>
-                                        <Box sx={{ mt: 'auto' }}>
-                                            <StyledHighlightsButton href={item.url}>
-                                                Saiba mais
-                                            </StyledHighlightsButton>
-                                        </Box>
-                                    </StyledHighlightsCardContent>
-                                </StyledHighlightCard>
-                            </Grow>
-                        ))}
+                        <CheckCircleOutlineIcon sx={{ color: '#072463', mr: 1.5 }} />
+                        <Typography variant="body1">{solution}</Typography>
                     </Box>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            flexDirection: { xs: 'column', md: 'row' },
-                            justifyContent: 'center',
-                            gap: { xs: 4, md: 3 },
-                        }}
-                    >
-                        {highlightItemsBottom.map((item, index) => (
-                            <Grow in={highlightCardInView[index]} style={{ transformOrigin: '0 0 0' }} timeout={1000 + (index * 500)} key={index}>
-                                <StyledHighlightCard ref={el => cardRefs.current[index] = el} sx={{ flex: 1, marginTop: 3 }}>
-                                    <CardMedia
-                                        component="img"
-                                        image={item.imageUrl}
-                                        alt={item.title}
-                                        sx={{
-                                            height: 200,
-                                            width: '100%',
-                                            objectFit: 'cover',
-                                            borderTopLeftRadius: '16px',
-                                            borderTopRightRadius: '16px',
-                                        }}
-                                    />
-                                    <StyledHighlightsCardContent>
-                                        <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 1 }}>
-                                            {item.title}
-                                        </Typography>
-                                        <Typography variant="body2" sx={{ mb: 2 }}>
-                                            {item.description}
-                                        </Typography>
-                                        <Box sx={{ mt: 'auto' }}>
-                                            <StyledHighlightsButton href={item.url}>
-                                                Saiba mais
-                                            </StyledHighlightsButton>
-                                        </Box>
-                                    </StyledHighlightsCardContent>
-                                </StyledHighlightCard>
-                            </Grow>
-                        ))}
-                    </Box>
-                </Box>
+                ))}
+            </Box>
+            
+            <Box sx={{ mt: 6, textAlign: 'center' }}>
+                <StyledInfoButton href="/orcamento">
+                    Fale com um especialista
+                </StyledInfoButton>
+            </Box>
+        </Box>
+    </Container>
+</Box>
 
                 {/* Seção "Como funciona" */}
  {/* Secção "Como funciona" - REESTRUTURADA */}
@@ -825,7 +862,7 @@ export default function Home() {
                 <Box
                     sx={{
                         ...sectionStyles,
-                        backgroundColor: '#F7F7F7', // Manteve a cor de fundo cinza
+                        backgroundColor: '#FfFfFf', // Manteve a cor de fundo cinza
                     }}
                 >
                     <Container maxWidth="lg">
