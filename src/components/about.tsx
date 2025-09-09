@@ -39,7 +39,7 @@ const values = [
 const mainBanner = {
     title: 'Nossa História, Nossos Valores',
     subtitle: 'Conheça a Nury Energia e descubra como estamos moldando um futuro mais limpo e sustentável.',
-    imageUrl: '/IMG_2929.webp',
+    imageUrl: '/img_about.webp',
     align: 'flex-start', // Alinha o texto à esquerda
 };
 const StyledCarousel = styled(Box)(({ theme }) => ({

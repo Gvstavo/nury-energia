@@ -16,9 +16,14 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 const mainBanner = {
     title: 'Energia Solar é o nosso forte',
     subtitle: 'Soluções completas para residências, agronegócio e indústrias em todo o Sul do Brasil.',
-    imageUrl: '/mpv-shot0108.jpg',
+    imageUrl: '/mpv-shot0108.webp',
     align: 'flex-start', // Alinha o texto à esquerda
 };
+const youtubeVideos = [
+    'fCAE7wRFL18', // Exemplo de ID do YouTube
+    'GqOoh28oZi4', // Outro exemplo de ID
+    'DJeoIkWSQnI', // Mais um exemplo
+];
 const mainSolutions = [
     {
         title: 'Energia Solar',
@@ -171,6 +176,24 @@ const cases = [
         avatarUrl: 'lampada-nury.webp',
     },
 ];
+const StyledVideoContainer = styled(Box)(({ theme }) => ({
+    position: 'relative',
+    width: '100%',
+    paddingBottom: '56.25%', /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+    height: 0,
+    overflow: 'hidden',
+    borderRadius: '16px',
+    boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
+    iframe: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        border: 'none',
+        borderRadius: '16px',
+    }
+}));
 
 const StyledAdvantageCard = styled(Card)(({ theme }) => ({
     display: 'flex',
@@ -639,11 +662,11 @@ export default function Home() {
                         >
                             <CardMedia
                                 component="img"
-                                image="/img_.webp"
+                                image="/img_info.webp"
                                 alt="Reunião de negócios"
                                 sx={{
                                     width: '100%',
-                                    height: 'auto',
+                                    height: '427px',
                                 }}
                             />
                         </Box>
@@ -674,7 +697,7 @@ export default function Home() {
                 >
                     Temos a solução energética
                     <br />
-                    perfeita para si!
+                    perfeita para o seu projeto!
                 </Typography>
             </Box>
         </Grow>
@@ -859,52 +882,49 @@ export default function Home() {
 </Box>
 
                 {/* Seção de Cases de Sucesso */}
-                <Box
-                    sx={{
-                        ...sectionStyles,
-                        backgroundColor: '#FfFfFf', // Manteve a cor de fundo cinza
-                    }}
-                >
-                    <Container maxWidth="lg">
-                        <Grow in={casesTitleInView} style={{ transformOrigin: '0 0 0' }} timeout={1000}>
-                            <Box ref={casesTitleRef}>
-                                <Typography variant="h3" sx={{ fontWeight: 'bold', mb: 6, color: '#1A1A1A' }}>
-                                    Cases de Sucesso
-                                </Typography>
-                            </Box>
-                        </Grow>
-                        <Box
-                            sx={{
-                                display: 'flex',
-                                flexDirection: { xs: 'column', md: 'row' },
-                                justifyContent: 'center',
-                                gap: { xs: 4, md: 3 },
-                            }}
-                        >
-                            {cases.map((caseItem, index) => (
-                                <Grow in={caseCardInView[index]} style={{ transformOrigin: '0 0 0' }} timeout={1000 + (index * 300)} key={index}>
-                                    <StyledSuccessCard ref={el => caseCardRefs.current[index] = el} sx={{ flex: 1 }}>
-                                        <StyledAvatar alt={caseItem.name}>
-                                            <img src={caseItem.avatarUrl} alt={caseItem.name} style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />
-                                        </StyledAvatar>
-                                        <CardContent>
-                                            <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#072463' }}>
-                                                {caseItem.name}
-                                            </Typography>
-                                            <Typography variant="body2" sx={{ color: '#555', mb: 1 }}>
-                                                {caseItem.type}
-                                            </Typography>
-                                            <Rating name={`rating-${index}`} value={caseItem.rating} readOnly sx={{ mb: 2 }} />
-                                            <Typography variant="body2" sx={{ fontStyle: 'italic', color: '#1A1A1A' }}>
-                                                "{caseItem.comment}"
-                                            </Typography>
-                                        </CardContent>
-                                    </StyledSuccessCard>
-                                </Grow>
-                            ))}
+{/* Secção de Cases de Sucesso (com Iframes do YouTube) */}
+            <Box
+                sx={{
+                    ...sectionStyles,
+                    backgroundColor: '#ffffff', // Corrigido para branco
+                }}
+            >
+                <Container maxWidth="lg">
+                    <Grow in={casesTitleInView} style={{ transformOrigin: '0 0 0' }} timeout={1000}>
+                        <Box ref={casesTitleRef}>
+                            <Typography variant="h3" sx={{ fontWeight: 'bold', mb: 2, color: '#1A1A1A' }}>
+                                Cases de Sucesso
+                            </Typography>
+                            
+                            {/* Subtítulo Adicionado Aqui */}
+                            <Typography variant="h6" component="p" sx={{ color: 'text.secondary', mb: 6, maxWidth: '700px', mx: 'auto' }}>
+                                Descubra como os nossos clientes estão a economizar e a gerar a sua própria energia limpa. Inspire-se em projetos que geram economia e sustentabilidade.
+                            </Typography>
                         </Box>
-                    </Container>
-                </Box>
+                    </Grow>
+                    <Box
+                        sx={{
+                            display: 'grid',
+                            gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' },
+                            gap: { xs: 4, md: 3 },
+                            justifyContent: 'center',
+                        }}
+                    >
+                        {youtubeVideos.map((videoId, index) => (
+                            <Grow in={casesTitleInView} style={{ transformOrigin: '0 0 0' }} timeout={1000 + (index * 300)} key={videoId}>
+                                <StyledVideoContainer>
+                                    <iframe
+                                        src={`https://www.youtube.com/embed/${videoId}`}
+                                        title="YouTube video player"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowFullScreen
+                                    ></iframe>
+                                </StyledVideoContainer>
+                            </Grow>
+                        ))}
+                    </Box>
+                </Container>
+            </Box>
             </Box>
         </>
     );
