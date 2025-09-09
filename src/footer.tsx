@@ -11,7 +11,6 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 const StyledFooter = styled(Box)(({ theme }) => ({
   backgroundColor: '#072463', // Cor de fundo que se aproxima da imagem
@@ -90,6 +89,11 @@ export default function Footer() {
   <Link href="https://www.instagram.com/nuryenergia/" target="_blank" rel="noopener">
   <IconButton sx={{ color: 'white' }}>
       <InstagramIcon />
+  </IconButton>
+</Link>
+  <Link href="https://www.youtube.com/@nuryenergia" target="_blank" rel="noopener">
+  <IconButton sx={{ color: 'white' }}>
+      <YouTubeIcon />
   </IconButton>
 </Link>
 </Box>

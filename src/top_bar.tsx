@@ -7,6 +7,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import InstagramIcon from '@mui/icons-material/Instagram';
+import YouTubeIcon from '@mui/icons-material/YouTube';
 
 export default function TopBar() {
   const [isAtTop, setIsAtTop] = useState(true);
@@ -77,6 +78,11 @@ export default function TopBar() {
 <Link href="https://www.instagram.com/nuryenergia/" target="_blank" rel="noopener noreferrer">
 <IconButton sx={{ color: 'white' }}>
     <InstagramIcon />
+</IconButton>
+</Link>
+<Link href="https://www.youtube.com/@nuryenergia" target="_blank" rel="noopener noreferrer">
+<IconButton sx={{ color: 'white' }}>
+    <YouTubeIcon />
 </IconButton>
 </Link>
 </Box>
