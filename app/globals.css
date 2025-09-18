@@ -12,12 +12,6 @@
   --font-mono: var(--font-geist-mono);
 }
 
-/*@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-} */
 
 body {
   background: var(--background);
@@ -27,4 +21,20 @@ body {
 .nav-item-hover:hover {
   color: #0091BD;
   
+}
+/* Estilo inicial dos elementos */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* Estilo final (quando a classe é ativada) */
+.fade-in-up.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+html {
+  scroll-behavior: smooth;
 }

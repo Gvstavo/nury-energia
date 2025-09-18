@@ -1,153 +1,176 @@
 'use client';
 
 import { useState } from 'react';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import Box from '@mui/material/Box';
+import { 
+    AppBar, 
+    Toolbar, 
+    Button, 
+    Box, 
+    Menu, 
+    MenuItem, 
+    IconButton, 
+    Drawer, 
+    List, 
+    ListItem, 
+    ListItemText,
+    Collapse,
+    Typography,
+    Container
+} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 import Image from 'next/image';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Link from 'next/link';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+
 const navItems = [
-  { label: 'Página Inicial', href: '/' },
-  { label: 'Sobre nós', href: '/sobre-nos' },
-  { label: 'Sucesso do Cliente', href: '/sucesso-do-cliente' },
-  //{ label: 'Blog', href: '/blog' },
-  //{ label: 'Contato', href: '/contact' },
+    { label: 'Página Inicial', href: '/' },
+    { label: 'Sobre nós', href: '/sobre-nos' },
+    { label: 'Sucesso do Cliente', href: '/sucesso-do-cliente' },
 ];
 
 const solutions = [
-    //{ label: "Residencial", href: "/solucoes/residencial" },
-    //{ label: "Comercial", href: "/solucoes/comercial" },
-    //{ label: "Industrial", href: "/solucoes/industrial" },
-    //{ label: "Rural", href: "/solucoes/rural" },
-    {label: "Energia Solar", href: "/solucoes/energia-solar"},
+    { label: "Energia Solar", href: "/solucoes/energia-solar" },
     { label: "Mobilidade Elétrica", href: "/solucoes/mobilidade-eletrica" },
-    { label: "Mercado Livre de Energia", href: "/solucoes/mercado-livre-de-energia" },
- //   { label: "Baterias e Armazenamento", href: "/solucoes/baterias-e-armazenamento" },
-
+    { label: "Mercado Livre de Energia", href: "/solucoes/mercado-livre-energia" },
 ];
 
 export default function Navbar() {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const [drawerOpen, setDrawerOpen] = useState(false);
+    const [solutionsOpen, setSolutionsOpen] = useState(false);
 
-  const handleOpen = (event) => {
-     setAnchorEl(event.currentTarget);
- };
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('lg')); // Ponto de quebra para mobile
 
- const handleClose = () => {
-     setAnchorEl(null);
- };
+    const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => setAnchorEl(event.currentTarget);
+    const handleMenuClose = () => setAnchorEl(null);
 
- return (
-     <AppBar position="sticky" color="transparent" elevation={0} sx={{backgroundColor: "white"}} >
-       <Toolbar sx={{
-          justifyContent: 'space-between',
-          width: '100%',
-          maxWidth: '100%',
-          minHeight: 93,
-          alignItems: 'center',
-          
-          transition: 'background-color 0.3s ease-in-out',
-      }}>
-      <Box
-          component="a"
-          href="/"
-          sx={{
-             flexGrow: 1,
-             display: 'flex',
-             alignItems: 'center',
-             textDecoration: 'none',
-             px: 17
-         }}
-     >
-  {/* Use o componente Image do Next.js aqui */}
-        <Image
-           src="/logo-nuryenergia.png"
-           alt="Logo da Nury Energia"
-           width={120}
-           height={40}
-           priority={true}
-       />
-   </Box>
+    const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+        if (event.type === 'keydown' && ((event as React.KeyboardEvent).key === 'Tab' || (event as React.KeyboardEvent).key === 'Shift')) {
+            return;
+        }
+        setDrawerOpen(open);
+    };
 
-   <Box sx={{ display: 'flex', flexGrow: 1, justifyContent: 'flex-end', alignItems: 'center' , px: 15}}>
-      {navItems.map((item) => (
-         <Button key={item.label} href={item.href} color="inherit" sx={{ mx: 1, textTransform: 'none', '&:hover': { backgroundColor: 'transparent' } }} className="nav-item-hover">
-           {item.label}
-       </Button>
-       ))}
-                    <Button
-                        id="solutions-button"
-                        aria-controls={open ? 'solutions-menu' : undefined}
-                        aria-haspopup="true"
-                        aria-expanded={open ? 'true' : undefined}
-                        onMouseEnter={handleOpen}
-                        color="inherit"
-                        sx={{ mx: 1, textTransform: 'none', '&:hover': { backgroundColor: 'transparent' } }}
-                        className="nav-item-hover"
-                        endIcon={<ArrowDropDownIcon />}
-                    >
-                        Soluções
-                    </Button>
-                    <Menu
-                        id="solutions-menu"
-                        anchorEl={anchorEl}
-                        open={open}
-                        onClose={handleClose}
-                        onMouseLeave={handleClose}
-                        MenuListProps={{
-                            disablePadding: true,
-                            onMouseLeave: handleClose
-                        }}
-                    >
-                        {/* 3. Mapeie o novo array e integre o Link */}
+    const handleSolutionsClick = () => {
+        setSolutionsOpen(!solutionsOpen);
+    };
+
+    const drawerContent = (
+        <Box
+            sx={{ width: 280, p: 2 }}
+            role="presentation"
+        >
+            <IconButton onClick={toggleDrawer(false)} sx={{ position: 'absolute', top: 8, right: 8 }}>
+                <CloseIcon />
+            </IconButton>
+            <List sx={{ mt: 4 }}>
+                {navItems.map((item) => (
+                    <ListItem key={item.label} component={Link} href={item.href} onClick={toggleDrawer(false)}>
+                        <ListItemText primary={item.label} />
+                    </ListItem>
+                ))}
+                <ListItem onClick={handleSolutionsClick}>
+                    <ListItemText primary="Soluções" />
+                    {solutionsOpen ? <ExpandLess /> : <ExpandMore />}
+                </ListItem>
+                <Collapse in={solutionsOpen} timeout="auto" unmountOnExit>
+                    <List component="div" disablePadding>
                         {solutions.map((solution) => (
-                            <MenuItem
-                                key={solution.label}
-                                component={Link}         // Renderiza o MenuItem como um Link
-                                href={solution.href}     // Passa o caminho para o Link
-                                onClick={handleClose}    // Fecha o menu ao clicar
-                                sx={{
-                                    textTransform: 'none',
-                                    color: 'black',
-                                    '&:hover': {
-                                        backgroundColor: 'transparent',
-                                        color: '#0091BD',
-                                    },
-                                    '&:focus-visible': {
-                                        backgroundColor: 'transparent',
-                                        outline: 'none',
-                                    },
-                                }}
-                            >
-                                {solution.label}
-                            </MenuItem>
+                            <ListItem key={solution.label} component={Link} href={solution.href} sx={{ pl: 4 }} onClick={toggleDrawer(false)}>
+                                <ListItemText primary={solution.label} />
+                            </ListItem>
                         ))}
-                    </Menu>
- <Button
-   variant="contained"
-   href="/orcamento"
-   sx={{
-     ml: 2, // Margem à esquerda para separar do menu de soluções
-     backgroundColor: '#072463', // Cor de fundo do botão
-     color: 'white',
-     fontWeight: 'bold',
-     textTransform: 'none', // Remove o uppercase padrão
-     '&:hover': {
-       backgroundColor: '#007A9A', // Cor de hover mais clara
-     },
-   }}
->
-  Pedir orçamento
-</Button>
+                    </List>
+                </Collapse>
+                <ListItem sx={{ mt: 2 }}>
+                    <Button
+                        variant="contained"
+                        component={Link}
+                        href="/orcamento"
+                        fullWidth
+                        sx={{ backgroundColor: '#072463', '&:hover': { backgroundColor: '#051a4a' } }}
+                        onClick={toggleDrawer(false)}
+                    >
+                        Pedir orçamento
+                    </Button>
+                </ListItem>
+            </List>
+        </Box>
+    );
 
-</Box>
-</Toolbar>
-</AppBar>
-);
+    return (
+        <AppBar position="sticky" color="transparent" elevation={0} sx={{ backgroundColor: "white" }}>
+            <Container maxWidth="xl">
+                <Toolbar disableGutters sx={{ minHeight: 93, justifyContent: 'space-between' }}>
+                    <Box component={Link} href="/" sx={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
+                        <Image src="/logo-nuryenergia.png" alt="Logo da Nury Energia" width={120} height={40} priority={true} />
+                    </Box>
+
+                    {isMobile ? (
+                        <>
+                            <IconButton
+                                color="inherit"
+                                aria-label="open drawer"
+                                edge="end"
+                                onClick={toggleDrawer(true)}
+                            >
+                                <MenuIcon sx={{ color: '#1A1A1A' }} />
+                            </IconButton>
+                            <Drawer
+                                anchor="right"
+                                open={drawerOpen}
+                                onClose={toggleDrawer(false)}
+                            >
+                                {drawerContent}
+                            </Drawer>
+                        </>
+                    ) : (
+                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                            {navItems.map((item) => (
+                                <Button key={item.label} component={Link} href={item.href} color="inherit" sx={{ mx: 1, textTransform: 'none', color: '#1A1A1A' }} className="nav-item-hover">
+                                    {item.label}
+                                </Button>
+                            ))}
+                            <Button
+                                onMouseEnter={handleMenuOpen}
+                                color="inherit"
+                                sx={{ mx: 1, textTransform: 'none', color: '#1A1A1A' }}
+                                className="nav-item-hover"
+                                endIcon={<ArrowDropDownIcon />}
+                            >
+                                Soluções
+                            </Button>
+                            <Menu
+                                anchorEl={anchorEl}
+                                open={Boolean(anchorEl)}
+                                onClose={handleMenuClose}
+                                MenuListProps={{ onMouseLeave: handleMenuClose }}
+                                sx={{ '.MuiPaper-root': { mt: 2 } }}
+                            >
+                                {solutions.map((solution) => (
+                                    <MenuItem key={solution.label} component={Link} href={solution.href} onClick={handleMenuClose}>
+                                        {solution.label}
+                                    </MenuItem>
+                                ))}
+                            </Menu>
+                            <Button
+                                variant="contained"
+                                component={Link}
+                                href="/orcamento"
+                                sx={{ ml: 2, backgroundColor: '#072463', '&:hover': { backgroundColor: '#007A9A' } }}
+                            >
+                                Pedir orçamento
+                            </Button>
+                        </Box>
+                    )}
+                </Toolbar>
+            </Container>
+        </AppBar>
+    );
 }
