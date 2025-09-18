@@ -13,6 +13,8 @@ import { useScrollEffect } from "../utils.tsx";
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link'; // Importe o Link para o botão
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import Image from 'next/image'; // 1. IMPORTADO O COMPONENTE IMAGE
+
 const mainBanner = {
     title: 'Energia Solar é o nosso forte',
     subtitle: 'Soluções completas para residências, agronegócio e indústrias em todo o Sul do Brasil.',
@@ -217,33 +219,19 @@ const StyledCarousel = styled(Box)(({ theme }) => ({
 }));
 
 const StyledSlide = styled(Box, {
-    shouldForwardProp: (prop) => prop !== 'imageUrl' && prop !== 'align',
-}) <any>(({ theme, imageUrl, align }) => ({
+    shouldForwardProp: (prop) => prop !== 'align',
+}) <any>(({ theme, align }) => ({
     width: '100%',
     height: '100%',
-    position: 'relative', // Necessário para o pseudo-elemento do overlay
+    position: 'relative',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: align || 'center', // Usa o alinhamento do objeto do banner
+    alignItems: align || 'center',
     justifyContent: 'center',
     padding: theme.spacing(4, 10),
-    textAlign: align === 'flex-start' ? 'left' : 'center', // Alinha o texto
+    textAlign: align === 'flex-start' ? 'left' : 'center',
     
-    // A imagem de fundo agora fica no pseudo-elemento ::before
-    '&::before': {
-        content: '""',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        backgroundImage: `url(${imageUrl})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        zIndex: 1,
-    },
-
-    // O gradiente azul fica no pseudo-elemento ::after
+    // Gradiente continua aqui
     '&::after': {
         content: '""',
         position: 'absolute',
@@ -251,7 +239,6 @@ const StyledSlide = styled(Box, {
         left: 0,
         width: '100%',
         height: '100%',
-        // O gradiente vai da esquerda (azul) para a direita (transparente)
         background: 'linear-gradient(to right, rgba(7, 36, 99, 0.7), rgba(7, 36, 99, 0.1), transparent)',
         zIndex: 2,
     },
@@ -546,10 +533,18 @@ export default function Home() {
             <Box>
                 {/* Carrossel de Banners */}
                 <StyledCarousel>
-                    <StyledSlide
-                        imageUrl={mainBanner.imageUrl}
-                        align={mainBanner.align}
-                    >
+                    <StyledSlide align={mainBanner.align}>
+                        {/* 3. COMPONENTE IMAGE ADICIONADO COM A PROPRIEDADE 'PRIORITY' */}
+                        <Image
+                            src={mainBanner.imageUrl}
+                            alt="Consultor da Nury Energia inspecionando uma usina solar"
+                            fill
+                            priority // <-- A MUDANÇA MAIS IMPORTANTE
+                            style={{
+                                objectFit: 'cover',
+                                zIndex: 1,
+                            }}
+                        />
                         <SlideContent sx={{ maxWidth: '50%' }}>
                             <Typography variant="h2" component="h1" sx={{ fontWeight: 'bold', mb: 2 }}>
                                 {mainBanner.title}
@@ -662,7 +657,7 @@ export default function Home() {
                         >
                             <CardMedia
                                 component="img"
-                                image="/img_info.webp"
+                                image="/IMG_3659.webp"
                                 alt="Reunião de negócios"
                                 sx={{
                                     width: '100%',

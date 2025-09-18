@@ -13,7 +13,7 @@ import SystemUpdateAltIcon from '@mui/icons-material/SystemUpdateAlt';
 const mainBanner = {
     title: 'Conduza o Futuro. Abasteça com o Sol.',
     subtitle: 'Integre carregadores de veículos elétricos ao seu sistema de energia solar e experimente a verdadeira mobilidade 100% limpa e sustentável.',
-    imageUrl: '/chuttersnap-xfaYAsMV1p8-unsplash.webp',
+    imageUrl: '/6.webp',
     align: 'flex-start',
 };
 
